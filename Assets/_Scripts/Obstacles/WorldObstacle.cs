@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class WorldObstacle : MonoBehaviour
 {
-    private float moveSpeed = 10.0f;
+    public float moveSpeed = 10.0f;
     private float deactivateZPoint = -10.0f;
+    private bool destructible = true;
+    private int hitPoints = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +24,39 @@ public class WorldObstacle : MonoBehaviour
         // Move towards the 0 point
         transform.Translate( -(Vector3.forward * moveSpeed) * Time.deltaTime);
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+            print("This WorldObject hit the Player, add functionality in the future!");
+        else
+            print("Bonk!");
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("Crash!");
+    }
+
+    public void SetDestructible(bool newDestructible)
+    {
+        destructible = newDestructible;
+    }
+
+    public void SetRelativeHitPoints(int hitPointsChange)
+    {
+        if(!destructible) // Don't continue if this object is indestructible
+        {
+            return;
+        }
+
+        hitPoints += hitPointsChange;
+
+        if(hitPoints < 1) // Deactivate this object
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void SetMoveSpeed(float newMoveSpeed)
