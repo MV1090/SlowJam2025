@@ -283,6 +283,22 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5259836662201784685, guid: 813e999a176fe1e4f8aff2ff7cc86795, type: 3}
+      propertyPath: xMaxOffSet
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259836662201784685, guid: 813e999a176fe1e4f8aff2ff7cc86795, type: 3}
+      propertyPath: xMinOffset
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259836662201784685, guid: 813e999a176fe1e4f8aff2ff7cc86795, type: 3}
+      propertyPath: yMaxOffSet
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259836662201784685, guid: 813e999a176fe1e4f8aff2ff7cc86795, type: 3}
+      propertyPath: yMinOffset
+      value: -0.065
+      objectReference: {fileID: 0}
+    - target: {fileID: 5259836662201784685, guid: 813e999a176fe1e4f8aff2ff7cc86795, type: 3}
       propertyPath: projectileSpawn
       value: 
       objectReference: {fileID: 1219034990}
