@@ -70,8 +70,13 @@ public class PlayerController : MonoBehaviour
 
         Vector3 direction = (targetPoint - transform.position).normalized;
 
-        Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
-        projectile.direction = direction;                
+        //Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
+        Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();
+        projectile.transform.position = transform.position;
+        projectile.transform.rotation = transform.rotation;
+        projectile.direction = direction;
+        projectile.gameObject.SetActive(true);
+        projectile.StartLifeTimer();
 
         Debug.DrawLine(transform.position, targetPoint, Color.green, 2f);        
     }

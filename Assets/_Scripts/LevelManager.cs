@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     private IEnumerator SpawnRocks()
     {
         //print("Started SpawnRock CoRoutine");
-        GameObject gameobj = ObjectPool.SharedInstance.GetPooledObject();
+        GameObject gameobj = ObjectPool.SharedInstance.GetObstacleObject();
         WorldObstacle obstacle = gameobj.GetComponent<WorldObstacle>();
         if(obstacle != null)
         {

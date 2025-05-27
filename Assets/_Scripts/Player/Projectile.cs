@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
@@ -8,19 +9,28 @@ public class Projectile : MonoBehaviour
 
 
     public Rigidbody rb;
+
+    private IEnumerator LifeTimer(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        gameObject.SetActive(false);
+    }
+
     private void Start()
     {   
         if (lifeSpan <= 0)
         {
             lifeSpan = 2;
-        }
-                
-        Destroy(gameObject, lifeSpan);       
-        
+        }      
     }
 
     private void Update()
     {       
         transform.Translate((direction * projectileSpeed) * Time.deltaTime);
+    }
+
+    public void StartLifeTimer()
+    {
+        StartCoroutine(LifeTimer(lifeSpan));
     }
 }

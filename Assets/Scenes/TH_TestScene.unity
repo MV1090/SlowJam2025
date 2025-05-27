@@ -150,8 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToPool: {fileID: 4007502761013966919, guid: 3793cdfeb35552c41b7f7c0748f0a3db, type: 3}
-  projectileToPool: {fileID: 0}
-  amountToPool: 10
+  objectAmountToPool: 10
+  projectileToPool: {fileID: 7571358571764005658, guid: 723c8e40057d9724d8939677ac1dee22, type: 3}
+  projectileAmountToPool: 25
   pooledObjects: []
   pooledProjectiles: []
 --- !u!114 &7532748
