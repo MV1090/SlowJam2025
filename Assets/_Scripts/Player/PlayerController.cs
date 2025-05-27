@@ -14,12 +14,13 @@ public class PlayerController : MonoBehaviour
 
     InputAction move;
     PlayerInput playerInput;
-    public Camera _camera;     
+    [SerializeField] private Camera _camera;
 
     bool isMoving;
 
     // Firing Settings
-    [SerializeField] private GameObject reticle;
+    //[SerializeField] private GameObject reticle;
+   
     [SerializeField] private Projectile projectilePrefab;
     [SerializeField] private Transform  projectileSpawn;
 
@@ -49,12 +50,30 @@ public class PlayerController : MonoBehaviour
     public void OnFire(InputAction.CallbackContext context)
     {  
         if (!gameObject.activeInHierarchy)
-            return;
+            return;                
+        
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        Vector3 targetPoint;
 
-        Projectile projectile = Instantiate(projectilePrefab, projectileSpawn.transform.position, projectileSpawn.transform.rotation);
-        projectile.targetPosition = new Vector3(reticle.transform.position.x, reticle.transform.position.y, 0);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100))
+        {
+            targetPoint = hit.point;
+            Debug.DrawLine(ray.origin, targetPoint, Color.red, 2f);
+            Debug.Log("Hit point: " + targetPoint);
+        }
+        else
+        {            
+            targetPoint = ray.origin + ray.direction * 100f;
+            Debug.DrawLine(ray.origin, targetPoint, Color.yellow, 2f);
+            Debug.Log("No hit — firing into empty space.");
+        }
 
-        Debug.Log("POW POW POW POW");
+        Vector3 direction = (targetPoint - transform.position).normalized;
+
+        Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
+        projectile.direction = direction;                
+
+        Debug.DrawLine(transform.position, targetPoint, Color.green, 2f);        
     }
     
     void Update()
@@ -76,7 +95,7 @@ public class PlayerController : MonoBehaviour
     {
         float camHeight = _camera.orthographicSize;
         float camWidth = camHeight * _camera.aspect;
-
+        
         float xMin = -camWidth * xClampPercentage * xMinOffset;
         float xMax = camWidth * xClampPercentage * xMaxOffSet;
         float yMin = -camHeight * yClampPercentage * yMinOffset;

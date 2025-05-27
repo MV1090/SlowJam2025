@@ -1,30 +1,26 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 public class Projectile : MonoBehaviour
 {
     public float projectileSpeed = 10f;
-    public float lifeSpan = 2f;
-    public Vector3 targetPosition;
+    public float lifeSpan = 5f;
+    public Vector3 direction;
 
-    private Vector3 moveDirection;
 
+    public Rigidbody rb;
     private void Start()
-    {
-        // Calculate direction once
-        moveDirection = (targetPosition - transform.position).normalized;
-
-        // Destroy after lifespan (optional)
-        Destroy(gameObject, lifeSpan);
+    {   
+        if (lifeSpan <= 0)
+        {
+            lifeSpan = 2;
+        }
+                
+        Destroy(gameObject, lifeSpan);       
+        
     }
 
     private void Update()
-    {
-        // Move in the direction every frame
-        transform.position += moveDirection * projectileSpeed * Time.deltaTime;
-
-        // Keep Z fixed to simulate 2D behavior in a 3D space (optional)
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+    {       
+        transform.Translate((direction * projectileSpeed) * Time.deltaTime);
     }
 }
