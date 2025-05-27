@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    // Movement Settings
     public float moveSpeed = 5f;
     [SerializeField] float xClampPercentage = 80;
     [SerializeField] float yClampPercentage = 80;
@@ -11,12 +12,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float yMinOffset;
     [SerializeField] float yMaxOffSet;
 
+    InputAction move;
+    PlayerInput playerInput;
+    public Camera _camera;     
 
     bool isMoving;
 
-    InputAction move;
-    PlayerInput playerInput;
-    public Camera _camera;
+    // Firing Settings
+    [SerializeField] private GameObject reticle;
+    [SerializeField] private Projectile projectilePrefab;
+    [SerializeField] private Transform  projectileSpawn;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,20 +36,32 @@ public class PlayerController : MonoBehaviour
         if (!gameObject.activeInHierarchy)
             return;
 
-        isMoving = true;
-        Debug.Log("Is Moving");
+        isMoving = true;        
     }
     public void OnMoveStopped(InputAction.CallbackContext context)
     {
         if (!gameObject.activeInHierarchy)
             return;
 
-        isMoving = false;
-        Debug.Log("Stopped Moving");
+        isMoving = false;        
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
+    {  
+        if (!gameObject.activeInHierarchy)
+            return;
+
+        Projectile projectile = Instantiate(projectilePrefab, projectileSpawn.transform.position, projectileSpawn.transform.rotation);
+        projectile.targetPosition = new Vector3(reticle.transform.position.x, reticle.transform.position.y, 0);
+
+        Debug.Log("POW POW POW POW");
     }
     
     void Update()
     {
+        if (!gameObject.activeInHierarchy)
+            return;
+
         if (isMoving)
         { 
             Vector2 movementInput = move.ReadValue<Vector2>();

@@ -16,6 +16,14 @@ public class InputManager : Singleton<InputManager>
         inputActions.Enable();
         inputActions.Player.Movement.performed += playerController.OnMoveStarted;
         inputActions.Player.Movement.canceled += playerController.OnMoveStopped;
+        inputActions.Player.Fire.performed += playerController.OnFire;
     }
 
+    private void OnDisable()
+    {        
+        inputActions.Player.Movement.performed -= playerController.OnMoveStarted;
+        inputActions.Player.Movement.canceled -= playerController.OnMoveStopped;
+        inputActions.Player.Fire.performed -= playerController.OnFire;
+        inputActions.Disable();
+    }
 }
