@@ -6,6 +6,8 @@ public class LevelManager : MonoBehaviour
     public float spawnZPoint = 30.0f; // the Z position objects should spawn
     public float despawnZPoint = -10.0f; // the z position object despawn
     public float worldMoveSpeed = 10.0f; // how fast this object moves towards the camera
+    public static LevelManager LevelInstance; // Static Singleton referenced by other objects
+    public GameObject playerRef;
 
     private IEnumerator SpawnRocks()
     {
@@ -25,10 +27,16 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(SpawnRocks());
     }
 
+    private void Awake()
+    {
+        LevelInstance = this;
+        playerRef = GameObject.FindGameObjectWithTag("Player"); // store player reference with level
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
         StartCoroutine(SpawnRocks());
     }
 

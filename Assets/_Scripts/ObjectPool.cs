@@ -17,10 +17,7 @@ public class ObjectPool : MonoBehaviour
     private void Awake()
     {
         SharedInstance = this;
-    }
 
-    void Start()
-    {
         // Populate the Object Pools
         pooledObjects = new List<GameObject>();
         GameObject tmp;
@@ -38,7 +35,7 @@ public class ObjectPool : MonoBehaviour
         }
 
         for (int i = 0; i < projectileAmountToPool; i++)
-        { 
+        {
             // Add to Projectile pool
             if (projectileToPool != null)
             {
@@ -47,6 +44,37 @@ public class ObjectPool : MonoBehaviour
                 pooledProjectiles.Add(tmpProj);
             }
         }
+
+    }
+
+    void Start()
+    {
+        //// Populate the Object Pools
+        //pooledObjects = new List<GameObject>();
+        //GameObject tmp;
+        //Projectile tmpProj;
+
+        //for (int i = 0; i < objectAmountToPool; i++)
+        //{
+        //    // Add to Obstacle pool
+        //    if (objectToPool != null)
+        //    {
+        //        tmp = Instantiate(objectToPool);
+        //        tmp.SetActive(false);
+        //        pooledObjects.Add(tmp);
+        //    }
+        //}
+
+        //for (int i = 0; i < projectileAmountToPool; i++)
+        //{ 
+        //    // Add to Projectile pool
+        //    if (projectileToPool != null)
+        //    {
+        //        tmpProj = Instantiate(projectileToPool);
+        //        tmpProj.gameObject.SetActive(false);
+        //        pooledProjectiles.Add(tmpProj);
+        //    }
+        //}
     }
 
     // Attempts to retrieve an inactive object from the pool

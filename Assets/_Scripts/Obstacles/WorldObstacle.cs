@@ -3,9 +3,9 @@ using UnityEngine;
 public class WorldObstacle : MonoBehaviour
 {
     public float moveSpeed = 10.0f;
-    private float deactivateZPoint = -10.0f;
-    private bool destructible = true;
-    private int hitPoints = 1;
+    protected float deactivateZPoint = -10.0f;
+    protected bool destructible = true;
+    protected int hitPoints = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
