@@ -18,9 +18,7 @@ public class PlayerController : MonoBehaviour
 
     bool isMoving;
 
-    // Firing Settings
-    //[SerializeField] private GameObject reticle;
-   
+    // Firing Settings     
     [SerializeField] private Projectile projectilePrefab;
     [SerializeField] private Transform  projectileSpawn;
 
@@ -45,6 +43,11 @@ public class PlayerController : MonoBehaviour
             return;
 
         isMoving = false;        
+    }
+
+    public void OnDoingYerJob(InputAction.CallbackContext context)
+    {
+        JobManager.Instance.currentJob.DoYerJob(this);
     }
 
     public void OnFire(InputAction.CallbackContext context)
@@ -113,4 +116,6 @@ public class PlayerController : MonoBehaviour
 
         transform.position = clampPos;
     }
+
+    
 }
