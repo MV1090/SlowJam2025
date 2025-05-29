@@ -26,17 +26,17 @@ public class WorldObstacle : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Projectile"))
         {
             gameObject.SetActive(false);
             other.gameObject.SetActive(false);
         }
-        if (other.gameObject.CompareTag("Player"))
-            print("This WorldObject hit the Player, add functionality in the future!");
-        else
-            print("Bonk!");
+        //if (other.gameObject.CompareTag("Player"))
+        //    print("This WorldObject hit the Player, add functionality in the future!");
+        //else
+        //    print("Bonk!");
     }
 
     private void OnCollisionEnter(Collision collision)
