@@ -33,4 +33,25 @@ public class Projectile : MonoBehaviour
     {
         StartCoroutine(LifeTimer(lifeSpan));
     }
+
+    public void SetupProjectile(Transform parentTransform, float newScale, float newSpeed, Vector3 newDirection, bool isPlayerProjectile = false)
+    {
+        if(isPlayerProjectile)
+        {          
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        else
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+
+        gameObject.transform.localScale = new Vector3(newScale, newScale, newScale);
+        transform.SetPositionAndRotation(parentTransform.position, parentTransform.rotation);
+        projectileSpeed = newSpeed;
+        direction = newDirection;
+
+        gameObject.SetActive(true);
+        StartLifeTimer();
+    }
+
 }

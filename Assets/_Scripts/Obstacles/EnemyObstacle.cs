@@ -14,12 +14,14 @@ public class EnemyObstacle : WorldObstacle
             Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();
             Vector3 targetDirection = (LevelManager.LevelInstance.playerRef.transform.position - gameObject.transform.position).normalized;
 
-            projectile.transform.position = transform.position;
-            projectile.transform.rotation = transform.rotation;
-            projectile.projectileSpeed = moveSpeed + projectileSpeed;
-            projectile.direction = targetDirection;
-            projectile.gameObject.SetActive(true);
-            projectile.StartLifeTimer();
+            projectile.SetupProjectile(transform, 0.5f, moveSpeed + projectileSpeed, targetDirection);
+
+            //projectile.transform.position = transform.position;
+            //projectile.transform.rotation = transform.rotation;
+            //projectile.projectileSpeed = moveSpeed + projectileSpeed;
+            //projectile.direction = targetDirection;
+            //projectile.gameObject.SetActive(true);
+            //projectile.StartLifeTimer();
         }
 
         //Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();

@@ -3,6 +3,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    // Player Stats
+    public int maxHealth = 3;
+    public float projectileSpeed = 10f;
+    private int health;
+    
     // Movement Settings
     public float moveSpeed = 5f;
     [SerializeField] float xClampPercentage = 80;
@@ -25,6 +30,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        health = maxHealth;
         isMoving = false;
         playerInput = GetComponent<PlayerInput>();
         move = playerInput.actions.FindAction("Movement");
@@ -75,11 +81,12 @@ public class PlayerController : MonoBehaviour
 
         //Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();
-        projectile.transform.position = transform.position;
-        projectile.transform.rotation = transform.rotation;
-        projectile.direction = direction;
-        projectile.gameObject.SetActive(true);
-        projectile.StartLifeTimer();
+        projectile.SetupProjectile(transform, 1.0f, projectileSpeed, direction, true);
+        //projectile.transform.position = transform.position;
+        //projectile.transform.rotation = transform.rotation;
+        //projectile.direction = direction;
+        //projectile.gameObject.SetActive(true);
+        //projectile.StartLifeTimer();
 
         Debug.DrawLine(transform.position, targetPoint, Color.green, 2f);        
     }
@@ -117,5 +124,8 @@ public class PlayerController : MonoBehaviour
         transform.position = clampPos;
     }
 
-    
+    public void SetHealthRelative(int healthValue)
+    {
+        health += Mathf.Clamp(health+healthValue, 0, maxHealth);
+    }
 }
