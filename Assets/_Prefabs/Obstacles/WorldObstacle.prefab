@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8103326384627431649}
   - component: {fileID: 3191697604784675509}
   - component: {fileID: 4918262772266401663}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WorldObstacle
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1743731389985606178}
   - component: {fileID: 6640356272585831131}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6375449807374664372}
   - component: {fileID: 5429710226347273997}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

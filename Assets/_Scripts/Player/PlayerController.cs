@@ -113,6 +113,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Projectile"))
+        {
+            print("Ouch! The player took some damage from a Projectile!");
+            other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.CompareTag("Obstacle"))
+        {
+            print("Ouch! The player took some damage hitting an Obstacle!");
+            other.gameObject.SetActive(false);
+        }       
+    }
+
     void ClampPosition()
     {
         float camHeight = _camera.orthographicSize;

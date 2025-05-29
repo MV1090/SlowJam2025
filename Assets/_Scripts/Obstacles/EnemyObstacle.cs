@@ -54,4 +54,5 @@ public class EnemyObstacle : WorldObstacle
         // Move towards the 0 point
         transform.Translate(-(Vector3.forward * moveSpeed) * Time.deltaTime);
     }
+
 }

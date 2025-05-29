@@ -39,10 +39,12 @@ public class Projectile : MonoBehaviour
         if(isPlayerProjectile)
         {          
             gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+            gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
         }
         else
         {
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+            gameObject.layer = LayerMask.NameToLayer("EnemyProjectile");
         }
 
         gameObject.transform.localScale = new Vector3(newScale, newScale, newScale);
