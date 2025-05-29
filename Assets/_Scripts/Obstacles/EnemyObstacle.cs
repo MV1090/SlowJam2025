@@ -14,7 +14,7 @@ public class EnemyObstacle : WorldObstacle
             Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();
             Vector3 targetDirection = (LevelManager.LevelInstance.playerRef.transform.position - gameObject.transform.position).normalized;
 
-            projectile.SetupProjectile(transform, 0.5f, moveSpeed + projectileSpeed, targetDirection);
+            projectile.SetupProjectile(transform, 0.5f, moveSpeed + projectileSpeed, targetDirection, Projectile.ProjectileType.Enemy);
 
             //projectile.transform.position = transform.position;
             //projectile.transform.rotation = transform.rotation;

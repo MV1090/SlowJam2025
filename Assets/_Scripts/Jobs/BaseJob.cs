@@ -19,11 +19,11 @@ public class BaseJob : MonoBehaviour
     {
         context.ActivateNewJob(jobState);
     }
-    //public virtual void EnterState()
+    //protected virtual void EnterState()
     //{
-       
+
     //}
-    //public virtual void ExitState()
+    //protected virtual void ExitState()
     //{
 
     //}
