@@ -64,19 +64,21 @@ public class PlayerController : MonoBehaviour
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         Vector3 targetPoint;
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 100))
-        {
-            targetPoint = hit.point;
-            Debug.DrawLine(ray.origin, targetPoint, Color.red, 2f);
-            Debug.Log("Hit point: " + targetPoint);
-        }
-        else
-        {            
-            targetPoint = ray.origin + ray.direction * 100f;
-            Debug.DrawLine(ray.origin, targetPoint, Color.yellow, 2f);
-            Debug.Log("No hit — firing into empty space.");
-        }
+        //if (Physics.Raycast(ray, out RaycastHit hit, 100))
+        //{
+        //    targetPoint = hit.point;
+        //    Debug.DrawLine(ray.origin, targetPoint, Color.red, 2f);
+        //    Debug.Log("Hit point: " + targetPoint);
+        //}
+        //else
+        //{            
+        //    targetPoint = ray.origin + ray.direction * 100f;
+        //    Debug.DrawLine(ray.origin, targetPoint, Color.yellow, 2f);
+        //Debug.Log("No hit — firing into empty space.");
+        //}
 
+        targetPoint = ray.origin + ray.direction * 100f;
+        Debug.DrawLine(ray.origin, targetPoint, Color.yellow, 2f);
         Vector3 direction = (targetPoint - transform.position).normalized;
 
         //Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
