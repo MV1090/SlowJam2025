@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Projectile projectilePrefab;
     [SerializeField] private Transform  projectileSpawn;
 
+    Projectile.ProjectileType projectileType = Projectile.ProjectileType.Player;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -85,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
         //Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();
-        projectile.SetupProjectile(transform, 1.0f, projectileSpeed, direction, true);
+        projectile.SetupProjectile(transform, 1.0f, projectileSpeed, direction, projectileType);
 
         Debug.DrawLine(transform.position, targetPoint, Color.green, 2f);        
     }
