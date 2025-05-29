@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 3;
     public float projectileSpeed = 10f;
     private int health;
+
+    // Animation
+    public Animator animator;
     
     // Movement Settings
     public float moveSpeed = 5f;
@@ -74,7 +77,7 @@ public class PlayerController : MonoBehaviour
         //{            
         //    targetPoint = ray.origin + ray.direction * 100f;
         //    Debug.DrawLine(ray.origin, targetPoint, Color.yellow, 2f);
-        //Debug.Log("No hit — firing into empty space.");
+        //Debug.Log("No hit ï¿½ firing into empty space.");
         //}
 
         targetPoint = ray.origin + ray.direction * 100f;
@@ -103,6 +106,8 @@ public class PlayerController : MonoBehaviour
             Vector2 movementInput = move.ReadValue<Vector2>();
             Vector3 movement = new Vector3(movementInput.x, movementInput.y, 0);
             transform.Translate(movement * moveSpeed * Time.deltaTime);
+
+            animator.SetFloat("Hspeed", movementInput.x);
 
             ClampPosition();
         }
