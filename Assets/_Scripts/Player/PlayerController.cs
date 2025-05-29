@@ -62,36 +62,30 @@ public class PlayerController : MonoBehaviour
     public void OnFire(InputAction.CallbackContext context)
     {  
         if (!gameObject.activeInHierarchy)
-            return;                
-        
+            return;
+
+        int playerLayer = LayerMask.NameToLayer("Player");
+        int ignoreLayer = ~(1 << playerLayer);
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         Vector3 targetPoint;
 
-        //if (Physics.Raycast(ray, out RaycastHit hit, 100))
-        //{
-        //    targetPoint = hit.point;
-        //    Debug.DrawLine(ray.origin, targetPoint, Color.red, 2f);
-        //    Debug.Log("Hit point: " + targetPoint);
-        //}
-        //else
-        //{            
-        //    targetPoint = ray.origin + ray.direction * 100f;
-        //    Debug.DrawLine(ray.origin, targetPoint, Color.yellow, 2f);
-        //Debug.Log("No hit � firing into empty space.");
-        //}
-
-        targetPoint = ray.origin + ray.direction * 100f;
-        Debug.DrawLine(ray.origin, targetPoint, Color.yellow, 2f);
+        if (Physics.Raycast(ray, out RaycastHit hit, 100, ignoreLayer))
+        {
+            targetPoint = hit.point;
+            Debug.DrawLine(ray.origin, targetPoint, Color.red, 2f);
+            Debug.Log("Hit point: " + targetPoint);
+        }
+        else
+        {
+            targetPoint = ray.origin + ray.direction * 100f;
+            Debug.DrawLine(ray.origin, targetPoint, Color.yellow, 2f);
+            Debug.Log("No hit � firing into empty space.");
+        }       
         Vector3 direction = (targetPoint - transform.position).normalized;
 
         //Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();
         projectile.SetupProjectile(transform, 1.0f, projectileSpeed, direction, true);
-        //projectile.transform.position = transform.position;
-        //projectile.transform.rotation = transform.rotation;
-        //projectile.direction = direction;
-        //projectile.gameObject.SetActive(true);
-        //projectile.StartLifeTimer();
 
         Debug.DrawLine(transform.position, targetPoint, Color.green, 2f);        
     }
