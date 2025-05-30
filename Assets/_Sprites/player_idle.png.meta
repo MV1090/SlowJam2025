@@ -118,7 +118,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 48
+        width: 50
         height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -138,9 +138,9 @@ TextureImporter:
       name: player_idle_1
       rect:
         serializedVersion: 2
-        x: 48
+        x: 50
         y: 0
-        width: 48
+        width: 50
         height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -160,9 +160,9 @@ TextureImporter:
       name: player_idle_2
       rect:
         serializedVersion: 2
-        x: 96
+        x: 100
         y: 0
-        width: 48
+        width: 50
         height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
