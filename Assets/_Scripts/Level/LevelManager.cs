@@ -26,8 +26,8 @@ public class LevelManager : MonoBehaviour
         if (isDoingEncounter == false)
         {
             //print("Started SpawnRock CoRoutine");
-            GameObject gameobj = ObjectPool.SharedInstance.GetObstacleObject();
-            WorldObstacle obstacle = gameobj.GetComponent<WorldObstacle>();
+            WorldObstacle obstacle = ObjectPool.SharedInstance.GetWorldObstacleObject();
+            
             if (obstacle != null)
             {
                 float randX = Random.Range(-5.0f, 5.0f);
@@ -38,37 +38,32 @@ public class LevelManager : MonoBehaviour
                 int randI = Random.Range(0, obstaclesList.Count);
                 obstacle.SetupObstacle(obstaclesList[randI]);
 
-                gameobj.SetActive(true);
+                obstacle.gameObject.SetActive(true);
             }
         }
         yield return new WaitForSeconds(1);
         StartCoroutine(SpawnRandomObstacle());
     }
 
-    private IEnumerator DoEncounter(LevelEncounterScriptableObject encounter)
+    private IEnumerator DoEncounter(LevelEncounterScriptableObject levelEncounter)
     {
-        //print("Spawning Object from Encounter");
-        GameObject gameobj = ObjectPool.SharedInstance.GetObstacleObject();
-        WorldObstacle obstacle = gameobj.GetComponent<WorldObstacle>();
-        
-        if (obstacle != null)
+        switch(levelEncounter.encounterType)
         {
-            float randX = Random.Range(-5.0f, 5.0f);
-            obstacle.transform.position = new Vector3(randX, 0.0f, spawnZPoint);
-            obstacle.SetMoveSpeed(worldMoveSpeed);
-            obstacle.SetDeactivatePoint(despawnZPoint);
-
-            int randI = Random.Range(0, obstaclesList.Count);
-            obstacle.SetupObstacle(encounter.objectToSpawn);
-
-            gameobj.SetActive(true);
+            case EncounterType.Obstacles:
+                CreateWorldObstacle(levelEncounter.objectToSpawn);
+                break;
+            case EncounterType.Enemies:
+                CreateEnemyObstacle(levelEncounter.objectToSpawn);
+                break;
+            default:
+                break;
         }
 
-        yield return new WaitForSeconds(encounter.spawnRate);
+        yield return new WaitForSeconds(levelEncounter.spawnRate);
         if (obstacleSpawnCounter > 0)
         {
             obstacleSpawnCounter--;
-            StartCoroutine(DoEncounter(encounter));
+            StartCoroutine(DoEncounter(levelEncounter));
         }
         else
             isDoingEncounter = false;
@@ -104,5 +99,42 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    
+    private void CreateWorldObstacle(ObstacleScriptableObject obstacleData)
+    {
+        WorldObstacle obstacle = ObjectPool.SharedInstance.GetWorldObstacleObject();
+
+        if (obstacle != null)
+        {
+            float randX = Random.Range(-5.0f, 5.0f);
+            obstacle.transform.position = new Vector3(randX, 0.0f, spawnZPoint);
+            obstacle.SetMoveSpeed(worldMoveSpeed);
+            obstacle.SetDeactivatePoint(despawnZPoint);           
+            obstacle.SetupObstacle(obstacleData);
+
+            obstacle.gameObject.SetActive(true);
+        }
+    }
+
+    private void CreateEnemyObstacle(ObstacleScriptableObject enemyData)
+    {
+        EnemyObstacle enemy = ObjectPool.SharedInstance.GetEnemyObstacleObject();
+        if (enemy == null)
+            return;
+
+        float randX = Random.Range(-5.0f, 5.0f);
+        float spawnY = 0.0f;
+
+        if(enemyData.isFloating)
+            spawnY = 2.0f;
+        
+        enemy.transform.position = new Vector3(randX, spawnY, spawnZPoint);
+
+        enemy.SetMoveSpeed(worldMoveSpeed);
+        enemy.SetDeactivatePoint(despawnZPoint);
+        enemy.SetupObstacle(enemyData);
+
+        enemy.gameObject.SetActive(true);
+        enemy.StartCoroutine("FireProjectile");
+    }
+
 }

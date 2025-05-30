@@ -5,88 +5,121 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public GameObject objectToPool;
-    public int objectAmountToPool = 10;
+    public WorldObstacle worldObstacleToPool;
+    public EnemyObstacle enemyObstacleToPool;
     public Projectile projectileToPool;
-    public int projectileAmountToPool = 25;
+    public int startingAmountToPool = 10;
 
     public static ObjectPool SharedInstance; // Other scripts call this to retrieve a pooled object
-    public List<GameObject> pooledObjects;
+    public List<WorldObstacle> pooledWorldObstacles;
+    public List<EnemyObstacle> pooledEnemyObstacles;
     public List<Projectile> pooledProjectiles;
 
-    private int currentObstaclesInPool; // Stores how many Obstacles are in its pool
-    private int currentProjectilesInPool; // Stores how many Projectiles are in its pool
+    private int currentWorldObstaclesInPool; // How many World Obstacles are in the pool
+    private int currentEnemyObstaclesInPool; // How many Enemy Obstacles are in the pool
+    private int currentProjectilesInPool;    // How many Projectiles are in its pool
 
     private void Awake()
     {
         SharedInstance = this;
-        currentObstaclesInPool = objectAmountToPool;
-        currentProjectilesInPool = projectileAmountToPool;
+        currentWorldObstaclesInPool = startingAmountToPool;
+        currentEnemyObstaclesInPool = startingAmountToPool;
+        currentProjectilesInPool    = startingAmountToPool;
 
         // Populate the Object Pools
-        pooledObjects = new List<GameObject>();
-        pooledProjectiles = new List<Projectile>();
+        pooledWorldObstacles = new List<WorldObstacle>();
+        pooledEnemyObstacles = new List<EnemyObstacle>();
+        pooledProjectiles    = new List<Projectile>();
 
-        for (int i = 0; i < objectAmountToPool; i++)
+        for (int i = 0; i < startingAmountToPool; i++)
         {
             // Add to Obstacle pool
-            CreateNewObstacle();
-        }
-
-        for (int i = 0; i < projectileAmountToPool; i++)
-        {
-            // Add to Projectile pool
+            CreateNewWorldObstacle();
+            CreateNewEnemyObstacle();
             CreateNewProjectile();
-        }
-
+        }      
     }
 
-    private GameObject CreateNewObstacle()
+    private WorldObstacle CreateNewWorldObstacle()
     {
-        if (objectToPool != null)
-        {
-            GameObject newObstacleObject;
-            newObstacleObject = Instantiate(objectToPool);
-            newObstacleObject.SetActive(false);
-            pooledObjects.Add(newObstacleObject);
-            currentObstaclesInPool = pooledObjects.Count;
-            return newObstacleObject;
-        }
-        return null;
+        if (worldObstacleToPool == null)
+            return null;
+        
+        WorldObstacle newObstacleObject;
+        newObstacleObject = Instantiate(worldObstacleToPool);
+        newObstacleObject.gameObject.SetActive(false);
+        pooledWorldObstacles.Add(newObstacleObject);
+        currentWorldObstaclesInPool = pooledWorldObstacles.Count;
+        return newObstacleObject;     
+    }
+
+    private EnemyObstacle CreateNewEnemyObstacle()
+    {
+        if (enemyObstacleToPool == null)
+            return null;
+
+        EnemyObstacle newEnemyObstacle;
+        newEnemyObstacle = Instantiate(enemyObstacleToPool);
+        newEnemyObstacle.gameObject.SetActive(false);
+        pooledEnemyObstacles.Add(newEnemyObstacle);
+        currentEnemyObstaclesInPool = pooledEnemyObstacles.Count;
+        return newEnemyObstacle;
     }
 
     private Projectile CreateNewProjectile()
     {
-        if (projectileToPool != null)
-        {
-            Projectile newProjectileObject;
-            newProjectileObject = Instantiate(projectileToPool);
-            newProjectileObject.gameObject.SetActive(false);
-            pooledProjectiles.Add(newProjectileObject);
-            currentProjectilesInPool = pooledProjectiles.Count;
-            return newProjectileObject;
-        }
-        return null;
+        if (projectileToPool == null)
+            return null;
+        
+        Projectile newProjectileObject;
+        newProjectileObject = Instantiate(projectileToPool);
+        newProjectileObject.gameObject.SetActive(false);
+        pooledProjectiles.Add(newProjectileObject);
+        currentProjectilesInPool = pooledProjectiles.Count;
+        return newProjectileObject;
+        
     }
 
-    // Attempts to retrieve an inactive object from the pool
-    // Call this from any class using "ObjectPool.SharedInstance.GetObstacleObject();"
-    public GameObject GetObstacleObject()
+    // Attempts to retrieve an inactive World Obstacle from the pool
+    // Call this from any class using "ObjectPool.SharedInstance.GetWorldObstacleObject();"
+    public WorldObstacle GetWorldObstacleObject()
     {
         // Search the array for an existing inactive Obstacle
         // Returns early if it finds one
-        for (int i = 0; i < currentObstaclesInPool; i++)
+        for (int i = 0; i < currentWorldObstaclesInPool; i++)
         {
-            if(!pooledObjects[i].activeInHierarchy)
+            if(!pooledWorldObstacles[i].gameObject.activeInHierarchy)
             {
-                return pooledObjects[i];
+                return pooledWorldObstacles[i];
             }
         }
 
         // If no inactive Obstacles found, attempt to create a new Obstacle
-        GameObject newObstacleObject = CreateNewObstacle();
+        WorldObstacle newObstacleObject = CreateNewWorldObstacle();
         if (newObstacleObject != null)
             return newObstacleObject;
+        else
+            return null;
+    }
+
+    // Attempts to retrieve an inactive Enemy Obstacle from the pool
+    // Call this from any class using "ObjectPool.SharedInstance.GetEnemyObstacleObject();"
+    public EnemyObstacle GetEnemyObstacleObject()
+    {
+        // Search the array for an existing inactive Obstacle
+        // Returns early if it finds one
+        for (int i = 0; i < currentEnemyObstaclesInPool; i++)
+        {
+            if (!pooledEnemyObstacles[i].gameObject.activeInHierarchy)
+            {
+                return pooledEnemyObstacles[i];
+            }
+        }
+
+        // If no inactive Enemy Obstacles found, attempt to create a new one
+        EnemyObstacle newEnemyObstacle = CreateNewEnemyObstacle();
+        if (newEnemyObstacle != null)
+            return newEnemyObstacle;
         else
             return null;
     }
