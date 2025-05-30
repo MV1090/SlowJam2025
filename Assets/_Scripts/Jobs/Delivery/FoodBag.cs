@@ -10,6 +10,8 @@ public class FoodBag : MonoBehaviour
 
     public Action onDelivered;
     public Action notDelivered;
+    
+    Customer customer;
     private IEnumerator LifeTimer(float sec)
     {
         yield return new WaitForSeconds(sec);
@@ -44,8 +46,11 @@ public class FoodBag : MonoBehaviour
         if (collision.gameObject.tag == "Customer")
         {
             onDelivered?.Invoke();
-            Destroy(gameObject);
-            Debug.Log("Food Delivered");
+
+            customer = collision.gameObject.GetComponent<Customer>();
+            customer.receivedFood?.Invoke();
+
+            Destroy(gameObject);            
         }
         else
         {

@@ -5,8 +5,7 @@ public class Delivery : BaseJob
     Vector3 throwDirection;
 
     int numOfDeliveries;
-    [SerializeField] int foodToDeliver = 5;
-    int deliveriesDelivered;
+    [SerializeField] int foodToDeliver = 5;    
 
     int numOfShifts = 0;
 
@@ -63,13 +62,12 @@ public class Delivery : BaseJob
         throwDirection = (targetPoint - player.position).normalized;
 
         FoodBag foodBag = Instantiate(foodPrefab, player.position, player.rotation);
-        foodBag.direction = throwDirection;               
+        foodBag.direction = throwDirection;        
 
         Debug.Log("Food to deliver: " + numOfDeliveries);
         numOfDeliveries--;
 
         Debug.DrawLine(transform.position, targetPoint, Color.green, 2f);
-    }
-  
+    } 
        
 }
