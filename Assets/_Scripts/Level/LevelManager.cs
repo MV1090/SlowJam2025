@@ -127,7 +127,7 @@ public class LevelManager : MonoBehaviour
         if(enemyData.isFloating)
             spawnY = 2.0f;
         
-        enemy.transform.position = new Vector3(randX, spawnY, spawnZPoint);
+        enemy.transform.position = new Vector3(randX, spawnY, spawnZPoint*2);
 
         enemy.SetMoveSpeed(worldMoveSpeed);
         enemy.SetDeactivatePoint(despawnZPoint);
