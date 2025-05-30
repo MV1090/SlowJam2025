@@ -11,13 +11,17 @@ public class TaxiDriver : BaseJob
 
     Customer customer;
 
+    int numOfPickUps;
+    int customersToPickUp;
+    int numOfShifts;
+
     public override void InitState(JobManager ctx)
     {
         base.InitState(ctx);
         jobState = JobManager.JobState.TaxiDriver;
 
         cubePosOffset = new Vector3(0, 0, 1.25f);
-        cubeSizeOffset = new Vector3(5, 3, 2.5f);
+        cubeSizeOffset = new Vector3(3, 3, 2.5f);
         hasCustomer = false;
     }
     public override void DoYerJob(PlayerController player)
@@ -51,10 +55,9 @@ public class TaxiDriver : BaseJob
             if (!hit.CompareTag("Customer"))
                 return;
 
-            customer = hit.gameObject.GetComponent<Customer>();
-            customer.pickedUP?.Invoke();
+            customer = hit.gameObject.GetComponent<Customer>();            
             customer.playerPos = playerTransform;
-
+            customer.pickedUP?.Invoke();
             hasCustomer = true;
         }     
     }
@@ -64,7 +67,6 @@ public class TaxiDriver : BaseJob
     //    Gizmos.color = Color.blue;
     //    Gizmos.DrawCube(playerController.transform.position + cubePosOffset, cubeSizeOffset);
     //}
-
     private void DropOffCustomer()
     {
         customer.droppedOff?.Invoke();
