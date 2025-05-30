@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldObstacle : MonoBehaviour
@@ -6,6 +7,8 @@ public class WorldObstacle : MonoBehaviour
     protected float deactivateZPoint = -10.0f;
     protected bool destructible = true;
     protected int hitPoints = 1;
+
+    public SpriteRenderer sprRef;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,6 +27,13 @@ public class WorldObstacle : MonoBehaviour
         // Move towards the 0 point
         transform.Translate( -(Vector3.forward * moveSpeed) * Time.deltaTime);
         
+    }
+
+    public void SetupObstacle(ObstacleScriptableObject obstacleData)
+    {
+        sprRef.sprite = obstacleData.obstacleSprite;
+        destructible = obstacleData.isDestructible;
+
     }
 
     protected void OnTriggerEnter(Collider other)

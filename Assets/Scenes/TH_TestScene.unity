@@ -171,6 +171,10 @@ MonoBehaviour:
   despawnZPoint: -10
   worldMoveSpeed: 10
   playerRef: {fileID: 0}
+  encounterList: []
+  obstaclesList:
+  - {fileID: 11400000, guid: b4db8a94dd4ba5c459a67285bb4cf9e7, type: 2}
+  - {fileID: 11400000, guid: 066b8c3fe4088354fb3c4a0b07534f88, type: 2}
 --- !u!4 &7532749
 Transform:
   m_ObjectHideFlags: 0
@@ -5475,6 +5479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  sprRef: {fileID: 0}
   fireRate: 1
   projectileSpeed: 1
 --- !u!212 &1261016566
@@ -5674,6 +5679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  sprRef: {fileID: 0}
   fireRate: 1
   projectileSpeed: 1
 --- !u!212 &1459121526
@@ -5925,6 +5931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  sprRef: {fileID: 0}
   fireRate: 1
   projectileSpeed: 1
 --- !u!212 &1931938730
