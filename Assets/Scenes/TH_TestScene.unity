@@ -152,7 +152,7 @@ MonoBehaviour:
   objectToPool: {fileID: 4007502761013966919, guid: 3793cdfeb35552c41b7f7c0748f0a3db, type: 3}
   objectAmountToPool: 10
   projectileToPool: {fileID: 7571358571764005658, guid: 723c8e40057d9724d8939677ac1dee22, type: 3}
-  projectileAmountToPool: 25
+  projectileAmountToPool: 5
   pooledObjects: []
   pooledProjectiles: []
 --- !u!114 &7532748
@@ -167,11 +167,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726ddbcf828117c4d89d95a988f345e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnZPoint: 30
+  spawnZPoint: 15
   despawnZPoint: -10
   worldMoveSpeed: 10
+  encounterRate: 3
   playerRef: {fileID: 0}
-  encounterList: []
+  encounterList:
+  - {fileID: 11400000, guid: 23b80c65e8d23ee409ef19890b77e7c6, type: 2}
+  - {fileID: 11400000, guid: e63ac85806a469845a302a344151d3ad, type: 2}
   obstaclesList:
   - {fileID: 11400000, guid: b4db8a94dd4ba5c459a67285bb4cf9e7, type: 2}
   - {fileID: 11400000, guid: 066b8c3fe4088354fb3c4a0b07534f88, type: 2}
@@ -5465,7 +5468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1261016565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5665,7 +5668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1459121525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5917,7 +5920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1931938729
 MonoBehaviour:
   m_ObjectHideFlags: 0

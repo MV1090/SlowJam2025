@@ -47,7 +47,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator DoEncounter(LevelEncounterScriptableObject encounter)
     {
-        print("Spawning Object from Encounter");
+        //print("Spawning Object from Encounter");
         GameObject gameobj = ObjectPool.SharedInstance.GetObstacleObject();
         WorldObstacle obstacle = gameobj.GetComponent<WorldObstacle>();
         
@@ -78,7 +78,7 @@ public class LevelManager : MonoBehaviour
     {
         if (isDoingEncounter == false) // start a new encounter
         {
-            print("Selecting a new Encounter...");
+            //print("Selecting a new Encounter...");
             int randI = Random.Range(0, encounterList.Count);
             LevelEncounterScriptableObject selectedEncounter = encounterList[randI];
 

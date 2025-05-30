@@ -15,16 +15,17 @@ public class ObjectPool : MonoBehaviour
     public List<Projectile> pooledProjectiles;
 
     private int currentObstaclesInPool; // Stores how many Obstacles are in its pool
+    private int currentProjectilesInPool; // Stores how many Projectiles are in its pool
 
     private void Awake()
     {
         SharedInstance = this;
         currentObstaclesInPool = objectAmountToPool;
+        currentProjectilesInPool = projectileAmountToPool;
 
         // Populate the Object Pools
         pooledObjects = new List<GameObject>();
-        GameObject tmp;
-        Projectile tmpProj;
+        pooledProjectiles = new List<Projectile>();
 
         for (int i = 0; i < objectAmountToPool; i++)
         {
@@ -35,19 +36,9 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < projectileAmountToPool; i++)
         {
             // Add to Projectile pool
-            if (projectileToPool != null)
-            {
-                tmpProj = Instantiate(projectileToPool);
-                tmpProj.gameObject.SetActive(false);
-                pooledProjectiles.Add(tmpProj);
-            }
+            CreateNewProjectile();
         }
 
-    }
-
-    void Start()
-    {
-        
     }
 
     private GameObject CreateNewObstacle()
@@ -64,11 +55,26 @@ public class ObjectPool : MonoBehaviour
         return null;
     }
 
+    private Projectile CreateNewProjectile()
+    {
+        if (projectileToPool != null)
+        {
+            Projectile newProjectileObject;
+            newProjectileObject = Instantiate(projectileToPool);
+            newProjectileObject.gameObject.SetActive(false);
+            pooledProjectiles.Add(newProjectileObject);
+            currentProjectilesInPool = pooledProjectiles.Count;
+            return newProjectileObject;
+        }
+        return null;
+    }
+
     // Attempts to retrieve an inactive object from the pool
     // Call this from any class using "ObjectPool.SharedInstance.GetObstacleObject();"
     public GameObject GetObstacleObject()
     {
         // Search the array for an existing inactive Obstacle
+        // Returns early if it finds one
         for (int i = 0; i < currentObstaclesInPool; i++)
         {
             if(!pooledObjects[i].activeInHierarchy)
@@ -77,7 +83,7 @@ public class ObjectPool : MonoBehaviour
             }
         }
 
-        // Attempt to create a new Obstacle
+        // If no inactive Obstacles found, attempt to create a new Obstacle
         GameObject newObstacleObject = CreateNewObstacle();
         if (newObstacleObject != null)
             return newObstacleObject;
@@ -89,7 +95,9 @@ public class ObjectPool : MonoBehaviour
     // Call this from any class using "ObjectPool.SharedInstance.GetProjectileObject();"
     public Projectile GetProjectileObject()
     {
-        for (int i = 0; i < projectileAmountToPool; i++)
+        // Search the array for an existing inactive Projectile
+        // Returns early if it finds one
+        for (int i = 0; i < currentProjectilesInPool; i++)
         {
             if (!pooledProjectiles[i].gameObject.activeInHierarchy)
             {
@@ -97,6 +105,11 @@ public class ObjectPool : MonoBehaviour
             }
         }
 
-        return null;
+        // If no inactive Projectiles found, attempt to create a new Projectile
+        Projectile newProjectileObject = CreateNewProjectile();
+        if (newProjectileObject != null)
+            return newProjectileObject;
+        else
+            return null;
     }
 }
