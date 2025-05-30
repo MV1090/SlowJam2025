@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 89faaee009b20ab47b71249a03a4f444
+guid: 36fd1d4d1806d28458ecdb9193aca46a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 108737996587217360
-    second: testRock_0
+      213: 605162050437240712
+    second: sun_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,40 +96,49 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: testRock_0
+      name: sun_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 75
+        height: 75
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0d13b2cb1a0528100800000000000000
-      internalID: 108737996587217360
+      spriteID: 887dbd7bda7f56800800000000000000
+      internalID: 605162050437240712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sun_1
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 0
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0c9a12cf937bf44092272a2b2a05b68
+      internalID: -2061714198
       vertices: []
       indices: 
       edges: []
@@ -138,7 +147,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6cdd729508d15d841a5a1aa71194924c
+    spriteID: 624e3df0a48bd384d929b4b5869bde66
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +157,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      testRock_0: 108737996587217360
+      sun_0: 605162050437240712
+      sun_1: -2061714198
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
