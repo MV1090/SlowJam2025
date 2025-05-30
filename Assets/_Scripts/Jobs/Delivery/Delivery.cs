@@ -31,6 +31,8 @@ public class Delivery : BaseJob
         numOfDeliveries += foodToDeliver + numOfShifts;            
         
         numOfShifts++;
+
+        //Add number of Customers to pool here, then set each customers wallet. 
     }
 
 

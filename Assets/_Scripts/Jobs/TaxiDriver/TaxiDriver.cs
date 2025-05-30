@@ -40,6 +40,8 @@ public class TaxiDriver : BaseJob
     public override void StartJob()
     {
         base.StartJob();
+
+        //Add number of Customers to pool here, then set each customers wallet. 
     }
 
     private void PickUpCustomer(Transform playerTransform)

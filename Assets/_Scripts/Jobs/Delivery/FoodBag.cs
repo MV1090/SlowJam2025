@@ -8,8 +8,8 @@ public class FoodBag : MonoBehaviour
     public float lifeSpan = 5f;
     public Vector3 direction;
 
-    public Action onDelivered;
-    public Action notDelivered;
+    //public Action onDelivered;
+    //public Action notDelivered;
     
     Customer customer;
     private IEnumerator LifeTimer(float sec)
@@ -45,8 +45,7 @@ public class FoodBag : MonoBehaviour
 
         if (collision.gameObject.tag == "Customer")
         {
-            onDelivered?.Invoke();
-
+            //onDelivered?.Invoke();            
             customer = collision.gameObject.GetComponent<Customer>();
             customer.receivedFood?.Invoke();
 
@@ -54,7 +53,7 @@ public class FoodBag : MonoBehaviour
         }
         else
         {
-            notDelivered?.Invoke();
+            //notDelivered?.Invoke();
             Destroy(gameObject);
             Debug.Log("customer died of starvation");
         }

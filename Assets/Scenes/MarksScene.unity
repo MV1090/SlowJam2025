@@ -130,6 +130,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c5ac519962b6445aa16e525c5fc1c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &43566470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 43566472}
+  - component: {fileID: 43566471}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &43566471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43566470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435c5eb18b77b384aba3edc26318234b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnMoneyChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnScoreChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &43566472
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43566470}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.380309, y: 4.1011086, z: -18.615726}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &442767436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,6 +1056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPassenger: 0
   playerPos: {fileID: 0}
+  totalWallet: 25
 --- !u!1 &1599167473
 GameObject:
   m_ObjectHideFlags: 0
@@ -2629,11 +2680,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2439359484514486760, guid: 813e999a176fe1e4f8aff2ff7cc86795, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 132.9
+      value: 81
       objectReference: {fileID: 0}
     - target: {fileID: 2439359484514486760, guid: 813e999a176fe1e4f8aff2ff7cc86795, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 56.7
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 2439359484514486760, guid: 813e999a176fe1e4f8aff2ff7cc86795, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2878,3 +2929,4 @@ SceneRoots:
   - {fileID: 1982032334}
   - {fileID: 1995923242}
   - {fileID: 1644625964}
+  - {fileID: 43566472}

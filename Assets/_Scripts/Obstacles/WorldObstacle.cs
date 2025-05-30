@@ -42,6 +42,8 @@ public class WorldObstacle : MonoBehaviour
         {
             gameObject.SetActive(false);
             other.gameObject.SetActive(false);
+
+            GameManager.Instance.Score += 10;
         }
         //if (other.gameObject.CompareTag("Player"))
         //    print("This WorldObject hit the Player, add functionality in the future!");
