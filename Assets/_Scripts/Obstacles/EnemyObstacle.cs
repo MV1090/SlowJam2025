@@ -8,31 +8,17 @@ public class EnemyObstacle : WorldObstacle
 
     private IEnumerator FireProjectile()
     {
+        yield return new WaitForSeconds(fireRate);
         float distance = Vector3.Distance(LevelManager.LevelInstance.playerRef.transform.position, gameObject.transform.position);
         if (distance > 5.0f && gameObject.transform.position.z > 0.0f)
         {
             Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();
             Vector3 targetDirection = (LevelManager.LevelInstance.playerRef.transform.position - gameObject.transform.position).normalized;
 
-            projectile.SetupProjectile(transform, 0.5f, moveSpeed + projectileSpeed, targetDirection, Projectile.ProjectileType.Enemy);
+            projectile.SetupProjectile(transform, 0.5f, moveSpeed + projectileSpeed, targetDirection, Projectile.ProjectileType.Enemy);           
+        }     
 
-            //projectile.transform.position = transform.position;
-            //projectile.transform.rotation = transform.rotation;
-            //projectile.projectileSpeed = moveSpeed + projectileSpeed;
-            //projectile.direction = targetDirection;
-            //projectile.gameObject.SetActive(true);
-            //projectile.StartLifeTimer();
-        }
-
-        //Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();
-        //projectile.transform.position = transform.position;
-        //projectile.transform.rotation = transform.rotation;
-        //projectile.projectileSpeed = moveSpeed + projectileSpeed;
-        //projectile.direction = Vector3.back;
-        //projectile.gameObject.SetActive(true);
-        //projectile.StartLifeTimer();
-
-        yield return new WaitForSeconds(fireRate);
+        //yield return new WaitForSeconds(fireRate);
         StartCoroutine(FireProjectile());
     }
 
@@ -45,14 +31,20 @@ public class EnemyObstacle : WorldObstacle
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.z < deactivateZPoint)
+        if (transform.position.z < deactivateZPoint) // Enemy is now out-of-bounds, deactivate it
         {
-            float randX = Random.Range(-5.0f, 5.0f);
-            transform.position = new Vector3(randX, transform.position.y, 20.0f);
+            gameObject.SetActive(false);
+            //float randX = Random.Range(-5.0f, 5.0f);
+            //transform.position = new Vector3(randX, transform.position.y, 20.0f);
         }
 
         // Move towards the 0 point
         transform.Translate(-(Vector3.forward * moveSpeed) * Time.deltaTime);
+    }
+
+    public void SetupEnemyObstacle(EnemyScriptableObject enemyData)
+    {
+        // To be completed.
     }
 
 }
