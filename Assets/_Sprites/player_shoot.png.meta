@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: b855e799f87b7e348b277d4f604a9c74
+guid: a8f046410693b044d8eece3de86e0e24
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9148800814639467426
-    second: drone_0
+      213: -4198333785000026376
+    second: player_shoot_0
+  - first:
+      213: 2524830005665916819
+    second: player_shoot_1
+  - first:
+      213: -3632927587993265727
+    second: player_shoot_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,35 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: drone_0
+      name: player_shoot_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 148
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2abc3655ed117fe70800000000000000
-      internalID: 9148800814639467426
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: drone_1
-      rect:
-        serializedVersion: 2
-        x: 148
-        y: 0
-        width: 148
-        height: 70
+        width: 75
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88191b676855a4249a19aade501b12b7
-      internalID: 1557789622
+      spriteID: f75cb41b25b0694499ac7d85693d3128
+      internalID: -385654222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_shoot_1
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 0
+        width: 75
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3260e0aece8b5f4459782cc88d94b8ae
+      internalID: -942226518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: player_shoot_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 0
+        width: 75
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2c1f7a0f4cfa31409ccb60857ace498
+      internalID: 518545481
       vertices: []
       indices: 
       edges: []
@@ -147,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fc0fd75281b21a944b440733f1979e54
+    spriteID: 609e058a03c8202418194c9762d899ed
     internalID: 0
     vertices: []
     indices: 
@@ -157,8 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      drone_0: 9148800814639467426
-      drone_1: 1557789622
+      player_shoot_0: -385654222
+      player_shoot_1: -942226518
+      player_shoot_2: 518545481
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
