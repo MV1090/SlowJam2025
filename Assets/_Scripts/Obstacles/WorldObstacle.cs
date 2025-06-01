@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+ public enum ObstacleType
+{
+    Obstacle, Enemy, Customer
+}
+
 public class WorldObstacle : MonoBehaviour
 {
     public float moveSpeed = 10.0f;
@@ -8,7 +13,8 @@ public class WorldObstacle : MonoBehaviour
     protected bool destructible = true;
     protected int hitPoints = 1;
 
-    public SpriteRenderer sprRef;
+    public SpriteRenderer sprRef; 
+    public ObstacleType obstacleType = ObstacleType.Obstacle;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,6 +37,7 @@ public class WorldObstacle : MonoBehaviour
 
     public void SetupObstacle(ObstacleScriptableObject obstacleData)
     {
+        obstacleType = obstacleData.obstacleType;
         sprRef.sprite = obstacleData.obstacleSprite;
         destructible = obstacleData.isDestructible;
 
@@ -38,7 +45,16 @@ public class WorldObstacle : MonoBehaviour
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Projectile"))
+        if (obstacleType == ObstacleType.Customer)
+        {   
+            // Delivery: Have customer react to receiving their food
+            print("Projectile hits a customer.");                    
+            //onDelivered?.Invoke();            
+            //Customer customer = collision.gameObject.GetComponent<Customer>();
+            GetComponent<Customer>().receivedFood?.Invoke();
+            gameObject.SetActive(false);
+        }         
+        else if (other.gameObject.CompareTag("Projectile"))
         {
             gameObject.SetActive(false);
             other.gameObject.SetActive(false);

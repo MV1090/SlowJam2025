@@ -35,7 +35,7 @@ public class JobManager : Singleton<JobManager>
             //    jobDictionary[state].gameObject.SetActive(false);
         }
 
-        ActivateNewJob(JobState.Unemployed);
+        //ActivateNewJob(JobState.Unemployed);
     }
 
     public void ActivateNewJob(JobState state)

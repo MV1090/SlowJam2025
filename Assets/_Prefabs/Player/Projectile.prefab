@@ -106,6 +106,7 @@ MonoBehaviour:
   lifeSpan: 2
   direction: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
+  defaultSprite: {fileID: -959829630997152127, guid: ada0fd30a3d05314d8436909fec11b22, type: 3}
 --- !u!54 &-2503962352095282218
 Rigidbody:
   m_ObjectHideFlags: 0

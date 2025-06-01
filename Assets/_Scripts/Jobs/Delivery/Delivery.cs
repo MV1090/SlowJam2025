@@ -10,6 +10,7 @@ public class Delivery : BaseJob
     int numOfShifts = 0;
 
     public Camera _camera;
+    public ObstacleScriptableObject foodBagData;
 
     [SerializeField] FoodBag foodPrefab;
     public override void InitState(JobManager ctx)
@@ -63,8 +64,11 @@ public class Delivery : BaseJob
 
         throwDirection = (targetPoint - player.position).normalized;
 
-        FoodBag foodBag = Instantiate(foodPrefab, player.position, player.rotation);
-        foodBag.direction = throwDirection;        
+        Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();
+        projectile.SetupProjectile(player.transform, 1.0f, 15.0f, throwDirection, Projectile.ProjectileType.Food, foodBagData);
+
+        //FoodBag foodBag = Instantiate(foodPrefab, player.position, player.rotation);
+        //foodBag.direction = throwDirection;
 
         Debug.Log("Food to deliver: " + numOfDeliveries);
         numOfDeliveries--;

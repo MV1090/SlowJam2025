@@ -8,10 +8,11 @@ public class Projectile : MonoBehaviour
     public Vector3 direction;
 
     public Rigidbody rb;
+    public Sprite defaultSprite;
 
     public enum ProjectileType
     {
-        Player, Upgrade1, Upgrade2, Upgrade3, Enemy, 
+        Player, Upgrade1, Upgrade2, Upgrade3, Enemy, Food
     }
 
     private IEnumerator LifeTimer(float sec)
@@ -21,7 +22,9 @@ public class Projectile : MonoBehaviour
     }
 
     private void Start()
-    {   
+    {
+        //defaultSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
+        
         if (lifeSpan <= 0)
         {
             lifeSpan = 2;
@@ -33,49 +36,68 @@ public class Projectile : MonoBehaviour
         transform.Translate((direction * projectileSpeed) * Time.deltaTime);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("Projectile hits something.");
+        // Delivery: Have customer react to receiving their food
+        if (collision.gameObject.CompareTag("Customer"))
+        {
+            //onDelivered?.Invoke();            
+            Customer customer = collision.gameObject.GetComponent<Customer>();
+            customer.receivedFood?.Invoke();
+
+            gameObject.SetActive(false);
+        }       
+
+    }
+
     public void StartLifeTimer()
     {
         StartCoroutine(LifeTimer(lifeSpan));
     }
 
-    public void SetupProjectile(Transform parentTransform, float newScale, float newSpeed, Vector3 newDirection, ProjectileType projectileType /* bool isPlayerProjectile = false*/)
-    {
-        //if(isPlayerProjectile)
-        //{          
-        //    gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-        //    gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
-        //}
-        //else
-        //{
-        //    gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        //    gameObject.layer = LayerMask.NameToLayer("EnemyProjectile");
-        //}
+    public void SetupProjectile(Transform parentTransform, float newScale, float newSpeed, Vector3 newDirection, ProjectileType projectileType, ObstacleScriptableObject projectileData = null)
+    {       
+        SpriteRenderer spriteComponent = gameObject.GetComponent<SpriteRenderer>();
 
         switch(projectileType)
-        {
+        {            
             case ProjectileType.Player:
                 gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
+                spriteComponent.sprite = defaultSprite;
                 break;  
                 
             case ProjectileType.Upgrade1:
                 gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
+                spriteComponent.sprite = defaultSprite;
                 break;
 
             case ProjectileType.Upgrade2:
                 gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
+                spriteComponent.sprite = defaultSprite;
                 break;
 
             case ProjectileType.Upgrade3:
                 gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
+                spriteComponent.sprite = defaultSprite;
                 break;
 
             case ProjectileType.Enemy:
                 gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                 gameObject.layer = LayerMask.NameToLayer("EnemyProjectile");
+                spriteComponent.sprite = defaultSprite;
+                break;
+
+            case ProjectileType.Food: // Change the projectile sprite to the food item.
+                if(projectileData != null)
+                    spriteComponent.sprite = projectileData.obstacleSprite;
+                else // fallback colour change            
+                    spriteComponent.color = Color.cyan;                       
+                gameObject.layer = LayerMask.NameToLayer("FoodBag");
                 break;
         };
 

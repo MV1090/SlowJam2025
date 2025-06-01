@@ -32,6 +32,9 @@ public class LevelManager : MonoBehaviour
 
     private int obstacleSpawnCounter; // how many encounters have occured this level
     private bool isDoingEncounter = false; // is the level currently doing an encounter?
+    
+    private JobManager jobManager;
+    public Customer customerPrefab;
 
     [HideInInspector]
     public static LevelManager LevelInstance; // Static Singleton referenced by other objects
@@ -102,9 +105,49 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(ChooseNewEncounter());
     }
 
+    private IEnumerator BeginJob()
+    {       
+        yield return new WaitForSeconds(3.0f);
+        if (jobManager)
+        {
+            if (jobManager.currentJob != null)
+            {
+                jobManager.currentJob.StartJob();
+                print("Your assigned Job has Started!");
+
+                if(jobManager.currentJob.jobState == JobManager.JobState.Delivery)
+                {
+                    print("Deliver those pizzas!");
+                    StartCoroutine(SpawnJobObstacle());
+                }
+            }
+        }
+        else
+        {
+            print("WARNING: Level Manager failed to find Job Manager in its GameObject. Jobs won't work!");
+        }
+    }
+
+    private IEnumerator SpawnJobObstacle()
+    {
+        if (jobManager.currentJob.jobState == JobManager.JobState.Delivery)
+        {
+            print("Someone's waiting for their delivery!");
+
+            Customer newCustomer = Instantiate(customerPrefab);
+            newCustomer.transform.position = new Vector3(5.0f, 0.0f, maxBoundary);
+            //newCustomer.SetMoveSpeed(worldMoveSpeed);
+            //newCustomer.SetDeactivatePoint(minBoundary);
+        }
+
+        yield return new WaitForSeconds(5.0f);
+        StartCoroutine(SpawnJobObstacle());
+    }
+
     private void Awake()
     {
         LevelInstance = this;
+        jobManager = GetComponent<JobManager>();
         playerRef = GameObject.FindGameObjectWithTag("Player"); // store player reference with level
     }
 
@@ -113,6 +156,18 @@ public class LevelManager : MonoBehaviour
     {
         StartCoroutine(SpawnRandomObstacle());
         StartCoroutine(ChooseNewEncounter());
+        StartCoroutine(BeginJob());
+        //if(jobManager)
+        //{
+        //    if(jobManager.currentJob != null)
+        //    {
+        //        jobManager.currentJob.StartJob();
+        //    }
+        //}
+        //else
+        //{
+        //    print("WARNING: Level Manager failed to find Job Manager in its GameObject. Jobs won't work!");
+        //}
 
     }
 

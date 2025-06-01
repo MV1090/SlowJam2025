@@ -3,6 +3,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ObstacleScriptableObject", menuName = "Scriptable Objects/ObstacleScriptableObject")]
 public class ObstacleScriptableObject : ScriptableObject
 {
+    [Tooltip("The type of Obstacle this is")]
+    public ObstacleType obstacleType = ObstacleType.Obstacle;
+
     [Tooltip("The sprite asset this Obstacle uses")]
     public Sprite obstacleSprite;
 
