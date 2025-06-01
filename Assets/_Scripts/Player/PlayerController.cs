@@ -109,7 +109,6 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Hspeed", movementInput.x);
             animator.SetFloat("Vpos", transform.position.y);
 
-
             ClampPosition();
         }
     }
