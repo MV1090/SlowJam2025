@@ -35,6 +35,9 @@ public class LevelManager : MonoBehaviour
     
     private JobManager jobManager;
     public Customer customerPrefab;
+    public GameObject taxiStopPrefab;
+    public GameObject trashPrefab;
+    private bool isSpawningStop = true;
 
     [HideInInspector]
     public static LevelManager LevelInstance; // Static Singleton referenced by other objects
@@ -115,11 +118,16 @@ public class LevelManager : MonoBehaviour
                 jobManager.currentJob.StartJob();
                 print("Your assigned Job has Started!");
 
-                if(jobManager.currentJob.jobState == JobManager.JobState.Delivery)
+                if (jobManager.currentJob.jobState == JobManager.JobState.Delivery)
                 {
                     print("Deliver those pizzas!");
-                    StartCoroutine(SpawnJobObstacle());
                 }
+                else if (jobManager.currentJob.jobState == JobManager.JobState.TaxiDriver)
+                {
+                    print("Get some Taxi fares!");
+                }
+
+                StartCoroutine(SpawnJobObstacle());
             }
         }
         else
@@ -138,6 +146,29 @@ public class LevelManager : MonoBehaviour
             newCustomer.transform.position = new Vector3(5.0f, 0.0f, maxBoundary);
             //newCustomer.SetMoveSpeed(worldMoveSpeed);
             //newCustomer.SetDeactivatePoint(minBoundary);
+        }
+        else if(jobManager.currentJob.jobState == JobManager.JobState.TaxiDriver)
+        {
+            isSpawningStop = !isSpawningStop; // toggle between spawning customers and stops
+
+            if (isSpawningStop)
+            {
+                print("Drop off that person!");
+                GameObject newStop = Instantiate(taxiStopPrefab);
+                //newStop.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+
+                float randX = Random.Range(-1.0f, 1.0f);
+                newStop.transform.position = new Vector3(randX, 0.0f, maxBoundary);
+            }
+            else
+            {
+                print("Pick up that person!");
+                Customer newCustomer = Instantiate(customerPrefab);
+                newCustomer.gameObject.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+
+                float randX = Random.Range(-1.0f, 1.0f);
+                newCustomer.transform.position = new Vector3(randX, 0.0f, maxBoundary);
+            }
         }
 
         yield return new WaitForSeconds(5.0f);

@@ -221,7 +221,7 @@ MonoBehaviour:
   - {fileID: 1070853221}
   - {fileID: 2132406182}
   - {fileID: 350150868}
-  currentJob: {fileID: 1070853221}
+  currentJob: {fileID: 2132406182}
 --- !u!4 &897354048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 715080517155533116, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
@@ -280,9 +280,17 @@ PrefabInstance:
       value: LevelManager
       objectReference: {fileID: 0}
     - target: {fileID: 8335133069915710905, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: trashPrefab
+      value: 
+      objectReference: {fileID: 4963784798205717968, guid: 462491a7b3b16784f8d5a01277a2522f, type: 3}
+    - target: {fileID: 8335133069915710905, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
       propertyPath: customerPrefab
       value: 
       objectReference: {fileID: 3156704719743208417, guid: abeaf63bf7ca2044da2f1fa0f1567dc9, type: 3}
+    - target: {fileID: 8335133069915710905, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: taxiStopPrefab
+      value: 
+      objectReference: {fileID: 2620302757156222619, guid: ca43cf35299d3214aac90b47b9e0c3bb, type: 3}
     - target: {fileID: 8335133069915710905, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
       propertyPath: customerObstacleData
       value: 
