@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float xMaxOffSet;
     [SerializeField] float yMinOffset;
     [SerializeField] float yMaxOffSet;
+    [SerializeField] ParticleSystem jetParticles;
 
     InputAction move;
     PlayerInput playerInput;
@@ -92,7 +93,9 @@ public class PlayerController : MonoBehaviour
         Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();
         projectile.SetupProjectile(transform, 1.0f, projectileSpeed, direction, projectileType);
 
-        Debug.DrawLine(transform.position, targetPoint, Color.green, 2f);        
+        Debug.DrawLine(transform.position, targetPoint, Color.green, 2f);
+
+        animator.SetTrigger("Shooting");
     }
     
     void Update()
@@ -148,5 +151,21 @@ public class PlayerController : MonoBehaviour
     public void SetHealthRelative(int healthValue)
     {
         health += Mathf.Clamp(health+healthValue, 0, maxHealth);
+    }
+
+    public void TurnOffParticles()
+    {
+        if (jetParticles.isStopped)
+            return;
+
+            jetParticles.Stop();
+    }
+
+    public void TurnOnParticles()
+    {
+        if (!jetParticles.isStopped)
+            return;
+
+        jetParticles.Play();
     }
 }

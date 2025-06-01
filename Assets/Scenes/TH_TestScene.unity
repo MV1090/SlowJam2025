@@ -459,6 +459,10 @@ PrefabInstance:
       value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 5259836662201784685, guid: 813e999a176fe1e4f8aff2ff7cc86795, type: 3}
+      propertyPath: jetParticles
+      value: 
+      objectReference: {fileID: 1220034625}
+    - target: {fileID: 5259836662201784685, guid: 813e999a176fe1e4f8aff2ff7cc86795, type: 3}
       propertyPath: projectileSpawn
       value: 
       objectReference: {fileID: 1219034990}
@@ -5908,8 +5912,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Score:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 91ca5fdf73cc77c49a9a902f55056b1c, type: 2}
+  m_sharedMaterial: {fileID: 2517801999776639364, guid: 91ca5fdf73cc77c49a9a902f55056b1c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
