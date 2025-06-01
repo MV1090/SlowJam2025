@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     // Firing Settings     
     [SerializeField] private Projectile projectilePrefab;
     [SerializeField] private Transform  projectileSpawn;
+    [SerializeField] private Transform  projectileSpawnLeft;
+    [SerializeField] private Transform  projectileSpawnRight;
 
     Projectile.ProjectileType projectileType = Projectile.ProjectileType.Player;
 
@@ -89,9 +91,18 @@ public class PlayerController : MonoBehaviour
         }       
         Vector3 direction = (targetPoint - transform.position).normalized;
 
+        Transform spawnPoint;
+
+        if (movementInput.x > 0)
+            spawnPoint = projectileSpawnRight;
+        else if (movementInput.x < 0) 
+            spawnPoint = projectileSpawnLeft;
+        else 
+            spawnPoint = projectileSpawn;
+
         //Projectile projectile = Instantiate(projectilePrefab, transform.position, transform.rotation);
         Projectile projectile = ObjectPool.SharedInstance.GetProjectileObject();
-        projectile.SetupProjectile(transform, 1.0f, projectileSpeed, direction, projectileType);
+        projectile.SetupProjectile(spawnPoint, 1.0f, projectileSpeed, direction, projectileType);
 
         Debug.DrawLine(transform.position, targetPoint, Color.green, 2f);
 
@@ -163,7 +174,7 @@ public class PlayerController : MonoBehaviour
 
     public void TurnOnParticles()
     {
-        if (!jetParticles.isStopped)
+        if (jetParticles.isPlaying)
             return;
 
         jetParticles.Play();
