@@ -6,10 +6,10 @@ public class ObstacleScriptableObject : ScriptableObject
     [Tooltip("The sprite asset this Obstacle uses")]
     public Sprite obstacleSprite;
 
-    [Tooltip("Can this Obstacle be destroyed with player gunfire? (true) by default")]
+    [Tooltip("If true, this Obstacle can be destroyed with Player projectiles.")]
     public bool isDestructible = true;
 
-    [Tooltip("Is this Obstacle meant to be floating? (false) by default")]
+    [Tooltip("If true, this Obstacle will spawn floating in the air.")]
     public bool isFloating = false;
 
     [Tooltip("The scale of this Obstacle. (1.5x, 1.5y) by default")]

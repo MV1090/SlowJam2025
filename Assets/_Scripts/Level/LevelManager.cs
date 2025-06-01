@@ -4,10 +4,34 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
-    public float spawnZPoint = 30.0f; // the Z position objects should spawn
-    public float despawnZPoint = -10.0f; // the z position object despawn
-    public float worldMoveSpeed = 10.0f; // how fast objects move towards the camera
-    public float encounterRate = 5.0f; // how fast a new encounter appears (in seconds)
+    [Header("Level Boundaries")]
+    [Tooltip("The furthest point an Object spawns or despawns.")]
+    public float maxBoundary = 30.0f; // the Z position objects spawn/despawn from the level
+
+    [Tooltip("The closest point an Object spawns or despawns. Set to a negative value to have Objects go past the player before despawning.")]
+    public float minBoundary = -10.0f; // the z position object despawn
+
+    [Tooltip("How much can an object deviate from the centre when spawned (higher=wider)")]
+    public float XPosSpawnVariance = 5.0f;
+
+    [Tooltip("How fast objects move towards the Player by default in a Level.")]
+    public float worldMoveSpeed = 10.0f;
+
+    [Tooltip("How quickly do new Encounters occur during the level (in seconds).")]
+    public float encounterRate = 5.0f;
+
+    [Header("Level Encounters")]
+    [Tooltip("Lists what kind of Encounters can appear in this level randomly.")]
+    public List<LevelEncounterScriptableObject> encounterList;
+
+    [Tooltip("Lists what kind of Obstacles can spawn between Encounters in this level.")]
+    public List<ObstacleScriptableObject> obstaclesList;
+    
+    //public List<JobEncounterScriptableObject> jobEncounterList;
+    //public LevelEncounterScriptableObject endLevelEncounter;
+
+    private int obstacleSpawnCounter; // how many encounters have occured this level
+    private bool isDoingEncounter = false; // is the level currently doing an encounter?
 
     [HideInInspector]
     public static LevelManager LevelInstance; // Static Singleton referenced by other objects
@@ -15,25 +39,18 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public GameObject playerRef;
 
-    // Obstacle Data
-    public List<LevelEncounterScriptableObject> encounterList;
-    public List<ObstacleScriptableObject> obstaclesList;
-    private int obstacleSpawnCounter;
-    private bool isDoingEncounter = false;
-
     private IEnumerator SpawnRandomObstacle()
     {
         if (isDoingEncounter == false)
-        {
-            //print("Started SpawnRock CoRoutine");
+        {            
             WorldObstacle obstacle = ObjectPool.SharedInstance.GetWorldObstacleObject();
             
             if (obstacle != null)
             {
-                float randX = Random.Range(-5.0f, 5.0f);
-                obstacle.transform.position = new Vector3(randX, 0.0f, spawnZPoint); // 1.0f * Random.Range(0, 3.0f) for Y variance
+                float randX = Random.Range(-XPosSpawnVariance, XPosSpawnVariance);
+                obstacle.transform.position = new Vector3(randX, 0.0f, maxBoundary); // 1.0f * Random.Range(0, 3.0f) for Y variance
                 obstacle.SetMoveSpeed(worldMoveSpeed);
-                obstacle.SetDeactivatePoint(despawnZPoint);
+                obstacle.SetDeactivatePoint(minBoundary);
 
                 int randI = Random.Range(0, obstaclesList.Count);
                 obstacle.SetupObstacle(obstaclesList[randI]);
@@ -105,10 +122,10 @@ public class LevelManager : MonoBehaviour
 
         if (obstacle != null)
         {
-            float randX = Random.Range(-5.0f, 5.0f);
-            obstacle.transform.position = new Vector3(randX, 0.0f, spawnZPoint);
+            float randX = Random.Range(-XPosSpawnVariance, XPosSpawnVariance);
+            obstacle.transform.position = new Vector3(randX, 0.0f, maxBoundary);
             obstacle.SetMoveSpeed(worldMoveSpeed);
-            obstacle.SetDeactivatePoint(despawnZPoint);           
+            obstacle.SetDeactivatePoint(minBoundary);           
             obstacle.SetupObstacle(obstacleData);
 
             obstacle.gameObject.SetActive(true);
@@ -121,16 +138,16 @@ public class LevelManager : MonoBehaviour
         if (enemy == null)
             return;
 
-        float randX = Random.Range(-5.0f, 5.0f);
+        float randX = Random.Range(-XPosSpawnVariance, XPosSpawnVariance);
         float spawnY = 0.0f;
 
         if(enemyData.isFloating)
             spawnY = 2.0f;
         
-        enemy.transform.position = new Vector3(randX, spawnY, spawnZPoint*2);
+        enemy.transform.position = new Vector3(randX, spawnY, maxBoundary * 2);
 
         enemy.SetMoveSpeed(worldMoveSpeed);
-        enemy.SetDeactivatePoint(despawnZPoint);
+        enemy.SetDeactivatePoint(minBoundary);
         enemy.SetupObstacle(enemyData);
 
         enemy.gameObject.SetActive(true);
