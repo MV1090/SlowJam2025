@@ -107,6 +107,8 @@ public class PlayerController : MonoBehaviour
             transform.Translate(movement * moveSpeed * Time.deltaTime);
 
             animator.SetFloat("Hspeed", movementInput.x);
+            animator.SetFloat("Vpos", transform.position.y);
+
 
             ClampPosition();
         }

@@ -37,6 +37,7 @@ public class Sweeper : BaseJob
         {
             Debug.Log(hit.name);
             Destroy(hit.gameObject);
+            GameManager.Instance.money += 10;
         }
     }
 
