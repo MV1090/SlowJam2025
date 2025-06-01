@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     InputAction move;
     PlayerInput playerInput;
     [SerializeField] private Camera _camera;
+    Vector2 movementInput;
 
     bool isMoving;
 
@@ -53,7 +54,9 @@ public class PlayerController : MonoBehaviour
         if (!gameObject.activeInHierarchy)
             return;
 
-        isMoving = false;        
+        isMoving = false;
+        movementInput.x = 0;
+        animator.SetFloat("Hspeed", movementInput.x);
     }
 
     public void OnDoingYerJob(InputAction.CallbackContext context)
@@ -99,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
         if (isMoving)
         { 
-            Vector2 movementInput = move.ReadValue<Vector2>();
+            /*Vector2*/ movementInput = move.ReadValue<Vector2>();
             Vector3 movement = new Vector3(movementInput.x, movementInput.y, 0);
             transform.Translate(movement * moveSpeed * Time.deltaTime);
 
