@@ -94,8 +94,11 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator ChooseNewEncounter()
     {
+        if (encounterList.Count == 0)
+            yield break;
+
         if (isDoingEncounter == false) // start a new encounter
-        {
+        {           
             //print("Selecting a new Encounter...");
             int randI = Random.Range(0, encounterList.Count);
             LevelEncounterScriptableObject selectedEncounter = encounterList[randI];
@@ -118,6 +121,12 @@ public class LevelManager : MonoBehaviour
                 jobManager.currentJob.StartJob();
                 print("Your assigned Job has Started!");
 
+                if (jobManager.currentJob.jobState == JobManager.JobState.Unemployed)
+                {
+                    print("No Jobs yet.");
+                    yield break;
+                }
+
                 if (jobManager.currentJob.jobState == JobManager.JobState.Delivery)
                 {
                     print("Deliver those pizzas!");
@@ -125,6 +134,10 @@ public class LevelManager : MonoBehaviour
                 else if (jobManager.currentJob.jobState == JobManager.JobState.TaxiDriver)
                 {
                     print("Get some Taxi fares!");
+                }
+                else if (jobManager.currentJob.jobState == JobManager.JobState.Sweeper)
+                {
+                    print("Sweep the streets!");
                 }
 
                 StartCoroutine(SpawnJobObstacle());
@@ -169,6 +182,15 @@ public class LevelManager : MonoBehaviour
                 float randX = Random.Range(-1.0f, 1.0f);
                 newCustomer.transform.position = new Vector3(randX, 0.0f, maxBoundary);
             }
+        }
+        else if (jobManager.currentJob.jobState == JobManager.JobState.Sweeper)
+        {
+            print("Trash on the street!");
+            GameObject newTrash = Instantiate(trashPrefab);
+            //newStop.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+
+            float randX = Random.Range(-1.0f, 1.0f);
+            newTrash.transform.position = new Vector3(randX, 0.0f, maxBoundary);
         }
 
         yield return new WaitForSeconds(5.0f);

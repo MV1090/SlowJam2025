@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7961761194913930285}
   - component: {fileID: 7253134438629449849}
   - component: {fileID: 8038605568582464981}
+  - component: {fileID: 3358894366109413302}
   m_Layer: 14
   m_Name: Trash
   m_TagString: Trash
@@ -137,3 +138,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3358894366109413302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4963784798205717968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0804d934085c0904b8f67affe6b2e6f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  sprRef: {fileID: 0}
+  obstacleType: 0
