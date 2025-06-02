@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ada0fd30a3d05314d8436909fec11b22
+guid: ee3a347e4e75e5049a93659f9eb33cb1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -959829630997152127
-    second: player_bullet_0
+      213: -3865754878444347168
+    second: reticle_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_bullet_0
+      name: reticle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 36
-        height: 36
+        width: 50
+        height: 50
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 18e358739000ea2f0800000000000000
-      internalID: -959829630997152127
+      spriteID: 0e067917b641a5ac0800000000000000
+      internalID: -3865754878444347168
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0e50ec988a9cba940a8a18cacc2d17e8
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player_bullet_0: -959829630997152127
+      reticle_0: -3865754878444347168
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -167,6 +167,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 968496275928108802, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 968496275928108802, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 968496275928108802, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0616
+      objectReference: {fileID: 0}
+    - target: {fileID: 968496275928108802, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1914
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013869868865499511, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3865754878444347168, guid: ee3a347e4e75e5049a93659f9eb33cb1, type: 3}
+    - target: {fileID: 4013869868865499511, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: m_DrawMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7241984774243821446, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
       propertyPath: m_Name
       value: LevelManager
