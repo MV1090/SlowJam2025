@@ -32,7 +32,9 @@ public class Projectile : MonoBehaviour
     }
 
     private void Update()
-    {       
+    {
+        if (transform.position.y < 0.0f)
+            gameObject.SetActive(false);
         transform.Translate((direction * projectileSpeed) * Time.deltaTime);
     }
 
@@ -47,8 +49,8 @@ public class Projectile : MonoBehaviour
             customer.receivedFood?.Invoke();
 
             gameObject.SetActive(false);
-        }       
-
+        }
+        
     }
 
     public void StartLifeTimer()
