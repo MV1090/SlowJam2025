@@ -17,26 +17,33 @@ public class LevelManager : MonoBehaviour
     [Tooltip("How fast objects move towards the Player by default in a Level.")]
     public float worldMoveSpeed = 10.0f;
 
+    [Header("Level Encounters")]
+    [Tooltip("How many encounters should spawn this level?")]
+    public int encountersInLevel = 5;
+
     [Tooltip("How quickly do new Encounters occur during the level (in seconds).")]
     public float encounterRate = 5.0f;
 
-    [Header("Level Encounters")]
     [Tooltip("Lists what kind of Encounters can appear in this level randomly.")]
     public List<LevelEncounterScriptableObject> encounterList;
 
     [Tooltip("Lists what kind of Obstacles can spawn between Encounters in this level.")]
     public List<ObstacleScriptableObject> obstaclesList;
-    
+
+    private int levelsCompleted = 0;
+    private int encountersCompleted = 0;
+
     //public List<JobEncounterScriptableObject> jobEncounterList;
     //public LevelEncounterScriptableObject endLevelEncounter;
 
-    private int obstacleSpawnCounter; // how many encounters have occured this level
+    private int obstacleSpawnCounter; // during an encounter, tracks how many obstacles are left to spawn
     private bool isDoingEncounter = false; // is the level currently doing an encounter?
     
     private JobManager jobManager;
     public Customer customerPrefab;
     public GameObject taxiStopPrefab;
     public GameObject trashPrefab;
+    public GameObject levelExitPrefab;
     private bool isSpawningStop = true;
 
     [HideInInspector]
@@ -47,7 +54,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator SpawnRandomObstacle()
     {
-        if (isDoingEncounter == false)
+        if (isDoingEncounter == false && encountersCompleted < encountersInLevel)
         {            
             WorldObstacle obstacle = ObjectPool.SharedInstance.GetWorldObstacleObject();
             
@@ -88,8 +95,13 @@ public class LevelManager : MonoBehaviour
             obstacleSpawnCounter--;
             StartCoroutine(DoEncounter(levelEncounter));
         }
-        else
+        else // the encounter is completed
+        {
+            encountersCompleted++;
             isDoingEncounter = false;
+            print("Encounter Completed: " + encountersCompleted + "/" + encountersInLevel);
+            yield break;
+        }
     }
 
     private IEnumerator ChooseNewEncounter()
@@ -97,17 +109,28 @@ public class LevelManager : MonoBehaviour
         if (encounterList.Count == 0)
             yield break;
 
+        float encounterTimer = encounterRate;     
         if (isDoingEncounter == false) // start a new encounter
-        {           
-            //print("Selecting a new Encounter...");
-            int randI = Random.Range(0, encounterList.Count);
-            LevelEncounterScriptableObject selectedEncounter = encounterList[randI];
+        {
+            if (encountersCompleted >= encountersInLevel) // spawn the exit
+            {
+                GameObject levelExit = Instantiate(levelExitPrefab);
+                levelExit.transform.position = new Vector3(0.0f, 0.0f, maxBoundary);
+                encounterTimer *= 10;
+            }
+            else
+            {
+                //print("Selecting a new Encounter...");
+                int randI = Random.Range(0, encounterList.Count);
+                LevelEncounterScriptableObject selectedEncounter = encounterList[randI];
 
-            obstacleSpawnCounter = selectedEncounter.amountToSpawn;
-            StartCoroutine(DoEncounter(selectedEncounter));
+                obstacleSpawnCounter = selectedEncounter.amountToSpawn;
+                StartCoroutine(DoEncounter(selectedEncounter));
+                isDoingEncounter = true;
+            }
         }
         
-        yield return new WaitForSeconds(encounterRate);
+        yield return new WaitForSeconds(encounterTimer);
         StartCoroutine(ChooseNewEncounter());
     }
 
@@ -202,26 +225,23 @@ public class LevelManager : MonoBehaviour
         LevelInstance = this;
         jobManager = GetComponent<JobManager>();
         playerRef = GameObject.FindGameObjectWithTag("Player"); // store player reference with level
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        SetUpNewLevel();
+
+    }
+
+    public void SetUpNewLevel()
+    {       
+        encountersCompleted = 0;
+
         StartCoroutine(SpawnRandomObstacle());
         StartCoroutine(ChooseNewEncounter());
         StartCoroutine(BeginJob());
-        //if(jobManager)
-        //{
-        //    if(jobManager.currentJob != null)
-        //    {
-        //        jobManager.currentJob.StartJob();
-        //    }
-        //}
-        //else
-        //{
-        //    print("WARNING: Level Manager failed to find Job Manager in its GameObject. Jobs won't work!");
-        //}
-
     }
 
     private void CreateWorldObstacle(ObstacleScriptableObject obstacleData)

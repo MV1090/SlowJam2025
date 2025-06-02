@@ -4,14 +4,14 @@ using UnityEngine;
 
  public enum ObstacleType
 {
-    Obstacle, Enemy, Customer
+    Obstacle, Enemy, Customer, EndLevel
 }
 
 public class WorldObstacle : MonoBehaviour
 {
     public float moveSpeed = 10.0f;
     protected float deactivateZPoint = -10.0f;
-    protected bool destructible = true;
+    public bool destructible = true;
     protected int hitPoints = 1;
 
     public SpriteRenderer sprRef; 
@@ -59,6 +59,12 @@ public class WorldObstacle : MonoBehaviour
         }         
         else if (other.gameObject.CompareTag("Projectile"))
         {
+            if (!destructible)
+            {
+                other.gameObject.SetActive(false);
+                return;
+            }               
+
             ShowScore(transform.position, 10);
             gameObject.SetActive(false);
             other.gameObject.SetActive(false);

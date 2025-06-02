@@ -167,10 +167,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2810259538784868647, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: orthographic size
+      value: 3.495
+      objectReference: {fileID: 0}
     - target: {fileID: 7241984774243821446, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8335133069915710905, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: levelExitPrefab
+      value: 
+      objectReference: {fileID: 4007502761013966919, guid: bb817a4977d771841bf6c412fd56f8a7, type: 3}
     - target: {fileID: 8335133069915710905, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
       propertyPath: encounterList.Array.size
       value: 2
@@ -196,6 +204,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+--- !u!20 &231252897 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2810259538784868647, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+  m_PrefabInstance: {fileID: 231252896}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &524051803
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,6 +330,7 @@ GameObject:
   - component: {fileID: 911198634}
   - component: {fileID: 911198633}
   - component: {fileID: 911198632}
+  - component: {fileID: 911198637}
   - component: {fileID: 911198631}
   - component: {fileID: 911198635}
   - component: {fileID: 911198636}
@@ -344,7 +358,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -450,6 +464,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &911198637
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911198630}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &913752227
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,8 +559,8 @@ Canvas:
   m_GameObject: {fileID: 913752227}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 231252897}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -668,11 +709,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 913752231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 849, y: 498}
-  m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 32, y: 32}
+  m_SizeDelta: {x: 386, y: 32}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1275096671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,7 +734,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score:'
+  m_text: 'Score: 999999'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91ca5fdf73cc77c49a9a902f55056b1c, type: 2}
   m_sharedMaterial: {fileID: 2517801999776639364, guid: 91ca5fdf73cc77c49a9a902f55056b1c, type: 2}
@@ -730,7 +771,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 5
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

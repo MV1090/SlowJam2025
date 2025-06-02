@@ -81,13 +81,13 @@ public class PlayerController : MonoBehaviour
         {
             targetPoint = hit.point;
             Debug.DrawLine(ray.origin, targetPoint, Color.red, 2f);
-            Debug.Log("Hit point: " + targetPoint);
+            //Debug.Log("Hit point: " + targetPoint);
         }
         else
         {
             targetPoint = ray.origin + ray.direction * 100f;
             Debug.DrawLine(ray.origin, targetPoint, Color.yellow, 2f);
-            Debug.Log("No hit � firing into empty space.");
+            //Debug.Log("No hit � firing into empty space.");
         }       
         Vector3 direction = (targetPoint - transform.position).normalized;
 
@@ -136,8 +136,18 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
-            print("Ouch! The player took some damage hitting an Obstacle!");
-            other.gameObject.SetActive(false);
+            WorldObstacle obstacle = other.gameObject.GetComponent<WorldObstacle>();
+
+            if (obstacle.obstacleType == ObstacleType.EndLevel)
+            {
+                print("The Level has Ended.");
+                LevelManager.LevelInstance.SetUpNewLevel();
+            }
+            else
+            {
+                print("Ouch! The player took some damage hitting an Obstacle!");
+                other.gameObject.SetActive(false);
+            }
         }       
     }
 
