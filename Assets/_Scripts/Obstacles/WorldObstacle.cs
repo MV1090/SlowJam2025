@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
  public enum ObstacleType
@@ -15,6 +16,8 @@ public class WorldObstacle : MonoBehaviour
 
     public SpriteRenderer sprRef; 
     public ObstacleType obstacleType = ObstacleType.Obstacle;
+
+    public GameObject floatingScorePrefab;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -56,9 +59,10 @@ public class WorldObstacle : MonoBehaviour
         }         
         else if (other.gameObject.CompareTag("Projectile"))
         {
+            ShowScore(transform.position, 10);
             gameObject.SetActive(false);
             other.gameObject.SetActive(false);
-
+            
             GameManager.Instance.Score += 10;
         }
         //if (other.gameObject.CompareTag("Player"))
@@ -100,5 +104,10 @@ public class WorldObstacle : MonoBehaviour
     public void SetDeactivatePoint(float newZ)
     {
         deactivateZPoint = newZ;
+    }
+    public void ShowScore(Vector3 position, int scoreValue)
+    {
+        GameObject instance = Instantiate(floatingScorePrefab, position, Quaternion.identity);
+        instance.GetComponent<TMP_Text>().text = $"+{scoreValue}";
     }
 }

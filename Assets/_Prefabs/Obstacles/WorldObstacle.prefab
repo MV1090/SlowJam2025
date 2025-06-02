@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   sprRef: {fileID: 5429710226347273997}
+  floatingScorePrefab: {fileID: 8975863942774107405, guid: 4b28c70d0b746d3418aaad0174dd7f76, type: 3}
 --- !u!54 &3191697604784675509
 Rigidbody:
   m_ObjectHideFlags: 0
