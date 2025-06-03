@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 9217251022595231305}
+  shadowScaleMin: 0.25
   shadowYPosition: 0.13
 --- !u!1 &1963615537375763512
 GameObject:
@@ -5362,12 +5363,14 @@ MonoBehaviour:
   minBoundary: -10
   XPosSpawnVariance: 5
   worldMoveSpeed: 10
+  encountersInLevel: 5
   encounterRate: 3
   encounterList: []
   obstaclesList: []
   customerPrefab: {fileID: 3156704719743208417, guid: abeaf63bf7ca2044da2f1fa0f1567dc9, type: 3}
   taxiStopPrefab: {fileID: 2620302757156222619, guid: ca43cf35299d3214aac90b47b9e0c3bb, type: 3}
   trashPrefab: {fileID: 4963784798205717968, guid: 462491a7b3b16784f8d5a01277a2522f, type: 3}
+  levelExitPrefab: {fileID: 4007502761013966919, guid: bb817a4977d771841bf6c412fd56f8a7, type: 3}
   playerRef: {fileID: 0}
 --- !u!114 &8189273397696084381
 MonoBehaviour:

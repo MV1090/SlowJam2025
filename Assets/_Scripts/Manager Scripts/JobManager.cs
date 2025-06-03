@@ -53,4 +53,12 @@ public class JobManager : Singleton<JobManager>
         //currentJob.gameObject.SetActive(true);
         //currentJob.EnterState();
     }
+
+    // Randomly choose a new Job from the Job list
+    public void ChooseRandomJob()
+    {
+        int randI = Random.Range(0, allJobs.Length);
+        currentJob = allJobs[randI];
+        
+    }
 }

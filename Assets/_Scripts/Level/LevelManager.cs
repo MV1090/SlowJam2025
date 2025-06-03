@@ -141,40 +141,40 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator BeginJob()
     {       
-        yield return new WaitForSeconds(3.0f);
-        if (jobManager)
-        {
-            if (jobManager.currentJob != null)
-            {
-                jobManager.currentJob.StartJob();
-                print("Your assigned Job has Started!");
-
-                if (jobManager.currentJob.jobState == JobManager.JobState.Unemployed)
-                {
-                    print("No Jobs yet.");
-                    yield break;
-                }
-
-                if (jobManager.currentJob.jobState == JobManager.JobState.Delivery)
-                {
-                    print("Deliver those pizzas!");
-                }
-                else if (jobManager.currentJob.jobState == JobManager.JobState.TaxiDriver)
-                {
-                    print("Get some Taxi fares!");
-                }
-                else if (jobManager.currentJob.jobState == JobManager.JobState.Sweeper)
-                {
-                    print("Sweep the streets!");
-                }
-
-                StartCoroutine(SpawnJobObstacle());
-            }
-        }
-        else
+        if(jobManager == null)
         {
             print("WARNING: Level Manager failed to find Job Manager in its GameObject. Jobs won't work!");
+            yield break;
         }
+        
+        yield return new WaitForSeconds(3.0f);
+  
+        jobManager.ChooseRandomJob(); // DEBUG: Shuffle Jobs randomly.
+        
+        jobManager.currentJob.StartJob();
+        print("Your assigned Job has Started!");
+
+        if (jobManager.currentJob.jobState == JobManager.JobState.Unemployed)
+        {
+            print("No Jobs yet.");
+            yield break;
+        }
+
+        if (jobManager.currentJob.jobState == JobManager.JobState.Delivery)
+        {
+            print("Deliver those pizzas!");
+        }
+        else if (jobManager.currentJob.jobState == JobManager.JobState.TaxiDriver)
+        {
+            print("Get some Taxi fares!");
+        }
+        else if (jobManager.currentJob.jobState == JobManager.JobState.Sweeper)
+        {
+            print("Sweep the streets!");
+        }
+
+        StartCoroutine(SpawnJobObstacle());             
+        
     }
 
     private IEnumerator SpawnJobObstacle()
@@ -204,8 +204,7 @@ public class LevelManager : MonoBehaviour
             else
             {
                 print("Pick up that person!");
-                Customer newCustomer = Instantiate(customerPrefab);
-                newCustomer.gameObject.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+                Customer newCustomer = Instantiate(customerPrefab);                
 
                 float randX = Random.Range(-1.0f, 1.0f);
                 newCustomer.transform.position = new Vector3(randX, 0.0f, maxBoundary);
