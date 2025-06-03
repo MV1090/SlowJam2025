@@ -2,6 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+/** Level Manager
+ *  Responsible for spawning objects into the level. It uses LevelEncounterScripableObjects to spawn its objects in groups.
+ *  In between Level Encounters, it spawns random objects using ObstacleScriptableObjects.
+ *  Once a certain amount of Level Encounters are spawned, the level is considered complete and will spawn a Level Exit.
+ *  If a job is accepted, the Level Manager will spawn those periodically on top of the Encounters and random objects.
+ */
+
 public class LevelManager : MonoBehaviour
 {
     [Header("Level Boundaries")]
@@ -31,7 +38,7 @@ public class LevelManager : MonoBehaviour
     public List<ObstacleScriptableObject> obstaclesList;
 
     private int levelsCompleted = 0;
-    private int encountersCompleted = 0;
+    private int encountersCompleted = 0;    
 
     //public List<JobEncounterScriptableObject> jobEncounterList;
     //public LevelEncounterScriptableObject endLevelEncounter;
@@ -90,17 +97,20 @@ public class LevelManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(levelEncounter.spawnRate);
-        if (obstacleSpawnCounter > 0)
+
+        if (obstacleSpawnCounter > 0) // continue spawning the obstacles it needs
         {
             obstacleSpawnCounter--;
             StartCoroutine(DoEncounter(levelEncounter));
         }
-        else // the encounter is completed
+        else // the encounter is completed, run cooldown and then pick a new encounter
         {
             encountersCompleted++;
             isDoingEncounter = false;
             print("Encounter Completed: " + encountersCompleted + "/" + encountersInLevel);
-            yield break;
+
+            yield return new WaitForSeconds(encounterRate);
+            StartCoroutine(ChooseNewEncounter());
         }
     }
 
@@ -108,30 +118,25 @@ public class LevelManager : MonoBehaviour
     {
         if (encounterList.Count == 0)
             yield break;
-
-        float encounterTimer = encounterRate;     
-        if (isDoingEncounter == false) // start a new encounter
-        {
-            if (encountersCompleted >= encountersInLevel) // spawn the exit
-            {
-                GameObject levelExit = Instantiate(levelExitPrefab);
-                levelExit.transform.position = new Vector3(0.0f, 0.0f, maxBoundary);
-                encounterTimer *= 10;
-            }
-            else
-            {
-                //print("Selecting a new Encounter...");
-                int randI = Random.Range(0, encounterList.Count);
-                LevelEncounterScriptableObject selectedEncounter = encounterList[randI];
-
-                obstacleSpawnCounter = selectedEncounter.amountToSpawn;
-                StartCoroutine(DoEncounter(selectedEncounter));
-                isDoingEncounter = true;
-            }
-        }
         
-        yield return new WaitForSeconds(encounterTimer);
-        StartCoroutine(ChooseNewEncounter());
+        if (encountersCompleted >= encountersInLevel) // spawn the exit
+        {
+            GameObject levelExit = Instantiate(levelExitPrefab);
+            levelExit.transform.position = new Vector3(0.0f, 0.0f, maxBoundary);            
+        }
+        else // pick a new encounter to spawn
+        {
+            //print("Selecting a new Encounter...");
+            int randI = Random.Range(0, encounterList.Count);
+            LevelEncounterScriptableObject selectedEncounter = encounterList[randI];
+
+            obstacleSpawnCounter = selectedEncounter.amountToSpawn;
+            StartCoroutine(DoEncounter(selectedEncounter));
+            isDoingEncounter = true;
+        }
+               
+        //yield return new WaitForSeconds(encounterTimer);
+        //StartCoroutine(ChooseNewEncounter());
     }
 
     private IEnumerator BeginJob()
@@ -239,6 +244,7 @@ public class LevelManager : MonoBehaviour
     {       
         encountersCompleted = 0;
 
+        StopAllCoroutines();
         StartCoroutine(SpawnRandomObstacle());
         StartCoroutine(ChooseNewEncounter());
         StartCoroutine(BeginJob());
@@ -272,7 +278,7 @@ public class LevelManager : MonoBehaviour
         if(enemyData.isFloating)
             spawnY = 2.0f;
         
-        enemy.transform.position = new Vector3(randX, spawnY, maxBoundary * 2);
+        enemy.transform.position = new Vector3(randX, spawnY, maxBoundary);
 
         enemy.SetMoveSpeed(worldMoveSpeed);
         enemy.SetDeactivatePoint(minBoundary);

@@ -49,9 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  destructible: 1
+  setInactiveOnDespawn: 1
   sprRef: {fileID: 5429710226347273997}
   obstacleType: 0
   floatingScorePrefab: {fileID: 8975863942774107405, guid: 4b28c70d0b746d3418aaad0174dd7f76, type: 3}
+  spriteOffset: {x: 0, y: 0.5, z: 0}
 --- !u!54 &3191697604784675509
 Rigidbody:
   m_ObjectHideFlags: 0

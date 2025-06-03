@@ -10,6 +10,9 @@ public class Projectile : MonoBehaviour
     public Rigidbody rb;
     public Sprite defaultSprite;
 
+    private SphereCollider projectileCollider;
+    private float defaultRadius = 0.5f;
+
     public enum ProjectileType
     {
         Player, Upgrade1, Upgrade2, Upgrade3, Enemy, Food
@@ -19,6 +22,12 @@ public class Projectile : MonoBehaviour
     {
         yield return new WaitForSeconds(sec);
         gameObject.SetActive(false);
+    }
+
+    private void Awake()
+    {
+        projectileCollider = gameObject.GetComponent<SphereCollider>();
+        defaultRadius = projectileCollider.radius;
     }
 
     private void Start()
@@ -67,43 +76,50 @@ public class Projectile : MonoBehaviour
             case ProjectileType.Player:
                 gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
+                projectileCollider.radius = defaultRadius;
                 spriteComponent.sprite = defaultSprite;
                 break;  
                 
             case ProjectileType.Upgrade1:
                 gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
+                projectileCollider.radius = defaultRadius;
                 spriteComponent.sprite = defaultSprite;
                 break;
 
             case ProjectileType.Upgrade2:
                 gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
+                projectileCollider.radius = defaultRadius;
                 spriteComponent.sprite = defaultSprite;
                 break;
 
             case ProjectileType.Upgrade3:
                 gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
+                projectileCollider.radius = defaultRadius;
                 spriteComponent.sprite = defaultSprite;
                 break;
 
             case ProjectileType.Enemy:
                 gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                 gameObject.layer = LayerMask.NameToLayer("EnemyProjectile");
+                projectileCollider.radius = defaultRadius / 2;
                 spriteComponent.sprite = defaultSprite;
                 break;
 
             case ProjectileType.Food: // Change the projectile sprite to the food item.
-                if(projectileData != null)
+                gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+                gameObject.layer = LayerMask.NameToLayer("FoodBag");
+                projectileCollider.radius = defaultRadius;
+
+                if (projectileData != null)
                     spriteComponent.sprite = projectileData.obstacleSprite;
                 else // fallback colour change            
                     spriteComponent.color = Color.cyan;                       
-                gameObject.layer = LayerMask.NameToLayer("FoodBag");
+                
                 break;
         };
-
-            
 
         gameObject.transform.localScale = new Vector3(newScale, newScale, newScale);
         transform.SetPositionAndRotation(parentTransform.position, parentTransform.rotation);

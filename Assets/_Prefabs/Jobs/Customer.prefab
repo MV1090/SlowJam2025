@@ -169,5 +169,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  destructible: 1
+  setInactiveOnDespawn: 0
   sprRef: {fileID: 4944712858479698894}
   obstacleType: 2
+  floatingScorePrefab: {fileID: 0}

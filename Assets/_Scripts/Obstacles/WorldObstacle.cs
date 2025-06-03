@@ -13,16 +13,19 @@ public class WorldObstacle : MonoBehaviour
     protected float deactivateZPoint = -10.0f;
     public bool destructible = true;
     protected int hitPoints = 1;
+    public bool setInactiveOnDespawn = true;
 
     public SpriteRenderer sprRef; 
     public ObstacleType obstacleType = ObstacleType.Obstacle;
 
     public GameObject floatingScorePrefab;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Vector3 spriteOffset;
+    private BoxCollider obstacleCollider;
+
+    private void Awake()
     {
-        
+        obstacleCollider = gameObject.GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -30,7 +33,10 @@ public class WorldObstacle : MonoBehaviour
     {
         if(transform.position.z < deactivateZPoint)
         {
-            gameObject.SetActive(false);
+            if (setInactiveOnDespawn)
+                gameObject.SetActive(false);
+            else
+                Destroy(this);
         }
 
         // Move towards the 0 point
@@ -43,6 +49,11 @@ public class WorldObstacle : MonoBehaviour
         obstacleType = obstacleData.obstacleType;
         sprRef.sprite = obstacleData.obstacleSprite;
         destructible = obstacleData.isDestructible;
+
+        // Resize collider based on the sprite size
+        obstacleCollider.size = new Vector3(obstacleData.obstacleSprite.bounds.size.x * obstacleData.obstacleScale.x, 
+            obstacleData.obstacleSprite.bounds.size.y * obstacleData.obstacleScale.y, obstacleData.obstacleSprite.bounds.size.z);
+        obstacleCollider.center = obstacleData.obstacleSprite.bounds.center + spriteOffset;
 
     }
 
