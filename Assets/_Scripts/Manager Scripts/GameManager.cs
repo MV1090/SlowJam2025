@@ -32,8 +32,29 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private int _level = 0;
+    public UnityEvent<int> OnLevelChanged;
+    public int Level
+    {
+        get => _level;
+
+        set
+        {
+            _level = value;
+            OnLevelChanged?.Invoke(_level);
+            //Debug.Log("Welcome to Level " + _level);
+        }
+    }
+
+    public UnityEvent<string> OnJobChanged;
+
     private void Start()
     {
         
     }    
+
+    public void ChangeJobDescription(string jobDescriptor)
+    {
+        OnJobChanged?.Invoke(jobDescriptor);
+    }
 }

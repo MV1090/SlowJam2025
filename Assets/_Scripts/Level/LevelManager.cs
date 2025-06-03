@@ -156,21 +156,24 @@ public class LevelManager : MonoBehaviour
 
         if (jobManager.currentJob.jobState == JobManager.JobState.Unemployed)
         {
-            print("No Jobs yet.");
+            GameManager.Instance.ChangeJobDescription("---");
             yield break;
         }
 
         if (jobManager.currentJob.jobState == JobManager.JobState.Delivery)
         {
-            print("Deliver those pizzas!");
+            GameManager.Instance.ChangeJobDescription("Deliver Pizza!");
+
         }
         else if (jobManager.currentJob.jobState == JobManager.JobState.TaxiDriver)
         {
-            print("Get some Taxi fares!");
+            GameManager.Instance.ChangeJobDescription("Taxi Customers!");
+
         }
         else if (jobManager.currentJob.jobState == JobManager.JobState.Sweeper)
         {
-            print("Sweep the streets!");
+            GameManager.Instance.ChangeJobDescription("Sweep Trash!");
+
         }
 
         StartCoroutine(SpawnJobObstacle());             
@@ -242,6 +245,8 @@ public class LevelManager : MonoBehaviour
     public void SetUpNewLevel()
     {       
         encountersCompleted = 0;
+        GameManager.Instance.Level++;
+        GameManager.Instance.ChangeJobDescription("---");
 
         StopAllCoroutines();
         StartCoroutine(SpawnRandomObstacle());
