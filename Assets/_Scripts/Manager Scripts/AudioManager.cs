@@ -1,20 +1,11 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [System.Serializable]
-    public class Sound
-    {
-        public string name; // Name of the sound (e.g., "MoveUpSound")
-        public AudioClip clip; // Audio clip to play
-    }
-
-    [SerializeField] private List<Sound> sounds = new List<Sound>(); // List of sounds
-    private Dictionary<string, AudioClip> soundDictionary = new Dictionary<string, AudioClip>();
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource; // Reference to the manually added AudioSource
+    [SerializeField] private AudioClip backgroundTrack; // Reference to the background track
 
     void Awake()
     {
@@ -22,32 +13,52 @@ public class AudioManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); // Make this GameObject persistent across scenes
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Destroy duplicate instances
             return;
         }
 
-        // Initialize AudioSource and sound dictionary
-        audioSource = gameObject.AddComponent<AudioSource>();
-        foreach (var sound in sounds)
+        // Ensure the AudioSource is assigned
+        if (audioSource == null)
         {
-            soundDictionary[sound.name] = sound.clip;
+            Debug.LogError("AudioSource is not assigned in the AudioManager!");
+            return;
+        }
+
+        // Ensure the background track is assigned
+        if (backgroundTrack == null)
+        {
+            Debug.LogError("Background track is not assigned in the AudioManager!");
+            return;
+        }
+
+        // Configure the AudioSource for the background track
+        audioSource.clip = backgroundTrack;
+        audioSource.loop = true; // Ensure looping is enabled
+    }
+
+    private void Start()
+    {
+        // Play background music when the game starts
+        AudioManager.Instance.PlayBackgroundTrack();
+    }
+
+    public void PlayBackgroundTrack()
+    {
+        if (audioSource != null && !audioSource.isPlaying)
+        {
+            audioSource.Play(); // Play the background track
         }
     }
 
-    public void Play(string soundName)
+    public void StopBackgroundTrack()
     {
-        // Play the sound if it exists in the dictionary
-        if (soundDictionary.TryGetValue(soundName, out AudioClip clip))
+        if (audioSource != null && audioSource.isPlaying)
         {
-            audioSource.PlayOneShot(clip);
-        }
-        else
-        {
-            Debug.LogWarning($"Sound '{soundName}' not found!");
+            audioSource.Stop(); // Stop the background track
         }
     }
 }
