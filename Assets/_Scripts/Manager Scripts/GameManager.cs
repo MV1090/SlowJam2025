@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
         {
             _money = value;
             OnMoneyChanged?.Invoke(_money);
-            Debug.Log("Money: "+_money);
+            Debug.Log("Money: " + _money);
         }
     }
 
@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
         {
             _score = value;
             OnScoreChanged?.Invoke(_score);
-            Debug.Log("Score: "+_score);
+            Debug.Log("Score: " + _score);
         }
     }
 
@@ -50,8 +50,9 @@ public class GameManager : Singleton<GameManager>
 
     private void Start()
     {
-        
-    }    
+        // Play background music when the game starts
+        AudioManager.Instance.Play("BackgroundTrack");
+    }
 
     public void ChangeJobDescription(string jobDescriptor)
     {
