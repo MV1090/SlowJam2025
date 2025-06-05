@@ -58,7 +58,6 @@ public class JobManager : Singleton<JobManager>
     public void ChooseRandomJob()
     {
         int randI = Random.Range(0, allJobs.Length);
-        currentJob = allJobs[randI];
-        
+        currentJob = allJobs[randI];        
     }
 }
