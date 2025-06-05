@@ -51,7 +51,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         // Play background music when the game starts
-        AudioManager.Instance.PlayBackgroundTrack();
+       // AudioManager.Instance.PlayBackgroundTrack();
     }
 
     public void ChangeJobDescription(string jobDescriptor)

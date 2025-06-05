@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class Upgrades
@@ -7,7 +8,11 @@ public class Upgrades
     public string upgradeName;
     public int baseCost;
     public float costMultiplier;
-    public List<float> levelValues;    
+    public List<float> levelValues;
+
+    public Image[] upgradeable;
+    //Sprite notUpgraded;
+    [SerializeField] Sprite upgraded;
 
     private int currentLevel = 0;
 
@@ -26,5 +31,10 @@ public class Upgrades
     {
         if (currentLevel < levelValues.Count - 1)
             currentLevel ++;
+
+        for(int i = 0; i < currentLevel; i ++)
+        {
+            upgradeable[i].sprite = upgraded;
+        }
     }
 }
