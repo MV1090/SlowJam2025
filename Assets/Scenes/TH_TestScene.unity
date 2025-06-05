@@ -171,6 +171,14 @@ PrefabInstance:
       propertyPath: orthographic size
       value: 3.495
       objectReference: {fileID: 0}
+    - target: {fileID: 2810259538784868647, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5546497569288460206, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7241984774243821446, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
       propertyPath: m_Name
       value: LevelManager
@@ -207,6 +215,10 @@ PrefabInstance:
       propertyPath: 'obstaclesList.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 066b8c3fe4088354fb3c4a0b07534f88, type: 2}
+    - target: {fileID: 9143955231767859660, guid: f689c307d8d4e134fb9969f5ecb65bc9, type: 3}
+      propertyPath: m_RenderShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -641,9 +653,9 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835297415}
   m_Enabled: 1
-  m_SortingLayerID: 1585339441
-  m_SortingLayer: -1
-  m_SortingOrder: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -5
   m_SortAtRoot: 0
 --- !u!64 &835297417
 MeshCollider:
@@ -729,7 +741,7 @@ Transform:
   m_GameObject: {fileID: 835297415}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.51, z: 0}
+  m_LocalPosition: {x: 0, y: -1.01, z: 0}
   m_LocalScale: {x: 25, y: 1, z: 24}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -840,7 +852,7 @@ Transform:
   m_GameObject: {fileID: 911198630}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 70.65379, y: 0, z: 240}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -854,9 +866,9 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 911198630}
   m_Enabled: 1
-  m_SortingLayerID: 1585339441
-  m_SortingLayer: -1
-  m_SortingOrder: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -5
   m_SortAtRoot: 0
 --- !u!95 &911198636
 Animator:
@@ -976,10 +988,10 @@ Canvas:
   m_GameObject: {fileID: 913752227}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 231252897}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -987,8 +999,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 2055112037
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &913752231
 RectTransform:
@@ -1788,6 +1800,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 911198634}
+  - {fileID: 835297420}
   - {fileID: 231252896}
   - {fileID: 1261919891}
   - {fileID: 913752231}
@@ -1795,4 +1808,3 @@ SceneRoots:
   - {fileID: 1230243533}
   - {fileID: 948078746}
   - {fileID: 1466583927}
-  - {fileID: 835297420}
