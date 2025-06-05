@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1938325bb36ebe4489f4fb9c8cf38785, type: 3}
-  m_Name: SunLevelEncounter
+  m_Name: SunEncounter
   m_EditorClassIdentifier: 
   encounterType: 0
   objectToSpawn: {fileID: 11400000, guid: c43e527621523b04c8a00dc32be5ad20, type: 2}

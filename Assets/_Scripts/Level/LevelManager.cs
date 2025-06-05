@@ -24,28 +24,30 @@ public class LevelManager : MonoBehaviour
     [Tooltip("How fast objects move towards the Player by default in a Level.")]
     public float worldMoveSpeed = 10.0f;
 
-    [Header("Level Encounters")]
     [Tooltip("How many encounters should spawn this level?")]
     public int encountersInLevel = 5;
 
     [Tooltip("How quickly do new Encounters occur during the level (in seconds).")]
     public float encounterRate = 5.0f;
 
-    [Tooltip("Lists what kind of Encounters can appear in this level randomly.")]
-    public List<LevelEncounterScriptableObject> encounterList;
+    [Header("Level Encounters")]
+    [Tooltip("Stores every possible level this Manager can pick from.")]
+    public List<LevelDetailsScriptableObject> gameLevels; // all game levels available
+    private LevelDetailsScriptableObject currentLevel; // current level to use encounters/obstacles from
 
-    [Tooltip("Lists what kind of Obstacles can spawn between Encounters in this level.")]
-    public List<ObstacleScriptableObject> obstaclesList;
+    //[Tooltip("Lists what kind of Encounters can appear in this level randomly.")]
+    //private List<LevelEncounterScriptableObject> encounterList;
+
+    //[Tooltip("Lists what kind of Obstacles can spawn between Encounters in this level.")]
+    //private List<ObstacleScriptableObject> obstaclesList;
 
     private int levelsCompleted = 0;
-    private int encountersCompleted = 0;    
-
-    //public List<JobEncounterScriptableObject> jobEncounterList;
-    //public LevelEncounterScriptableObject endLevelEncounter;
+    private int encountersCompleted = 0;
 
     private int obstacleSpawnCounter; // during an encounter, tracks how many obstacles are left to spawn
-    private bool isDoingEncounter = false; // is the level currently doing an encounter?
-    
+    private bool isDoingEncounter = false; // is the level currently doing an encounter? 
+
+    [Header("Level Prefab References")]
     private JobManager jobManager;
     public Customer customerPrefab;
     public GameObject taxiStopPrefab;
@@ -72,8 +74,8 @@ public class LevelManager : MonoBehaviour
                 obstacle.SetMoveSpeed(worldMoveSpeed);
                 obstacle.SetDeactivatePoint(minBoundary);
 
-                int randI = Random.Range(0, obstaclesList.Count);
-                obstacle.SetupObstacle(obstaclesList[randI]);
+                int randI = Random.Range(0, currentLevel.levelRandomObstacles.Count);
+                obstacle.SetupObstacle(currentLevel.levelRandomObstacles[randI]);
 
                 obstacle.gameObject.SetActive(true);
             }
@@ -116,7 +118,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator ChooseNewEncounter()
     {
-        if (encounterList.Count == 0)
+        if (currentLevel.levelEncounters.Count == 0)
             yield break;
         
         if (encountersCompleted >= encountersInLevel) // spawn the exit
@@ -127,8 +129,8 @@ public class LevelManager : MonoBehaviour
         else // pick a new encounter to spawn
         {
             //print("Selecting a new Encounter...");
-            int randI = Random.Range(0, encounterList.Count);
-            LevelEncounterScriptableObject selectedEncounter = encounterList[randI];
+            int randI = Random.Range(0, currentLevel.levelEncounters.Count);
+            LevelEncounterScriptableObject selectedEncounter = currentLevel.levelEncounters[randI];
 
             obstacleSpawnCounter = selectedEncounter.amountToSpawn;
             StartCoroutine(DoEncounter(selectedEncounter));
@@ -243,15 +245,24 @@ public class LevelManager : MonoBehaviour
     }
 
     public void SetUpNewLevel()
-    {       
+    { 
+        StopAllCoroutines(); // stop all timers immediately
+
         encountersCompleted = 0;
         GameManager.Instance.Level++;
         GameManager.Instance.ChangeJobDescription("---");
 
-        StopAllCoroutines();
+        SelectLevel();
+       
         StartCoroutine(SpawnRandomObstacle());
         StartCoroutine(ChooseNewEncounter());
         StartCoroutine(BeginJob());
+    }
+
+    public void SelectLevel()
+    {
+        int randI = Random.Range(0, gameLevels.Count);
+        currentLevel = gameLevels[randI];
     }
 
     private void CreateWorldObstacle(ObstacleScriptableObject obstacleData)

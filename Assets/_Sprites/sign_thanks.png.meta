@@ -73,7 +73,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -111,7 +111,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -121,6 +121,19 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -434,7 +447,20 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sign_thanks_0: 3463241567867153869
+      sign_thanks_1: -6165289145075761391
+      sign_thanks_10: 720993385452780225
+      sign_thanks_11: -5997074329830875440
+      sign_thanks_12: -3214736225578365739
+      sign_thanks_2: 5396127708260362580
+      sign_thanks_3: 4680090007388454445
+      sign_thanks_4: 4803986372620986157
+      sign_thanks_5: -1822764530498870259
+      sign_thanks_6: 5620252608979212309
+      sign_thanks_7: -578463642746313061
+      sign_thanks_8: -8196992205431039358
+      sign_thanks_9: 3371803628080695852
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
