@@ -15,9 +15,9 @@ public class UpgradeManager : MonoBehaviour
     {
         upgrades = new Dictionary<string, Upgrades>()
         {
-            {"Speed", speedUpgrade},
-            {"Health", healthUpgrade},
-            {"Ammo", ammoUpgrade}
+            {"speed", speedUpgrade},
+            {"health", healthUpgrade},
+            {"ammo", ammoUpgrade}
         };
     }
 
@@ -34,7 +34,15 @@ public class UpgradeManager : MonoBehaviour
 
                 Debug.Log($"Upgraded {upgradeType} to level {upgrade.CurrentLevel}. Value: {upgrade.CurrentValue}");
             }
+            else { Debug.Log("no money Failed"); }
+
+
         }
+        else
+        {
+            Debug.Log("upgrade Failed");
+        }
+
     }
 
     private void CompleteUpgrade(string upgradeType)
@@ -42,13 +50,13 @@ public class UpgradeManager : MonoBehaviour
         switch (upgradeType.ToLower())
         {
             case "speed":
-                
+                Debug.Log("Upgrade speed");
                 break;
             case "health":
-                
+                Debug.Log("Upgrade health");
                 break;
             case "ammo":
-                
+                Debug.Log("Upgrade ammo");
                 break;
         }
     }
