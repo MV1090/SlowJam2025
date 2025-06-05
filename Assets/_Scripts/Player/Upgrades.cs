@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +36,7 @@ public class Upgrades
         for(int i = 0; i < currentLevel; i ++)
         {
             upgradeable[i].sprite = upgraded;
+            upgradeable[i].GetComponentInChildren<TMP_Text>().enabled = false;
         }
     }
 }

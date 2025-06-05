@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameMenu : BaseMenu
 {
     [SerializeField] GameObject upgrades;
+    [SerializeField] GameObject player;
     public override void InitState(MenuManager ctx)
     {
         base.InitState(ctx);
@@ -34,12 +35,14 @@ public class GameMenu : BaseMenu
         if (value > 1) 
         {
             upgrades.gameObject.SetActive(true);
+            //player.gameObject.SetActive(false);
             Time.timeScale = 0.0f;
         }
     }
     public void HideUpgrades()
     {
         upgrades.gameObject.SetActive(false);
+        //player.gameObject.SetActive(true);
         Time.timeScale = 1.0f;
     }
 }

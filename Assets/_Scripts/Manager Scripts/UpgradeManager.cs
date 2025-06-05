@@ -30,7 +30,7 @@ public class UpgradeManager : MonoBehaviour
                 GameManager.Instance.money -= upgrade.CurrentCost;
                 upgrade.ApplyUpgrade();
 
-                CompleteUpgrade(upgradeType);
+                CompleteUpgrade(upgradeType, upgrade);
 
                 Debug.Log($"Upgraded {upgradeType} to level {upgrade.CurrentLevel}. Value: {upgrade.CurrentValue}");
             }
@@ -45,11 +45,12 @@ public class UpgradeManager : MonoBehaviour
 
     }
 
-    private void CompleteUpgrade(string upgradeType)
+    private void CompleteUpgrade(string upgradeType, Upgrades upgrade)
     {
         switch (upgradeType.ToLower())
         {
             case "speed":
+                GameManager.Instance.PlayerSpeed = upgrade.CurrentValue;
                 Debug.Log("Upgrade speed");
                 break;
             case "health":

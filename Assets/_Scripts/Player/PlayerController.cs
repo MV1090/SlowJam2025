@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     
     // Movement Settings
-    public float moveSpeed = 5f;
+    //public float moveSpeed = 5f;
     [SerializeField] float xClampPercentage = 80;
     [SerializeField] float yClampPercentage = 80;
     [SerializeField] float xMinOffset;
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         { 
             /*Vector2*/ movementInput = move.ReadValue<Vector2>();
             Vector3 movement = new Vector3(movementInput.x, movementInput.y, 0);
-            transform.Translate(movement * moveSpeed * Time.deltaTime);
+            transform.Translate(movement * GameManager.Instance.PlayerSpeed * Time.deltaTime);
 
             animator.SetFloat("Hspeed", movementInput.x);
             animator.SetFloat("Vpos", transform.position.y);

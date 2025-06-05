@@ -46,6 +46,30 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    [SerializeField] private float _playerSpeed = 3;
+    public float PlayerSpeed
+    {
+        get => _playerSpeed;
+
+        set
+        {
+            _playerSpeed = value;
+        }
+    }
+
+    [SerializeField] private float _playerHealth = 0;
+    public float PlayerHealth
+    {
+        get => _playerHealth;
+
+        set
+        {
+            _playerHealth = value;
+        }
+    }
+    
+
+
     public UnityEvent<string> OnJobChanged;
 
     private void Start()
