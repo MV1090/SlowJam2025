@@ -1,7 +1,9 @@
+using TMPro;
 using UnityEngine;
 
 public class EndGameMenu : BaseMenu
 {
+    [SerializeField] TMP_Text score;
     public override void InitState(MenuManager ctx)
     {
         base.InitState(ctx);
@@ -11,12 +13,13 @@ public class EndGameMenu : BaseMenu
     public override void EnterState()
     {
         base.EnterState();
+        score.text = "SCORE: " + GameManager.Instance.Score;
         Time.timeScale = 0.0f;
     }
 
     public override void ExitState()
     {
-        base.ExitState();
+        base.ExitState();        
         Time.timeScale = 1.0f;
     }
     public void JumpToMainMenu()

@@ -86,11 +86,11 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, GameManager.Instance.ProjectileAOE);
-    }
+    //void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, GameManager.Instance.ProjectileAOE);
+    //}
 
     public void StartLifeTimer()
     {
