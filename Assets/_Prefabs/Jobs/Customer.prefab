@@ -227,6 +227,7 @@ MonoBehaviour:
   destructible: 1
   setInactiveOnDespawn: 0
   sprRef: {fileID: 8134859223270276223}
+  animRef: {fileID: 0}
   obstacleType: 2
   floatingScorePrefab: {fileID: 8975863942774107405, guid: 4b28c70d0b746d3418aaad0174dd7f76, type: 3}
   spriteOffset: {x: 0, y: 0, z: 0}
@@ -256,7 +257,7 @@ Transform:
   m_GameObject: {fileID: 7847922353792013427}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalPosition: {x: 0, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

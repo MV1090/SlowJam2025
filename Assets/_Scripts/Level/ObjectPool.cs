@@ -10,7 +10,7 @@ public class ObjectPool : MonoBehaviour
     public Projectile projectileToPool;
     public int startingAmountToPool = 10;
 
-    public static ObjectPool SharedInstance; // Other scripts call this to retrieve a pooled object
+    public static ObjectPool SharedInstance; // Singleton Reference
     public List<WorldObstacle> pooledWorldObstacles;
     public List<EnemyObstacle> pooledEnemyObstacles;
     public List<Projectile> pooledProjectiles;
@@ -144,5 +144,24 @@ public class ObjectPool : MonoBehaviour
             return newProjectileObject;
         else
             return null;
+    }
+
+    // Sets all Pooled Objects to inactive, to be used again later.
+    public void DisableAllPooledObjects()
+    {       
+        foreach (var item in pooledWorldObstacles)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        foreach (var item in pooledEnemyObstacles)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        foreach (var item in pooledProjectiles)
+        {
+            item.gameObject.SetActive(false);
+        }
     }
 }
