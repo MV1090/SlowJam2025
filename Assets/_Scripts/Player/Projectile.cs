@@ -77,6 +77,7 @@ public class Projectile : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
                 projectileCollider.radius = defaultRadius;
+                gameObject.GetComponent<Animator>().enabled = true;
                 spriteComponent.sprite = defaultSprite;
                 break;  
                 
@@ -84,6 +85,7 @@ public class Projectile : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
                 projectileCollider.radius = defaultRadius;
+                gameObject.GetComponent<Animator>().enabled = true;
                 spriteComponent.sprite = defaultSprite;
                 break;
 
@@ -91,6 +93,7 @@ public class Projectile : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
                 projectileCollider.radius = defaultRadius;
+                gameObject.GetComponent<Animator>().enabled = true;
                 spriteComponent.sprite = defaultSprite;
                 break;
 
@@ -98,6 +101,7 @@ public class Projectile : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = Color.green;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
                 projectileCollider.radius = defaultRadius;
+                gameObject.GetComponent<Animator>().enabled = true;
                 spriteComponent.sprite = defaultSprite;
                 break;
 
@@ -105,6 +109,7 @@ public class Projectile : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                 gameObject.layer = LayerMask.NameToLayer("EnemyProjectile");
                 projectileCollider.radius = defaultRadius / 2;
+                gameObject.GetComponent<Animator>().enabled = true;
                 spriteComponent.sprite = defaultSprite;
                 break;
 
@@ -114,7 +119,10 @@ public class Projectile : MonoBehaviour
                 projectileCollider.radius = defaultRadius;
 
                 if (projectileData != null)
+                {
+                    gameObject.GetComponent<Animator>().enabled = false;
                     spriteComponent.sprite = projectileData.obstacleSprites[0];
+                }
                 else // fallback colour change
                     spriteComponent.color = Color.cyan;                       
                 
