@@ -1,6 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/* Level Details
+ * This is data the Level Manager uses to spawn Encounters and Random Obstacles.
+ * Use these to add unique personality to each level.
+ */
+
 [CreateAssetMenu(fileName = "LevelDetailsScriptableObject", menuName = "Scriptable Objects/LevelDetailsScriptableObject")]
 public class LevelDetailsScriptableObject : ScriptableObject
 {
@@ -14,5 +19,8 @@ public class LevelDetailsScriptableObject : ScriptableObject
 
     [Tooltip("Random obstacles that can spawn between encounters during the level.")]
     public List<ObstacleScriptableObject> levelRandomObstacles;
+
+    [Tooltip("Stores the type of Customers that may appear in this level.")]
+    public ObstacleScriptableObject levelCustomers;
 
 }

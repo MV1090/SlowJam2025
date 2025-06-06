@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ec393ffa02c41c45a1acf1511228a47, type: 3}
-  m_Name: PizzaObstacle
+  m_Name: GenericObstacle
   m_EditorClassIdentifier: 
   obstacleType: 0
   obstacleSprites:
-  - {fileID: -8292884223229719902, guid: 594b9845a6778a243b72f6f8555fdf71, type: 3}
+  - {fileID: 108737996587217360, guid: 89faaee009b20ab47b71249a03a4f444, type: 3}
+  - {fileID: 6786638080343564953, guid: a27b9874e1d28e9468c579f9b785986b, type: 3}
+  - {fileID: -8016135836876724269, guid: 6351ebcb2d850f247bb7f79978139f1b, type: 3}
   isDestructible: 1
   isFloating: 0
   obstacleScale: {x: 1.5, y: 1.5}

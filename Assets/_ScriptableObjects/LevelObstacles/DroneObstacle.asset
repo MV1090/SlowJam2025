@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: DroneObstacle
   m_EditorClassIdentifier: 
   obstacleType: 1
-  obstacleSprite: {fileID: 9148800814639467426, guid: b855e799f87b7e348b277d4f604a9c74, type: 3}
+  obstacleSprites:
+  - {fileID: 9148800814639467426, guid: b855e799f87b7e348b277d4f604a9c74, type: 3}
   isDestructible: 1
   isFloating: 1
   obstacleScale: {x: 1, y: 1}

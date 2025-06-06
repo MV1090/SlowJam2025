@@ -53,7 +53,7 @@ public class LevelManager : MonoBehaviour
     public GameObject taxiStopPrefab;
     public GameObject trashPrefab;
     public GameObject levelExitPrefab;
-    private bool isSpawningStop = true;
+    private bool isSpawningStop = false;
 
     [HideInInspector]
     public static LevelManager LevelInstance; // Static Singleton referenced by other objects
@@ -123,8 +123,16 @@ public class LevelManager : MonoBehaviour
         
         if (encountersCompleted >= encountersInLevel) // spawn the exit
         {
-            GameObject levelExit = Instantiate(levelExitPrefab);
-            levelExit.transform.position = new Vector3(0.0f, 0.0f, maxBoundary);            
+            if (isSpawningStop) // wait and try again
+            {
+                yield return new WaitForSeconds(encounterRate);
+                StartCoroutine(ChooseNewEncounter());
+            }
+            else
+            {
+                GameObject levelExit = Instantiate(levelExitPrefab);
+                levelExit.transform.position = new Vector3(0.0f, 0.0f, maxBoundary);
+            }
         }
         else // pick a new encounter to spawn
         {
@@ -186,20 +194,23 @@ public class LevelManager : MonoBehaviour
     {
         if (jobManager.currentJob.jobState == JobManager.JobState.Delivery)
         {
-            print("Someone's waiting for their delivery!");
+            //print("Someone's waiting for their delivery!");
 
             Customer newCustomer = Instantiate(customerPrefab);
+            if (currentLevel.levelCustomers)
+            {
+                newCustomer.GetComponent<WorldObstacle>().SetupObstacle(currentLevel.levelCustomers);
+            }
             newCustomer.transform.position = new Vector3(5.0f, 0.0f, maxBoundary);
+            newCustomer.transform.localScale = new Vector3(1.5f, 1.5f, 0.0f);
             //newCustomer.SetMoveSpeed(worldMoveSpeed);
             //newCustomer.SetDeactivatePoint(minBoundary);
         }
         else if(jobManager.currentJob.jobState == JobManager.JobState.TaxiDriver)
-        {
-            isSpawningStop = !isSpawningStop; // toggle between spawning customers and stops
-
+        {         
             if (isSpawningStop)
             {
-                print("Drop off that person!");
+                //print("Drop off that person!");
                 GameObject newStop = Instantiate(taxiStopPrefab);
                 //newStop.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 
@@ -208,16 +219,24 @@ public class LevelManager : MonoBehaviour
             }
             else
             {
-                print("Pick up that person!");
-                Customer newCustomer = Instantiate(customerPrefab);                
+                //print("Pick up that person!");
+                Customer newCustomer = Instantiate(customerPrefab);
+                if (currentLevel.levelCustomers)
+                {
+                    newCustomer.GetComponent<WorldObstacle>().SetupObstacle(currentLevel.levelCustomers);
+                }
 
                 float randX = Random.Range(-1.0f, 1.0f);
                 newCustomer.transform.position = new Vector3(randX, 0.0f, maxBoundary);
+                newCustomer.transform.localScale = new Vector3(1.0f, 1.0f, 0.0f);
             }
+
+            isSpawningStop = !isSpawningStop; // toggle between spawning customers and stops
+
         }
         else if (jobManager.currentJob.jobState == JobManager.JobState.Sweeper)
         {
-            print("Trash on the street!");
+            //print("Trash on the street!");
             GameObject newTrash = Instantiate(trashPrefab);
             //newStop.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 

@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec393ffa02c41c45a1acf1511228a47, type: 3}
   m_Name: SignObstacle
   m_EditorClassIdentifier: 
-  obstacleSprite: {fileID: 6786638080343564953, guid: a27b9874e1d28e9468c579f9b785986b, type: 3}
+  obstacleType: 0
+  obstacleSprites:
+  - {fileID: 6786638080343564953, guid: a27b9874e1d28e9468c579f9b785986b, type: 3}
   isDestructible: 1
+  isFloating: 0
   obstacleScale: {x: 1.5, y: 1.5}

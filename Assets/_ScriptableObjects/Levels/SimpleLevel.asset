@@ -18,6 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e63ac85806a469845a302a344151d3ad, type: 2}
   - {fileID: 11400000, guid: 92d6baa32579eeb4f89173a75d804747, type: 2}
   levelRandomObstacles:
-  - {fileID: 11400000, guid: 066b8c3fe4088354fb3c4a0b07534f88, type: 2}
-  - {fileID: 11400000, guid: e0ebe6c13ebd53443aff82b3a4a3cf94, type: 2}
-  - {fileID: 11400000, guid: b4db8a94dd4ba5c459a67285bb4cf9e7, type: 2}
+  - {fileID: 11400000, guid: 60146aba0bfe13e4781f5e05c70b5f19, type: 2}
+  levelCustomers: {fileID: 11400000, guid: 322fd6d555e8fc446bea9897c94cbc7e, type: 2}

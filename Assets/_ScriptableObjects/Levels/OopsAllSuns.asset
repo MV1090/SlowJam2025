@@ -17,3 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bcacdb90d4ba7f34cbea9eb11086773a, type: 2}
   levelRandomObstacles:
   - {fileID: 11400000, guid: c43e527621523b04c8a00dc32be5ad20, type: 2}
+  levelCustomers: {fileID: 11400000, guid: 322fd6d555e8fc446bea9897c94cbc7e, type: 2}

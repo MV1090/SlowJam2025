@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ec393ffa02c41c45a1acf1511228a47, type: 3}
   m_Name: SunObstacle
   m_EditorClassIdentifier: 
-  obstacleSprite: {fileID: 605162050437240712, guid: 36fd1d4d1806d28458ecdb9193aca46a, type: 3}
+  obstacleType: 0
+  obstacleSprites:
+  - {fileID: 605162050437240712, guid: 36fd1d4d1806d28458ecdb9193aca46a, type: 3}
+  - {fileID: -2061714198, guid: 36fd1d4d1806d28458ecdb9193aca46a, type: 3}
   isDestructible: 1
   isFloating: 0
   obstacleScale: {x: 1.5, y: 1.5}

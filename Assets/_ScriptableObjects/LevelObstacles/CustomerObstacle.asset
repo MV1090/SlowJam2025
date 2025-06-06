@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: CustomerObstacle
   m_EditorClassIdentifier: 
   obstacleType: 2
-  obstacleSprite: {fileID: 1994617998827618644, guid: 1227cfada7d234e4785cdb3e30e50e24, type: 3}
+  obstacleSprites:
+  - {fileID: -6416410375144250379, guid: aaa5d85abda2e4a57bf72294a440ed5f, type: 3}
+  - {fileID: 1853111501905161436, guid: 225d2ab7a501d436fbb9e7314e167df3, type: 3}
+  - {fileID: 6037495861354128789, guid: 1d299119397974b7797070f9345c44ec, type: 3}
+  - {fileID: -4070361761827794147, guid: ab31012588506477791a663de6dfe292, type: 3}
+  - {fileID: 2579595296465215791, guid: a6b744457042145a49cc9fdb3300e082, type: 3}
   isDestructible: 0
   isFloating: 0
   obstacleScale: {x: 1.5, y: 1.5}

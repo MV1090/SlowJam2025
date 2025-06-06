@@ -114,8 +114,8 @@ public class Projectile : MonoBehaviour
                 projectileCollider.radius = defaultRadius;
 
                 if (projectileData != null)
-                    spriteComponent.sprite = projectileData.obstacleSprite;
-                else // fallback colour change            
+                    spriteComponent.sprite = projectileData.obstacleSprites[0];
+                else // fallback colour change
                     spriteComponent.color = Color.cyan;                       
                 
                 break;

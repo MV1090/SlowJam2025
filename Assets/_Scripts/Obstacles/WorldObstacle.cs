@@ -46,14 +46,16 @@ public class WorldObstacle : MonoBehaviour
 
     public void SetupObstacle(ObstacleScriptableObject obstacleData)
     {
-        obstacleType = obstacleData.obstacleType;
-        sprRef.sprite = obstacleData.obstacleSprite;
+        obstacleType = obstacleData.obstacleType;   
         destructible = obstacleData.isDestructible;
 
+        Sprite chosenSprite;
+        chosenSprite  = obstacleData.obstacleSprites[Random.Range(0, obstacleData.obstacleSprites.Count)];        
+        sprRef.sprite = chosenSprite;
         // Resize collider based on the sprite size
-        obstacleCollider.size = new Vector3(obstacleData.obstacleSprite.bounds.size.x * obstacleData.obstacleScale.x, 
-            obstacleData.obstacleSprite.bounds.size.y * obstacleData.obstacleScale.y, obstacleData.obstacleSprite.bounds.size.z);
-        obstacleCollider.center = obstacleData.obstacleSprite.bounds.center + spriteOffset;
+        obstacleCollider.size = new Vector3(chosenSprite.bounds.size.x * obstacleData.obstacleScale.x,
+            chosenSprite.bounds.size.y * obstacleData.obstacleScale.y, chosenSprite.bounds.size.z);
+        obstacleCollider.center = chosenSprite.bounds.center + spriteOffset;
 
     }
 

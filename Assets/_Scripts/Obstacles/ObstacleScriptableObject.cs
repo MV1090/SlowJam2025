@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "ObstacleScriptableObject", menuName = "Scriptable Objects/ObstacleScriptableObject")]
 public class ObstacleScriptableObject : ScriptableObject
@@ -7,7 +8,7 @@ public class ObstacleScriptableObject : ScriptableObject
     public ObstacleType obstacleType = ObstacleType.Obstacle;
 
     [Tooltip("The sprite asset this Obstacle uses")]
-    public Sprite obstacleSprite;
+    public List<Sprite> obstacleSprites;
 
     [Tooltip("If true, this Obstacle can be destroyed with Player projectiles.")]
     public bool isDestructible = true;
