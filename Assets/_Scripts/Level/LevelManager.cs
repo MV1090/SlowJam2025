@@ -352,7 +352,7 @@ public class LevelManager : MonoBehaviour
     private void SetupTransformForSpecialObject(Transform obj, float xPos, float yPos = 0.0f, float scale = 1.0f)
     {
         obj.position = new Vector3(xPos, yPos, maxBoundary);
-        obj.localScale = new Vector3(scale, scale, 0.0f);
+        obj.localScale = new Vector3(scale, scale, 1.0f);
         obj.SetParent(jobParentGroup.transform);
     }
 

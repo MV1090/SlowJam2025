@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2747750788052404266
 Transform:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108905841097904414}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6d3208aa0b01a0949a5bd0c330cf07b1, type: 2}
   m_CullingMode: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   destructible: 1
   setInactiveOnDespawn: 1
   sprRef: {fileID: 7795745261048087130}
-  animRef: {fileID: 4786967638493119512}
+  explosionObj: {fileID: 2108905841097904414}
   obstacleType: 0
   floatingScorePrefab: {fileID: 8975863942774107405, guid: 4b28c70d0b746d3418aaad0174dd7f76, type: 3}
   spriteOffset: {x: 0, y: 0, z: 0}

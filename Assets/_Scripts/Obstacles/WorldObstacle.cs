@@ -16,7 +16,7 @@ public class WorldObstacle : MonoBehaviour
     public bool setInactiveOnDespawn = true;
 
     public SpriteRenderer sprRef;
-    public Animator animRef;
+    public GameObject explosionObj;
     public ObstacleType obstacleType = ObstacleType.Obstacle;
 
     public GameObject floatingScorePrefab;
@@ -114,8 +114,8 @@ public class WorldObstacle : MonoBehaviour
         if(hitPoints < 1) // Deactivate this object
         {
             gameObject.GetComponent<BoxCollider>().enabled = false;
-            animRef.enabled = true;
-            animRef.Play("Explosion");
+            explosionObj.SetActive(true);
+            explosionObj.GetComponent<Animator>().Play("Explosion");
             sprRef.enabled = false;
             ShowScore(transform.position, 10);
             //gameObject.SetActive(false);
@@ -139,8 +139,8 @@ public class WorldObstacle : MonoBehaviour
 
     public void OnDisable()
     {
-        if(animRef)
-            animRef.enabled = false;
+        if(explosionObj)
+            explosionObj.SetActive(false);
 
         if(sprRef)
             sprRef.enabled = true;
