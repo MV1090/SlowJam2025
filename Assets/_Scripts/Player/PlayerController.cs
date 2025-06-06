@@ -4,9 +4,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     // Player Stats
-    public int maxHealth = 3;
+    //public int maxHealth = 3;
     public float projectileSpeed = 10f;
-    private int health;
+    //private int health;
 
     // Animation
     public Animator animator;
@@ -36,13 +36,17 @@ public class PlayerController : MonoBehaviour
 
     Projectile.ProjectileType projectileType = Projectile.ProjectileType.Player;
 
+    Health healthComponent;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        health = maxHealth;
+        //health = maxHealth;
         isMoving = false;
         playerInput = GetComponent<PlayerInput>();
         move = playerInput.actions.FindAction("Movement");
+        healthComponent = GetComponent<Health>();
     }
 
     public void OnMoveStarted(InputAction.CallbackContext context)
@@ -133,6 +137,7 @@ public class PlayerController : MonoBehaviour
         {
             print("Ouch! The player took some damage from a Projectile!");
             other.gameObject.SetActive(false);
+            healthComponent.TakeDamage(10.0f);
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
@@ -147,6 +152,7 @@ public class PlayerController : MonoBehaviour
             {
                 print("Ouch! The player took some damage hitting an Obstacle!");
                 other.gameObject.SetActive(false);
+                healthComponent.TakeDamage(15.0f);
             }
         }       
     }
@@ -169,10 +175,10 @@ public class PlayerController : MonoBehaviour
         transform.position = clampPos;
     }
 
-    public void SetHealthRelative(int healthValue)
-    {
-        health += Mathf.Clamp(health+healthValue, 0, maxHealth);
-    }
+    //public void SetHealthRelative(int healthValue)
+    //{
+    //    health += Mathf.Clamp(health+healthValue, 0, maxHealth);
+    //}
 
     public void TurnOffParticles()
     {

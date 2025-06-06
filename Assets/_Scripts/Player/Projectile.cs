@@ -85,7 +85,6 @@ public class Projectile : MonoBehaviour
                 obstacle.SetRelativeHitPoints(-1);            
         }
     }
-
     //void OnDrawGizmosSelected()
     //{
     //    Gizmos.color = Color.red;

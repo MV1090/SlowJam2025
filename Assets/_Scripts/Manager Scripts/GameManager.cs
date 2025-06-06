@@ -4,6 +4,9 @@ using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
+
+    public Action OnDeath;
+
     private int _money = 0;
     public UnityEvent<int> OnMoneyChanged;
     public int money
@@ -58,6 +61,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     [SerializeField] private float _playerHealth = 0;
+    public UnityEvent<float> PlayerHealthChanged;
     public float PlayerHealth
     {
         get => _playerHealth;
@@ -65,6 +69,7 @@ public class GameManager : Singleton<GameManager>
         set
         {
             _playerHealth = value;
+            PlayerHealthChanged?.Invoke(_playerHealth);
         }
     }
 
