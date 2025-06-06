@@ -1554,6 +1554,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &543668056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7735367928036682483, guid: efa4e815e71bb2b448aaa3b7d580872d, type: 3}
+  m_PrefabInstance: {fileID: 806707709}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d508fd1a7696f35429861272fcdd677c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &626224017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,6 +1945,17 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &777582495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1842757801434216475, guid: efa4e815e71bb2b448aaa3b7d580872d, type: 3}
+  m_PrefabInstance: {fileID: 806707709}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f076648861c854f8af3d22f7d91f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &796664739
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,6 +2244,26 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 530630065}
+    - target: {fileID: 8946245494581343742, guid: efa4e815e71bb2b448aaa3b7d580872d, type: 3}
+      propertyPath: allJobs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8946245494581343742, guid: efa4e815e71bb2b448aaa3b7d580872d, type: 3}
+      propertyPath: 'allJobs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1983345837}
+    - target: {fileID: 8946245494581343742, guid: efa4e815e71bb2b448aaa3b7d580872d, type: 3}
+      propertyPath: 'allJobs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 543668056}
+    - target: {fileID: 8946245494581343742, guid: efa4e815e71bb2b448aaa3b7d580872d, type: 3}
+      propertyPath: 'allJobs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 777582495}
+    - target: {fileID: 8946245494581343742, guid: efa4e815e71bb2b448aaa3b7d580872d, type: 3}
+      propertyPath: 'allJobs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1437388884}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6114866108698775630, guid: efa4e815e71bb2b448aaa3b7d580872d, type: 3}
@@ -3602,6 +3644,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1395533739}
   m_CullTransparentMesh: 1
+--- !u!114 &1437388884 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2802194884793495781, guid: efa4e815e71bb2b448aaa3b7d580872d, type: 3}
+  m_PrefabInstance: {fileID: 806707709}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b7da636d59a79408c2d5531b4bc3c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1466583925
 GameObject:
   m_ObjectHideFlags: 0
@@ -4958,6 +5011,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2349389198908354374, guid: 2ed04e78a1f00e0409f0199b91653fdd, type: 3}
   m_PrefabInstance: {fileID: 1935943929}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1983345837 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 415721106358727569, guid: efa4e815e71bb2b448aaa3b7d580872d, type: 3}
+  m_PrefabInstance: {fileID: 806707709}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67429abe849b064c8758e4831fda245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2028724581
 GameObject:
   m_ObjectHideFlags: 0

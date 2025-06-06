@@ -162,7 +162,7 @@ public class LevelManager : MonoBehaviour
         jobManager.ChooseRandomJob(); // DEBUG: Shuffle Jobs randomly.
         
         jobManager.currentJob.StartJob();
-        print("Your assigned Job has Started!");
+        //print("Your assigned Job has Started!");
 
         if (jobManager.currentJob.jobState == JobManager.JobState.Unemployed)
         {
@@ -194,7 +194,8 @@ public class LevelManager : MonoBehaviour
     {
         if (jobManager.currentJob.jobState == JobManager.JobState.Delivery)
         {
-            //print("Someone's waiting for their delivery!");
+            if (encountersCompleted >= encountersInLevel)
+                yield break;
 
             Customer newCustomer = Instantiate(customerPrefab);
             if (currentLevel.levelCustomers)
@@ -220,6 +221,9 @@ public class LevelManager : MonoBehaviour
             else
             {
                 //print("Pick up that person!");
+                if (encountersCompleted >= encountersInLevel)
+                    yield break;
+
                 Customer newCustomer = Instantiate(customerPrefab);
                 if (currentLevel.levelCustomers)
                 {
@@ -237,6 +241,9 @@ public class LevelManager : MonoBehaviour
         else if (jobManager.currentJob.jobState == JobManager.JobState.Sweeper)
         {
             //print("Trash on the street!");
+            if (encountersCompleted >= encountersInLevel)
+                yield break;
+
             GameObject newTrash = Instantiate(trashPrefab);
             //newStop.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 
@@ -264,7 +271,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void SetUpNewLevel()
-    { 
+    {        
         StopAllCoroutines(); // stop all timers immediately
 
         encountersCompleted = 0;
