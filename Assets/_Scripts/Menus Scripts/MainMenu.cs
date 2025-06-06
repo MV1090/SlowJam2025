@@ -29,7 +29,7 @@ public class MainMenu : BaseMenu
     {
         context.SetActiveMenu(MenuManager.MenuStates.GameMenu);
         LevelManager.LevelInstance.StartNewGame();
-
+        AudioManager.Instance.PlayBackgroundTrack();
     }
 
     public void QuitGame()

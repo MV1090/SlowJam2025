@@ -57,7 +57,7 @@ public class AudioManager : MonoBehaviour
     {
         if (audioSource != null)
         {
-            audioSource.volume = 0.3f; // Set the volume to 0.6
+            audioSource.volume = 0.7f; // Set the volume to 0.6
             audioSource.clip = backgroundTrack; // Set the background track
             audioSource.Play(); // Play the track
 
