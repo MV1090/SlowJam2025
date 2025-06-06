@@ -60,7 +60,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    [SerializeField] private float _playerHealth = 0;
+    [SerializeField] private float _playerHealth = 100;
     public UnityEvent<float> PlayerHealthChanged;
     public float PlayerHealth
     {
@@ -95,5 +95,15 @@ public class GameManager : Singleton<GameManager>
     public void ChangeJobDescription(string jobDescriptor)
     {
         OnJobChanged?.Invoke(jobDescriptor);
+    }
+
+    public void ResetGame()
+    {
+        ProjectileAOE = 0;
+        PlayerHealth = 100;
+        PlayerSpeed = 3;
+        Level = 0;
+        Score = 0;
+        money = 0;
     }
 }

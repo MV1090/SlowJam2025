@@ -19,7 +19,8 @@ public class EndGameMenu : BaseMenu
 
     public override void ExitState()
     {
-        base.ExitState();        
+        base.ExitState();
+        GameManager.Instance.ResetGame();
         Time.timeScale = 1.0f;
     }
     public void JumpToMainMenu()

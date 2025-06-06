@@ -12,6 +12,6 @@ public class MoneyText : MonoBehaviour
 
     private void UpdateMoneyText(int value)
     {
-        moneyText.text = "Money: " + value.ToString();
+        moneyText.text = "$ " + value.ToString();
     }
 }

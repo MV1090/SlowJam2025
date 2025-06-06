@@ -12,7 +12,7 @@ public class Upgrades
     public List<float> levelValues;
 
     public Image[] upgradeable;
-    //Sprite notUpgraded;
+    [SerializeField] Sprite notUpgraded;
     [SerializeField] Sprite upgraded;
 
     private int currentLevel = 0;
@@ -37,6 +37,17 @@ public class Upgrades
         {
             upgradeable[i].sprite = upgraded;
             upgradeable[i].GetComponentInChildren<TMP_Text>().enabled = false;
+        }
+    }
+
+    public void ResetUpgrade()
+    {
+        currentLevel = 0;
+        
+        for(int i = 0; i < upgradeable.Length; i ++)
+        {
+            upgradeable[i].sprite = notUpgraded;
+            upgradeable[i].GetComponentInChildren<TMP_Text>().enabled = true;
         }
     }
 }

@@ -18,6 +18,8 @@ public class Projectile : MonoBehaviour
         Player, Upgrade1, Upgrade2, Upgrade3, Enemy, Food
     }
 
+    public ProjectileType currentProjectile;
+
     private IEnumerator LifeTimer(float sec)
     {
         yield return new WaitForSeconds(sec);
@@ -70,6 +72,9 @@ public class Projectile : MonoBehaviour
 
     private void AOEDamage(float range)
     {
+        if (currentProjectile == ProjectileType.Enemy)
+            return;
+
         Debug.Log("Applying AOE damage");
 
         int layersToHit = (1 << LayerMask.NameToLayer("World") | 1 << LayerMask.NameToLayer("Enemy"));
@@ -103,6 +108,7 @@ public class Projectile : MonoBehaviour
         switch(projectileType)
         {            
             case ProjectileType.Player:
+                currentProjectile = ProjectileType.Player;
                 gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
                 projectileCollider.radius = defaultRadius;
@@ -135,6 +141,7 @@ public class Projectile : MonoBehaviour
                 break;
 
             case ProjectileType.Enemy:
+                currentProjectile = ProjectileType.Enemy;
                 gameObject.GetComponent<SpriteRenderer>().color = Color.red;
                 gameObject.layer = LayerMask.NameToLayer("EnemyProjectile");
                 projectileCollider.radius = defaultRadius / 2;
@@ -143,6 +150,7 @@ public class Projectile : MonoBehaviour
                 break;
 
             case ProjectileType.Food: // Change the projectile sprite to the food item.
+                currentProjectile = ProjectileType.Food;
                 gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 gameObject.layer = LayerMask.NameToLayer("FoodBag");
                 projectileCollider.radius = defaultRadius;

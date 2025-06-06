@@ -19,6 +19,10 @@ public class UpgradeManager : MonoBehaviour
             {"health", healthUpgrade},
             {"ammo", ammoUpgrade}
         };
+
+        GameManager.Instance.OnDeath += () => ResetUpgrades("speed");
+        GameManager.Instance.OnDeath += () => ResetUpgrades("health");
+        GameManager.Instance.OnDeath += () => ResetUpgrades("ammo");
     }
 
     private void TryUpgrade(string upgradeType)
@@ -65,5 +69,9 @@ public class UpgradeManager : MonoBehaviour
     public void UpgradeHealth() => TryUpgrade("health");
     public void UpgradeAmmo() => TryUpgrade("ammo");
 
-
+    public void ResetUpgrades(string upgradeType)
+    {
+        if (upgrades.TryGetValue(upgradeType.ToLower(), out Upgrades upgrade))
+            upgrade.ResetUpgrade();
+    }
 }
