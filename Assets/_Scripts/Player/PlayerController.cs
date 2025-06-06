@@ -111,6 +111,9 @@ public class PlayerController : MonoBehaviour
         Debug.DrawLine(transform.position, targetPoint, Color.green, 2f);
 
         animator.SetTrigger("Shooting");
+
+        // Play shooting sound effect
+        AudioManager.Instance.PlayShootingSoundEffect();
     }
     
     void Update()
