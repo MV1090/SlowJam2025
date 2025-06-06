@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioSource audioSource; // Reference to the manually added AudioSource
     [SerializeField] private AudioClip backgroundTrack; // Reference to the background track
+    [SerializeField] private AudioClip mainMenuTrack; // Reference to the main menu track
 
     void Awake()
     {
@@ -35,30 +36,41 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        // Configure the AudioSource for the background track
-        audioSource.clip = backgroundTrack;
-        audioSource.loop = true; // Ensure looping is enabled
+        // Ensure the main menu track is assigned
+        if (mainMenuTrack == null)
+        {
+            Debug.LogError("Main menu track is not assigned in the AudioManager!");
+            return;
+        }
+
+        // Configure the AudioSource for looping
+        audioSource.loop = true;
     }
 
     private void Start()
     {
-        // Play background music when the game starts
-        AudioManager.Instance.PlayBackgroundTrack();
+        // Play main menu music when the game starts
+        AudioManager.Instance.PlayMainMenuTrack();
     }
 
     public void PlayBackgroundTrack()
     {
-        if (audioSource != null && !audioSource.isPlaying)
+        if (audioSource != null)
         {
-            audioSource.Play(); // Play the background track
+            audioSource.volume = 0.3f; // Set the volume to 0.6
+            audioSource.clip = backgroundTrack; // Set the background track
+            audioSource.Play(); // Play the track
+
         }
     }
 
-    public void StopBackgroundTrack()
+    public void PlayMainMenuTrack()
     {
-        if (audioSource != null && audioSource.isPlaying)
+        if (audioSource != null)
         {
-            audioSource.Stop(); // Stop the background track
+            audioSource.volume = 1.0f; // Set the volume to 0.6
+            audioSource.clip = mainMenuTrack; // Set the main menu track
+            audioSource.Play(); // Play the track
         }
     }
 }
