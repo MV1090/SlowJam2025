@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
 
     [Header("Level Prefab References")]
     private JobManager jobManager;
+    public GameObject jobParentGroup;
     public Customer customerPrefab;
     public GameObject taxiStopPrefab;
     public GameObject trashPrefab;
@@ -131,7 +132,7 @@ public class LevelManager : MonoBehaviour
             else
             {
                 GameObject levelExit = Instantiate(levelExitPrefab);
-                levelExit.transform.position = new Vector3(0.0f, 0.0f, maxBoundary);
+                SetupTransformForSpecialObject(levelExit.transform, 0.0f);
             }
         }
         else // pick a new encounter to spawn
@@ -194,36 +195,41 @@ public class LevelManager : MonoBehaviour
     {
         if (jobManager.currentJob.jobState == JobManager.JobState.Delivery)
         {
+            // Do NOT continue if all encounters are completed (end of level)
             if (encountersCompleted >= encountersInLevel)
                 yield break;
 
+            // Spawn a new customer on the edges of the level boundary to receive food
             Customer newCustomer = Instantiate(customerPrefab);
             if (currentLevel.levelCustomers)
             {
                 newCustomer.GetComponent<WorldObstacle>().SetupObstacle(currentLevel.levelCustomers);
             }
-            newCustomer.transform.position = new Vector3(5.0f, 0.0f, maxBoundary);
-            newCustomer.transform.localScale = new Vector3(1.5f, 1.5f, 0.0f);
-            //newCustomer.SetMoveSpeed(worldMoveSpeed);
-            //newCustomer.SetDeactivatePoint(minBoundary);
+
+            // Randomly choose between the left or right side
+            if(Random.value <= 0.5)
+                SetupTransformForSpecialObject(newCustomer.transform, XPosSpawnVariance);
+            else
+                SetupTransformForSpecialObject(newCustomer.transform, -XPosSpawnVariance);            
+ 
         }
         else if(jobManager.currentJob.jobState == JobManager.JobState.TaxiDriver)
         {         
             if (isSpawningStop)
             {
-                //print("Drop off that person!");
-                GameObject newStop = Instantiate(taxiStopPrefab);
-                //newStop.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+                // Spawn a taxi stop for the fare
+                GameObject newStop = Instantiate(taxiStopPrefab);               
 
                 float randX = Random.Range(-1.0f, 1.0f);
-                newStop.transform.position = new Vector3(randX, 0.0f, maxBoundary);
+                SetupTransformForSpecialObject(newStop.transform, randX);
             }
             else
             {
-                //print("Pick up that person!");
+                // Do NOT continue if all encounters are completed (end of level)
                 if (encountersCompleted >= encountersInLevel)
                     yield break;
 
+                // Spawn a new customer to be picked up
                 Customer newCustomer = Instantiate(customerPrefab);
                 if (currentLevel.levelCustomers)
                 {
@@ -231,24 +237,25 @@ public class LevelManager : MonoBehaviour
                 }
 
                 float randX = Random.Range(-1.0f, 1.0f);
-                newCustomer.transform.position = new Vector3(randX, 0.0f, maxBoundary);
-                newCustomer.transform.localScale = new Vector3(1.0f, 1.0f, 0.0f);
+                SetupTransformForSpecialObject(newCustomer.transform, randX);               
             }
 
-            isSpawningStop = !isSpawningStop; // toggle between spawning customers and stops
+            // toggle between spawning customers and stops
+            // TODO: Should only spawn stops if a fare is picked up; fares otherwise
+            isSpawningStop = !isSpawningStop; 
 
         }
         else if (jobManager.currentJob.jobState == JobManager.JobState.Sweeper)
         {
-            //print("Trash on the street!");
+            // Do NOT continue if all encounters are completed (end of level)
             if (encountersCompleted >= encountersInLevel)
                 yield break;
 
+            // Spawn a new trash object to be swept up
             GameObject newTrash = Instantiate(trashPrefab);
-            //newStop.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 
             float randX = Random.Range(-1.0f, 1.0f);
-            newTrash.transform.position = new Vector3(randX, 0.0f, maxBoundary);
+            SetupTransformForSpecialObject(newTrash.transform, randX);
         }
 
         yield return new WaitForSeconds(5.0f);
@@ -270,11 +277,22 @@ public class LevelManager : MonoBehaviour
 
     }
 
+    public void StartNewGame()
+    {
+        DestroyAllUnPooledObjects();
+        ObjectPool.SharedInstance.DisableAllPooledObjects();
+        GameManager.Instance.Level = 0;
+
+        SetUpNewLevel();
+        print("Started a new Level; Objects/Data wiped from LevelManager/ObjectPool");
+    }
+
     public void SetUpNewLevel()
     {        
         StopAllCoroutines(); // stop all timers immediately
 
         encountersCompleted = 0;
+        isSpawningStop = false;
         GameManager.Instance.Level++;
         GameManager.Instance.ChangeJobDescription("---");
 
@@ -329,4 +347,34 @@ public class LevelManager : MonoBehaviour
         enemy.StartCoroutine("FireProjectile");
     }
 
+    // Helper function to set up an unpooled GameObject instantiated by this class
+    // Sets position in level, scale, and adds it to a parent GameObject for later reference
+    private void SetupTransformForSpecialObject(Transform obj, float xPos, float yPos = 0.0f, float scale = 1.0f)
+    {
+        obj.position = new Vector3(xPos, yPos, maxBoundary);
+        obj.localScale = new Vector3(scale, scale, 0.0f);
+        obj.SetParent(jobParentGroup.transform);
+    }
+
+    public void DestroyAllUnPooledObjects()
+    {
+        if(jobParentGroup)
+        {
+            Transform[] objs = jobParentGroup.GetComponentsInChildren<Transform>();
+            print(objs.Length);
+
+            foreach (var item in objs)
+            {
+                Destroy(item.gameObject);
+            }     
+        }
+
+        // Create a new empty GameObject for Unpooled Objects to parent to
+        GameObject newParent = new GameObject();
+        newParent.transform.SetParent(this.transform);
+        newParent.name = "UnpooledObjects";
+        jobParentGroup = newParent;
+
+
+    }
 }

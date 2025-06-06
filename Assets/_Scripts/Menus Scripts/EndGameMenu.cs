@@ -29,5 +29,6 @@ public class EndGameMenu : BaseMenu
     public void Replay()
     {
         context.SetActiveMenu(MenuManager.MenuStates.GameMenu);
+        LevelManager.LevelInstance.StartNewGame();
     }
 }

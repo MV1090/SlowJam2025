@@ -28,7 +28,8 @@ public class MainMenu : BaseMenu
     public void JumpToGameMenu()
     {
         context.SetActiveMenu(MenuManager.MenuStates.GameMenu);
-        LevelManager.LevelInstance.SetUpNewLevel();
+        LevelManager.LevelInstance.StartNewGame();
+
     }
 
     public void QuitGame()

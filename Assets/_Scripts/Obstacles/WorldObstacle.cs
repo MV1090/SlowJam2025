@@ -34,12 +34,8 @@ public class WorldObstacle : MonoBehaviour
     {
         if(transform.position.z < deactivateZPoint)
         {
-            if (setInactiveOnDespawn)
-            {
-                animRef.enabled = false;
-                sprRef.enabled = true;
-                gameObject.SetActive(false);
-            }
+            if (setInactiveOnDespawn)                           
+                gameObject.SetActive(false);           
             else
                 Destroy(this);
         }
@@ -139,5 +135,14 @@ public class WorldObstacle : MonoBehaviour
     {
         GameObject instance = Instantiate(floatingScorePrefab, position, Quaternion.identity);
         instance.GetComponent<TMP_Text>().text = $"+{scoreValue}";
+    }
+
+    public void OnDisable()
+    {
+        if(animRef)
+            animRef.enabled = false;
+
+        if(sprRef)
+            sprRef.enabled = true;
     }
 }
