@@ -15,7 +15,8 @@ public class WorldObstacle : MonoBehaviour
     protected int hitPoints = 1;
     public bool setInactiveOnDespawn = true;
 
-    public SpriteRenderer sprRef; 
+    public SpriteRenderer sprRef;
+    public Animator animRef;
     public ObstacleType obstacleType = ObstacleType.Obstacle;
 
     public GameObject floatingScorePrefab;
@@ -34,7 +35,11 @@ public class WorldObstacle : MonoBehaviour
         if(transform.position.z < deactivateZPoint)
         {
             if (setInactiveOnDespawn)
+            {
+                animRef.enabled = false;
+                sprRef.enabled = true;
                 gameObject.SetActive(false);
+            }
             else
                 Destroy(this);
         }
@@ -48,6 +53,8 @@ public class WorldObstacle : MonoBehaviour
     {
         obstacleType = obstacleData.obstacleType;   
         destructible = obstacleData.isDestructible;
+        gameObject.GetComponent<BoxCollider>().enabled = true;
+        hitPoints = 1;
 
         Sprite chosenSprite;
         chosenSprite  = obstacleData.obstacleSprites[Random.Range(0, obstacleData.obstacleSprites.Count)];        
@@ -76,10 +83,9 @@ public class WorldObstacle : MonoBehaviour
             {
                 other.gameObject.SetActive(false);
                 return;
-            }               
+            }
 
-            ShowScore(transform.position, 10);
-            gameObject.SetActive(false);
+            SetRelativeHitPoints(-1);
             other.gameObject.SetActive(false);
             
             GameManager.Instance.Score += 10;
@@ -111,7 +117,12 @@ public class WorldObstacle : MonoBehaviour
 
         if(hitPoints < 1) // Deactivate this object
         {
-            gameObject.SetActive(false);
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            animRef.enabled = true;
+            animRef.Play("Explosion");
+            sprRef.enabled = false;
+            ShowScore(transform.position, 10);
+            //gameObject.SetActive(false);
         }
     }
 

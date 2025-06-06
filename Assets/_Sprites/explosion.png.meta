@@ -310,6 +310,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: explosion_6
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 0
+        width: 54
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59ac85dcf30131d47a7ac106acc98412
+      internalID: 782178423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -330,6 +352,7 @@ TextureImporter:
       explosion_3: -1046079385
       explosion_4: -34713109
       explosion_5: 1521476464
+      explosion_6: 782178423
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
