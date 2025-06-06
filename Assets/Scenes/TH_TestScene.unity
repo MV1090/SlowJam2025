@@ -2922,6 +2922,7 @@ MonoBehaviour:
     - {fileID: 2121584514}
     - {fileID: 681231946}
     - {fileID: 802089771}
+    notUpgraded: {fileID: 6656976390418837053, guid: effb8e7acd90ea44aa08bf761263d351, type: 3}
     upgraded: {fileID: 4640434982965811569, guid: 3ca51bfb9090f13439b81e11c51bf052, type: 3}
   healthUpgrade:
     upgradeName: health
@@ -2936,6 +2937,7 @@ MonoBehaviour:
     - {fileID: 148622449}
     - {fileID: 1145598837}
     - {fileID: 1675334230}
+    notUpgraded: {fileID: 6656976390418837053, guid: effb8e7acd90ea44aa08bf761263d351, type: 3}
     upgraded: {fileID: 4640434982965811569, guid: 3ca51bfb9090f13439b81e11c51bf052, type: 3}
   ammoUpgrade:
     upgradeName: ammo
@@ -2950,6 +2952,7 @@ MonoBehaviour:
     - {fileID: 207098095}
     - {fileID: 1622733191}
     - {fileID: 471303915}
+    notUpgraded: {fileID: 6656976390418837053, guid: effb8e7acd90ea44aa08bf761263d351, type: 3}
     upgraded: {fileID: 4640434982965811569, guid: 3ca51bfb9090f13439b81e11c51bf052, type: 3}
 --- !u!4 &948078746
 Transform:
