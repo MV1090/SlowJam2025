@@ -95,4 +95,15 @@ public class AudioManager : MonoBehaviour
             currentShootingClipIndex = (currentShootingClipIndex + 1) % shootingSoundEffects.Length;
         }
     }
+
+    public void PlayPizzaThrowSoundEffect()
+    {
+        if (soundEffectsSource != null && pizzaThrowSoundEffect != null)
+        {
+            // Set the source of the clip and play it
+            soundEffectsSource.clip = pizzaThrowSoundEffect;
+            soundEffectsSource.volume = 0.7f;
+            soundEffectsSource.Play();
+        }
+    }
 }
