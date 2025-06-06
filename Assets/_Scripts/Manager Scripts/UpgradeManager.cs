@@ -35,14 +35,11 @@ public class UpgradeManager : MonoBehaviour
                 Debug.Log($"Upgraded {upgradeType} to level {upgrade.CurrentLevel}. Value: {upgrade.CurrentValue}");
             }
             else { Debug.Log("no money Failed"); }
-
-
         }
         else
         {
             Debug.Log("upgrade Failed");
         }
-
     }
 
     private void CompleteUpgrade(string upgradeType, Upgrades upgrade)
@@ -51,13 +48,15 @@ public class UpgradeManager : MonoBehaviour
         {
             case "speed":
                 GameManager.Instance.PlayerSpeed = upgrade.CurrentValue;
-                Debug.Log("Upgrade speed");
+                
                 break;
             case "health":
-                Debug.Log("Upgrade health");
+                GameManager.Instance.PlayerHealth = upgrade.CurrentValue;
+                
                 break;
             case "ammo":
-                Debug.Log("Upgrade ammo");
+                GameManager.Instance.ProjectileAOE = upgrade.CurrentValue;
+                
                 break;
         }
     }

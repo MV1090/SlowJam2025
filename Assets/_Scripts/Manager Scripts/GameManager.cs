@@ -67,8 +67,17 @@ public class GameManager : Singleton<GameManager>
             _playerHealth = value;
         }
     }
-    
 
+    [SerializeField] private float _projectileAOE = 0;
+    public float ProjectileAOE
+    {
+        get => _projectileAOE;
+
+        set
+        {
+            _projectileAOE = value;
+        }
+    }
 
     public UnityEvent<string> OnJobChanged;
 

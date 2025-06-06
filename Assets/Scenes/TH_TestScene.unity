@@ -2759,7 +2759,7 @@ MonoBehaviour:
     - 0
     - 1
     - 2
-    - 3
+    - 4
     upgradeable:
     - {fileID: 207098095}
     - {fileID: 1622733191}
@@ -3350,6 +3350,7 @@ MonoBehaviour:
       m_Calls: []
   _playerSpeed: 3
   _playerHealth: 0
+  _projectileAOE: 3
   OnJobChanged:
     m_PersistentCalls:
       m_Calls: []

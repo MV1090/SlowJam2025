@@ -58,8 +58,38 @@ public class Projectile : MonoBehaviour
             customer.receivedFood?.Invoke();
 
             gameObject.SetActive(false);
-        }
+        }            
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Obstacle"))
+        AOEDamage(GameManager.Instance.ProjectileAOE);
+    }
+
+    private void AOEDamage(float range)
+    {
+        Debug.Log("Applying AOE damage");
+
+        int layersToHit = (1 << LayerMask.NameToLayer("World") | 1 << LayerMask.NameToLayer("Enemy"));
+        Collider[] hitCollider = Physics.OverlapSphere(transform.position, range, layersToHit);
+
+        foreach(var hit in hitCollider)
+        {
+            Debug.Log("Hit: " + hit.name);
+
+            WorldObstacle obstacle = hit.GetComponent<WorldObstacle>();
+
+            if(obstacle != null)
+                obstacle.SetRelativeHitPoints(-1);            
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, GameManager.Instance.ProjectileAOE);
     }
 
     public void StartLifeTimer()
