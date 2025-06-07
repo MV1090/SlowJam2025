@@ -74,6 +74,9 @@ public class Delivery : BaseJob
         numOfDeliveries--;
 
         Debug.DrawLine(transform.position, targetPoint, Color.green, 2f);
+
+        // Play pizza throw sound effect
+        AudioManager.Instance.PlayPizzaThrowSoundEffect();
     } 
        
 }

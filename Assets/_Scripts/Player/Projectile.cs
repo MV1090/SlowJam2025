@@ -52,6 +52,7 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         print("Projectile hits something.");
+    
         // Delivery: Have customer react to receiving their food
         if (collision.gameObject.CompareTag("Customer"))
         {
@@ -60,8 +61,7 @@ public class Projectile : MonoBehaviour
             customer.receivedFood?.Invoke();
 
             gameObject.SetActive(false);
-        }            
-        
+        }
     }
 
     private void OnTriggerEnter(Collider other)

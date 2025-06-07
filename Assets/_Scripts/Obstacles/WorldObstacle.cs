@@ -22,7 +22,7 @@ public class WorldObstacle : MonoBehaviour
     public GameObject floatingScorePrefab;
 
     public Vector3 spriteOffset;
-    private BoxCollider obstacleCollider;
+    protected BoxCollider obstacleCollider;
 
     private void Awake()
     {
@@ -64,14 +64,18 @@ public class WorldObstacle : MonoBehaviour
 
     protected void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Player")) // Player handles the collision logic here
+            return;
+
         if (obstacleType == ObstacleType.Customer)
-        {   
-            // Delivery: Have customer react to receiving their food
-            print("Projectile hits a customer.");                    
-            //onDelivered?.Invoke();            
-            //Customer customer = collision.gameObject.GetComponent<Customer>();
-            GetComponent<Customer>().receivedFood?.Invoke();
-            gameObject.SetActive(false);
+        {
+            if (JobManager.Instance.currentJob.jobState == JobManager.JobState.Delivery)
+            {
+                // Delivery: Have customer react to receiving their food
+                print("Projectile hits a customer.");
+                GetComponent<Customer>().receivedFood?.Invoke();
+                gameObject.SetActive(false);
+            }
         }         
         else if (other.gameObject.CompareTag("Projectile"))
         {
@@ -111,7 +115,7 @@ public class WorldObstacle : MonoBehaviour
 
         hitPoints += hitPointsChange;
 
-        if(hitPoints < 1) // Deactivate this object
+        if (hitPoints < 1) // Deactivate this object
         {
             gameObject.GetComponent<BoxCollider>().enabled = false;
             explosionObj.SetActive(true);
@@ -119,6 +123,7 @@ public class WorldObstacle : MonoBehaviour
             sprRef.enabled = false;
             ShowScore(transform.position, 10);
             //gameObject.SetActive(false);
+            AudioManager.Instance.PlayExplosionSoundEffect();
         }
     }
 
