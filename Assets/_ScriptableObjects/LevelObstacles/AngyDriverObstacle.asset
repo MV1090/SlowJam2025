@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstacleType: 1
   obstacleSprites:
-  - {fileID: 2010619005024776429, guid: 3010af2b0ca75fa44bcee6cbbb9dbe2a, type: 3}
+  - {fileID: 2010619005024776429, guid: 87a5c4f5bc2614910aa489b3191f560c, type: 3}
   isDestructible: 1
   isFloating: 0
   obstacleScale: {x: 2, y: 2}
