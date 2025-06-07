@@ -290,12 +290,10 @@ public class LevelManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        DestroyAllUnPooledObjects();
-        ObjectPool.SharedInstance.DisableAllPooledObjects();
+        ClearAllObstacles();
         GameManager.Instance.Level = 0;
-
         SetUpNewLevel();
-        print("Started a new Level; Objects/Data wiped from LevelManager/ObjectPool");
+
     }
 
     public void SetUpNewLevel()
@@ -320,12 +318,20 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(SpawnRandomObstacle());
         StartCoroutine(ChooseNewEncounter());
         StartCoroutine(BeginJob());
+
     }
 
     public void SelectLevel()
     {
         int randI = Random.Range(0, gameLevels.Count);
         currentLevel = gameLevels[randI];
+    }
+
+    public void ClearAllObstacles()
+    {
+        DestroyAllUnPooledObjects();
+        ObjectPool.SharedInstance.DisableAllPooledObjects();
+        print("Obstacles cleared by Level Manager.");
     }
 
     private void CreateWorldObstacle(ObstacleScriptableObject obstacleData)
