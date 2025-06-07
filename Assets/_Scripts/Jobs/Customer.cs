@@ -60,10 +60,13 @@ public class Customer : MonoBehaviour
     private void OnPickUP() 
     {           
         isPassenger = true;
+        gameObject.layer = LayerMask.NameToLayer("Player");
     }
     private void OnDropOff()
     {
         isPassenger = false;
+
+        gameObject.layer = LayerMask.NameToLayer("Customer");
 
         int StopLayer = 1 << LayerMask.NameToLayer("StopSign");
 
