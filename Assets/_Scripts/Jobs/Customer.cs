@@ -73,6 +73,7 @@ public class Customer : MonoBehaviour
         {
             GameManager.Instance.money += remainingWallet;
             Debug.Log("Customer at Stop");
+            PlayCustomerCompleteAudioEffect();
         }        
     }
     void OnReceivedFood()
@@ -81,12 +82,7 @@ public class Customer : MonoBehaviour
         remainingWallet = 0;
         Debug.Log("Food Received");
 
-        // Play food received sound effect
-        AudioManager.Instance.PlayFoodReceivedSoundEffect();
-
-        // Debug log the chosen sprite
-        Sprite chosenSprite = GetComponent<SpriteRenderer>()?.sprite;
-        Debug.Log("Chosen Sprite: " + (chosenSprite != null ? chosenSprite.name : "None"));
+        PlayCustomerCompleteAudioEffect();
     }
 
     void OnTakeDamage(int damage, int moneyLost)
@@ -129,6 +125,51 @@ public class Customer : MonoBehaviour
                     Debug.Log("Case: passenger5_0");
                     Debug.Log("Playing: Passenger5StartSoundEffect");
                     AudioManager.Instance.PlayPassenger5StartSoundEffect();
+                    break;
+                default:
+                    Debug.Log("No matching audio effect for sprite: " + spriteName);
+                    break;
+            }
+        }
+        else
+        {
+            Debug.Log("GlobalChosenSprite is null, cannot play audio effect.");
+        }
+    }
+
+    public void PlayCustomerCompleteAudioEffect()
+    {
+        if (GlobalChosenSprite != null)
+        {
+            string spriteName = GlobalChosenSprite.name;
+            Debug.Log("Sprite Name from complete audio function: " + spriteName); // Log the sprite name
+
+            switch (spriteName)
+            {
+                case "passenger1_0":
+                    Debug.Log("Case: passenger1_0"); // Log the case
+                    Debug.Log("Playing: Passenger1CompleteSoundEffect"); // Log the audio effect
+                    AudioManager.Instance.PlayPassenger1CompleteSoundEffect();
+                    break;
+                case "passenger2_0":
+                    Debug.Log("Case: passenger2_0");
+                    Debug.Log("Playing: Passenger2CompleteSoundEffect");
+                    AudioManager.Instance.PlayPassenger2CompleteSoundEffect();
+                    break;
+                case "passenger3_0":
+                    Debug.Log("Case: passenger3_0");
+                    Debug.Log("Playing: Passenger3CompleteSoundEffect");
+                    AudioManager.Instance.PlayPassenger3CompleteSoundEffect();
+                    break;
+                case "passenger4_0":
+                    Debug.Log("Case: passenger4_0");
+                    Debug.Log("Playing: Passenger4CompleteSoundEffect");
+                    AudioManager.Instance.PlayPassenger4CompleteSoundEffect();
+                    break;
+                case "passenger5_0":
+                    Debug.Log("Case: passenger5_0");
+                    Debug.Log("Playing: Passenger5CompleteSoundEffect");
+                    AudioManager.Instance.PlayPassenger5CompleteSoundEffect();
                     break;
                 default:
                     Debug.Log("No matching audio effect for sprite: " + spriteName);
