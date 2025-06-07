@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform  projectileSpawn;
     [SerializeField] private Transform  projectileSpawnLeft;
     [SerializeField] private Transform  projectileSpawnRight;
+    [SerializeField] private Transform  playerSpawnPoint;
 
     Projectile.ProjectileType projectileType = Projectile.ProjectileType.Player;
 
@@ -47,6 +48,13 @@ public class PlayerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         move = playerInput.actions.FindAction("Movement");
         healthComponent = GetComponent<Health>();
+
+        GameManager.Instance.OnDeath += Respawn;
+    }
+
+    void Respawn()
+    {
+        transform.position = playerSpawnPoint.position;
     }
 
     public void OnMoveStarted(InputAction.CallbackContext context)
@@ -177,11 +185,6 @@ public class PlayerController : MonoBehaviour
 
         transform.position = clampPos;
     }
-
-    //public void SetHealthRelative(int healthValue)
-    //{
-    //    health += Mathf.Clamp(health+healthValue, 0, maxHealth);
-    //}
 
     public void TurnOffParticles()
     {
