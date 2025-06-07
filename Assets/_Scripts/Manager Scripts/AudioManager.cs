@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip launchSoundEffect; // Reference to the Launch sound effect
     [SerializeField] private AudioClip footstepsSoundEffect; // Reference to the Footsteps sound effect
     [SerializeField] private AudioClip explosionSoundEffect; // Reference to the Explosion sound effect
+    [SerializeField] private AudioSource movementSoundSource; // Separate AudioSource for movement sounds
 
     private int currentShootingClipIndex = 0; // Tracker for the current audio clip
 
@@ -114,11 +115,11 @@ public class AudioManager : MonoBehaviour
 
     public void PlayJetpackOnSoundEffect()
     {
-        if (soundEffectsSource != null && jetpackOnSoundEffect != null)
+        if (movementSoundSource != null && jetpackOnSoundEffect != null)
         {
-            soundEffectsSource.clip = jetpackOnSoundEffect;
-            soundEffectsSource.volume = 0.7f;
-            soundEffectsSource.Play();
+            movementSoundSource.clip = jetpackOnSoundEffect;
+            movementSoundSource.volume = 0.5f;
+            movementSoundSource.Play();
         }
     }
 
@@ -144,11 +145,11 @@ public class AudioManager : MonoBehaviour
 
     public void PlayFootstepsSoundEffect()
     {
-        if (soundEffectsSource != null && footstepsSoundEffect != null)
+        if (movementSoundSource != null && footstepsSoundEffect != null)
         {
-            soundEffectsSource.clip = footstepsSoundEffect;
-            soundEffectsSource.volume = 0.7f;
-            soundEffectsSource.Play();
+            movementSoundSource.clip = footstepsSoundEffect;
+            movementSoundSource.volume = 0.6f;
+            movementSoundSource.Play();
         }
     }
 
@@ -159,6 +160,22 @@ public class AudioManager : MonoBehaviour
             soundEffectsSource.clip = explosionSoundEffect;
             soundEffectsSource.volume = 0.7f;
             soundEffectsSource.Play();
+        }
+    }
+
+    public void StopJetpackSoundEffect()
+    {
+        if (movementSoundSource != null && movementSoundSource.clip == jetpackOnSoundEffect)
+        {
+            movementSoundSource.Stop(); // Stop the jetpack sound effect
+        }
+    }
+
+    public void StopFootstepsSoundEffect()
+    {
+        if (movementSoundSource != null && movementSoundSource.clip == footstepsSoundEffect)
+        {
+            movementSoundSource.Stop(); // Stop the footsteps sound effect
         }
     }
 }
