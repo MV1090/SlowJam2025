@@ -22,7 +22,7 @@ public class WorldObstacle : MonoBehaviour
     public GameObject floatingScorePrefab;
 
     public Vector3 spriteOffset;
-    private BoxCollider obstacleCollider;
+    protected BoxCollider obstacleCollider;
 
     private void Awake()
     {

@@ -98,7 +98,7 @@ public class LevelManager : MonoBehaviour
                 CreateWorldObstacle(levelEncounter.objectToSpawn);
                 break;
             case EncounterType.Enemies:
-                CreateEnemyObstacle(levelEncounter.objectToSpawn);
+                CreateEnemyObstacle((EnemyScriptableObject)levelEncounter.objectToSpawn);
                 break;
             default:
                 break;
@@ -344,7 +344,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void CreateEnemyObstacle(ObstacleScriptableObject enemyData)
+    private void CreateEnemyObstacle(EnemyScriptableObject enemyData)
     {
         EnemyObstacle enemy = ObjectPool.SharedInstance.GetEnemyObstacleObject();
         if (enemy == null)
@@ -362,7 +362,7 @@ public class LevelManager : MonoBehaviour
         enemy.SetDeactivatePoint(minBoundary);
         enemy.projectileSpeed = Mathf.Round(worldMoveSpeed/2);
         enemy.fireRate = levelEnemyFireRate;
-        enemy.SetupObstacle(enemyData);
+        enemy.SetupEnemyObstacle(enemyData);
 
         enemy.gameObject.SetActive(true);
         enemy.StartCoroutine("FireProjectile");
