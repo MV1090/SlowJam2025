@@ -23,12 +23,18 @@ public class LevelManager : MonoBehaviour
 
     [Tooltip("How fast objects move towards the Player by default in a Level.")]
     public float worldMoveSpeed = 10.0f;
+    private float baseWorldSpeed;
 
     [Tooltip("How many encounters should spawn this level?")]
     public int encountersInLevel = 5;
+    private float baseEncounters;
 
     [Tooltip("How quickly do new Encounters occur during the level (in seconds).")]
     public float encounterRate = 5.0f;
+    private float baseEncounterRate;
+
+    public float levelEnemyFireRate = 1.0f;
+    private float baseEnemyFireRate;
 
     [Header("Level Encounters")]
     [Tooltip("Stores every possible level this Manager can pick from.")]
@@ -41,7 +47,6 @@ public class LevelManager : MonoBehaviour
     //[Tooltip("Lists what kind of Obstacles can spawn between Encounters in this level.")]
     //private List<ObstacleScriptableObject> obstaclesList;
 
-    private int levelsCompleted = 0;
     private int encountersCompleted = 0;
 
     private int obstacleSpawnCounter; // during an encounter, tracks how many obstacles are left to spawn
@@ -268,6 +273,12 @@ public class LevelManager : MonoBehaviour
         jobManager = GetComponent<JobManager>();
         playerRef = GameObject.FindGameObjectWithTag("Player"); // store player reference with level
 
+        // Store current values as the base difficulty
+        baseEncounterRate = encounterRate;
+        baseEncounters = encountersInLevel;
+        baseWorldSpeed = worldMoveSpeed;
+        baseEnemyFireRate = levelEnemyFireRate;
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -291,10 +302,18 @@ public class LevelManager : MonoBehaviour
     {        
         StopAllCoroutines(); // stop all timers immediately
 
+        // Reset certain values
         encountersCompleted = 0;
         isSpawningStop = false;
-        GameManager.Instance.Level++;
         GameManager.Instance.ChangeJobDescription("---");
+
+        // Update scaling
+        GameManager.Instance.Level++;
+        int currentStage = GameManager.Instance.Level;
+        worldMoveSpeed = Mathf.Min(baseWorldSpeed + (currentStage/2), baseWorldSpeed * 2);
+        encounterRate = Mathf.Max(baseEncounterRate - (currentStage * 0.1f), baseEncounterRate/2);
+        encountersInLevel = Mathf.RoundToInt(baseEncounters + (currentStage/2));
+        levelEnemyFireRate = Mathf.Max(baseEnemyFireRate - (currentStage * 0.05f), baseEnemyFireRate / 2);
 
         SelectLevel();
        
@@ -341,6 +360,8 @@ public class LevelManager : MonoBehaviour
 
         enemy.SetMoveSpeed(worldMoveSpeed);
         enemy.SetDeactivatePoint(minBoundary);
+        enemy.projectileSpeed = Mathf.Round(worldMoveSpeed/2);
+        enemy.fireRate = levelEnemyFireRate;
         enemy.SetupObstacle(enemyData);
 
         enemy.gameObject.SetActive(true);

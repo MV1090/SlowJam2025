@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1b3ae2e6cf34ac4d80da8db47adf86f, type: 3}
-  m_Name: SimpleLevel
+  m_Name: NatureWalk
   m_EditorClassIdentifier: 
   pickRandomly: 1
   levelEncounters:
   - {fileID: 11400000, guid: 92d6baa32579eeb4f89173a75d804747, type: 2}
   - {fileID: 11400000, guid: 23b80c65e8d23ee409ef19890b77e7c6, type: 2}
-  - {fileID: 11400000, guid: e63ac85806a469845a302a344151d3ad, type: 2}
+  - {fileID: 11400000, guid: 7b2bdd1c9192c384e8dbeea4b0389bd9, type: 2}
+  - {fileID: 11400000, guid: 77024376c8c56194996aaad027d5bd86, type: 2}
   levelRandomObstacles:
-  - {fileID: 11400000, guid: 60146aba0bfe13e4781f5e05c70b5f19, type: 2}
+  - {fileID: 11400000, guid: 066b8c3fe4088354fb3c4a0b07534f88, type: 2}
+  - {fileID: 11400000, guid: e0ebe6c13ebd53443aff82b3a4a3cf94, type: 2}
   levelCustomers: {fileID: 11400000, guid: 322fd6d555e8fc446bea9897c94cbc7e, type: 2}
