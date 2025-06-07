@@ -62,13 +62,18 @@ public class Customer : MonoBehaviour
         {
             GameManager.Instance.money += remainingWallet;
             Debug.Log("Customer at Stop");
+            // Play food received sound effect
+            AudioManager.Instance.PlayFoodReceivedSoundEffect();
         }        
     }
-    void OnReceivedFood() 
+    void OnReceivedFood()
     {
         GameManager.Instance.money += remainingWallet;
         remainingWallet = 0;
         Debug.Log("Food Received");
+
+        // Play food received sound effect
+        AudioManager.Instance.PlayFoodReceivedSoundEffect();
     }
 
     void OnTakeDamage(int damage, int moneyLost)

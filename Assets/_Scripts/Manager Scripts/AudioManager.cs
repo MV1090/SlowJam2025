@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip footstepsSoundEffect; // Reference to the Footsteps sound effect
     [SerializeField] private AudioClip explosionSoundEffect; // Reference to the Explosion sound effect
     [SerializeField] private AudioSource movementSoundSource; // Separate AudioSource for movement sounds
+    [SerializeField] private AudioClip foodReceivedSoundEffect; // Reference to the Food Received sound effect
 
     private int currentShootingClipIndex = 0; // Tracker for the current audio clip
 
@@ -127,7 +128,7 @@ public class AudioManager : MonoBehaviour
         if (soundEffectsSource != null && jobSuccessSoundEffect != null)
         {
             soundEffectsSource.clip = jobSuccessSoundEffect;
-            soundEffectsSource.volume = 0.7f;
+            soundEffectsSource.volume = 0.5f;
             soundEffectsSource.Play();
         }
     }
@@ -149,6 +150,16 @@ public class AudioManager : MonoBehaviour
         if (soundEffectsSource != null && explosionSoundEffect != null)
         {
             soundEffectsSource.clip = explosionSoundEffect;
+            soundEffectsSource.volume = 0.7f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayFoodReceivedSoundEffect()
+    {
+        if (soundEffectsSource != null && foodReceivedSoundEffect != null)
+        {
+            soundEffectsSource.clip = foodReceivedSoundEffect;
             soundEffectsSource.volume = 0.7f;
             soundEffectsSource.Play();
         }
