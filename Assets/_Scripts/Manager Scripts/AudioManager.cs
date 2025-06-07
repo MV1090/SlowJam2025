@@ -10,6 +10,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] shootingSoundEffects; // Array to hold multiple shooting sound effects
     [SerializeField] private AudioClip pizzaThrowSoundEffect; // Reference to the Pizza Throw sound effect
     [SerializeField] private AudioSource soundEffectsSource; // Separate AudioSource for sound effects
+    [SerializeField] private AudioClip jetpackOnSoundEffect; // Reference to the Jetpack On sound effect
+    [SerializeField] private AudioClip jobSuccessSoundEffect; // Reference to the Job Success sound effect
+    [SerializeField] private AudioClip launchSoundEffect; // Reference to the Launch sound effect
+    [SerializeField] private AudioClip footstepsSoundEffect; // Reference to the Footsteps sound effect
+    [SerializeField] private AudioClip explosionSoundEffect; // Reference to the Explosion sound effect
 
     private int currentShootingClipIndex = 0; // Tracker for the current audio clip
 
@@ -102,6 +107,56 @@ public class AudioManager : MonoBehaviour
         {
             // Set the source of the clip and play it
             soundEffectsSource.clip = pizzaThrowSoundEffect;
+            soundEffectsSource.volume = 0.7f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayJetpackOnSoundEffect()
+    {
+        if (soundEffectsSource != null && jetpackOnSoundEffect != null)
+        {
+            soundEffectsSource.clip = jetpackOnSoundEffect;
+            soundEffectsSource.volume = 0.7f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayJobSuccessSoundEffect()
+    {
+        if (soundEffectsSource != null && jobSuccessSoundEffect != null)
+        {
+            soundEffectsSource.clip = jobSuccessSoundEffect;
+            soundEffectsSource.volume = 0.7f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayLaunchSoundEffect()
+    {
+        if (soundEffectsSource != null && launchSoundEffect != null)
+        {
+            soundEffectsSource.clip = launchSoundEffect;
+            soundEffectsSource.volume = 0.7f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayFootstepsSoundEffect()
+    {
+        if (soundEffectsSource != null && footstepsSoundEffect != null)
+        {
+            soundEffectsSource.clip = footstepsSoundEffect;
+            soundEffectsSource.volume = 0.7f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayExplosionSoundEffect()
+    {
+        if (soundEffectsSource != null && explosionSoundEffect != null)
+        {
+            soundEffectsSource.clip = explosionSoundEffect;
             soundEffectsSource.volume = 0.7f;
             soundEffectsSource.Play();
         }

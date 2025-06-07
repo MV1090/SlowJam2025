@@ -111,7 +111,7 @@ public class WorldObstacle : MonoBehaviour
 
         hitPoints += hitPointsChange;
 
-        if(hitPoints < 1) // Deactivate this object
+        if (hitPoints < 1) // Deactivate this object
         {
             gameObject.GetComponent<BoxCollider>().enabled = false;
             explosionObj.SetActive(true);
@@ -119,6 +119,7 @@ public class WorldObstacle : MonoBehaviour
             sprRef.enabled = false;
             ShowScore(transform.position, 10);
             //gameObject.SetActive(false);
+            AudioManager.Instance.PlayExplosionSoundEffect();
         }
     }
 
