@@ -29,8 +29,15 @@ public class Customer : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
 
-        //Just here for testing.
+        // Just here for testing.
         remainingWallet = totalWallet;
+
+        // Retrieve the WorldObstacle component and debug log the chosen sprite
+        WorldObstacle worldObstacle = GetComponent<WorldObstacle>();
+        if (worldObstacle != null && worldObstacle.sprRef != null)
+        {
+            Debug.Log("Chosen Sprite: " + (worldObstacle.sprRef.sprite != null ? worldObstacle.sprRef.sprite.name : "None"));
+        }
     }
     
     void Update()
@@ -74,6 +81,10 @@ public class Customer : MonoBehaviour
 
         // Play food received sound effect
         AudioManager.Instance.PlayFoodReceivedSoundEffect();
+
+        // Debug log the chosen sprite
+        Sprite chosenSprite = GetComponent<SpriteRenderer>()?.sprite;
+        Debug.Log("Chosen Sprite: " + (chosenSprite != null ? chosenSprite.name : "None"));
     }
 
     void OnTakeDamage(int damage, int moneyLost)
