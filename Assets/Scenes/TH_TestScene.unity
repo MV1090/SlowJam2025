@@ -1663,7 +1663,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 3.73
+  orthographic size: 5.4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4061,8 +4061,8 @@ GameObject:
   - component: {fileID: 1466583927}
   - component: {fileID: 1466583926}
   - component: {fileID: 1466583928}
-  - component: {fileID: 1466583930}
   - component: {fileID: 1466583929}
+  - component: {fileID: 1466583930}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -4092,10 +4092,21 @@ MonoBehaviour:
   pizzaThrowSoundEffect: {fileID: 8300000, guid: 93f0202d44b5e4e41a0c20ec3a18269c, type: 3}
   soundEffectsSource: {fileID: 1466583930}
   jetpackOnSoundEffect: {fileID: 8300000, guid: 961f64bcf467b4b01b039a041597ee18, type: 3}
-  jobSuccessSoundEffect: {fileID: 0}
+  jobSuccessSoundEffect: {fileID: 8300000, guid: b030ab6b2ce4a4814a8473d9de60a0ca, type: 3}
   footstepsSoundEffect: {fileID: 8300000, guid: ed4295f5caa7a45529c0dc9ba9d7d95c, type: 3}
   explosionSoundEffect: {fileID: 8300000, guid: e0e7973146db44029b8ec1ba857758b9, type: 3}
   movementSoundSource: {fileID: 1466583929}
+  foodReceivedSoundEffect: {fileID: 8300000, guid: b030ab6b2ce4a4814a8473d9de60a0ca, type: 3}
+  passenger1StartSoundEffect: {fileID: 8300000, guid: 90fcfc4dc6f0e4656a4e63f84e276171, type: 3}
+  passenger1CompleteSoundEffect: {fileID: 8300000, guid: 2df976d2e0db44eb3a9fddf42bb3cc36, type: 3}
+  passenger2StartSoundEffect: {fileID: 8300000, guid: 766f7a4b1f1a340ca967ec8e8aa9e00a, type: 3}
+  passenger2CompleteSoundEffect: {fileID: 8300000, guid: b030ab6b2ce4a4814a8473d9de60a0ca, type: 3}
+  passenger3StartSoundEffect: {fileID: 8300000, guid: 508244f96be0948c194d6881b33e5658, type: 3}
+  passenger3CompleteSoundEffect: {fileID: 8300000, guid: 2b9e6854be96f4effb0efb6d200f9f90, type: 3}
+  passenger4StartSoundEffect: {fileID: 8300000, guid: 80e3f1a08861c48abaf3193ca254919f, type: 3}
+  passenger4CompleteSoundEffect: {fileID: 8300000, guid: f97816d12312a4573b047d6cd3303d81, type: 3}
+  passenger5StartSoundEffect: {fileID: 8300000, guid: c454b09c7558a4546b550249be28899f, type: 3}
+  passenger5CompleteSoundEffect: {fileID: 8300000, guid: a0f5b1f419b7a4e2ca572cc05986c7bb, type: 3}
 --- !u!4 &1466583927
 Transform:
   m_ObjectHideFlags: 0
@@ -4227,7 +4238,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 34
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

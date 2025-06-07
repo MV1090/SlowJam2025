@@ -16,6 +16,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip explosionSoundEffect; // Reference to the Explosion sound effect
     [SerializeField] private AudioSource movementSoundSource; // Separate AudioSource for movement sounds
     [SerializeField] private AudioClip foodReceivedSoundEffect; // Reference to the Food Received sound effect
+    [SerializeField] private AudioClip passenger1StartSoundEffect; // Reference to Passenger 1 start sound effect
+    [SerializeField] private AudioClip passenger1CompleteSoundEffect; // Reference to Passenger 1 complete sound effect
+    [SerializeField] private AudioClip passenger2StartSoundEffect; // Reference to Passenger 2 start sound effect
+    [SerializeField] private AudioClip passenger2CompleteSoundEffect; // Reference to Passenger 2 complete sound effect
+    [SerializeField] private AudioClip passenger3StartSoundEffect; // Reference to Passenger 3 start sound effect
+    [SerializeField] private AudioClip passenger3CompleteSoundEffect; // Reference to Passenger 3 complete sound effect
+    [SerializeField] private AudioClip passenger4StartSoundEffect; // Reference to Passenger 4 start sound effect
+    [SerializeField] private AudioClip passenger4CompleteSoundEffect; // Reference to Passenger 4 complete sound effect
+    [SerializeField] private AudioClip passenger5StartSoundEffect; // Reference to Passenger 5 start sound effect
+    [SerializeField] private AudioClip passenger5CompleteSoundEffect; // Reference to Passenger 5 complete sound effect
 
     private int currentShootingClipIndex = 0; // Tracker for the current audio clip
 
@@ -161,6 +171,106 @@ public class AudioManager : MonoBehaviour
         {
             soundEffectsSource.clip = foodReceivedSoundEffect;
             soundEffectsSource.volume = 0.7f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayPassenger1StartSoundEffect()
+    {
+        if (soundEffectsSource != null && passenger1StartSoundEffect != null)
+        {
+            soundEffectsSource.clip = passenger1StartSoundEffect;
+            soundEffectsSource.volume = 0.6f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayPassenger1CompleteSoundEffect()
+    {
+        if (soundEffectsSource != null && passenger1CompleteSoundEffect != null)
+        {
+            soundEffectsSource.clip = passenger1CompleteSoundEffect;
+            soundEffectsSource.volume = 0.6f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayPassenger2StartSoundEffect()
+    {
+        if (soundEffectsSource != null && passenger2StartSoundEffect != null)
+        {
+            soundEffectsSource.clip = passenger2StartSoundEffect;
+            soundEffectsSource.volume = 0.6f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayPassenger2CompleteSoundEffect()
+    {
+        if (soundEffectsSource != null && passenger2CompleteSoundEffect != null)
+        {
+            soundEffectsSource.clip = passenger2CompleteSoundEffect;
+            soundEffectsSource.volume = 0.6f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayPassenger3StartSoundEffect()
+    {
+        if (soundEffectsSource != null && passenger3StartSoundEffect != null)
+        {
+            soundEffectsSource.clip = passenger3StartSoundEffect;
+            soundEffectsSource.volume = 0.6f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayPassenger3CompleteSoundEffect()
+    {
+        if (soundEffectsSource != null && passenger3CompleteSoundEffect != null)
+        {
+            soundEffectsSource.clip = passenger3CompleteSoundEffect;
+            soundEffectsSource.volume = 0.6f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayPassenger4StartSoundEffect()
+    {
+        if (soundEffectsSource != null && passenger4StartSoundEffect != null)
+        {
+            soundEffectsSource.clip = passenger4StartSoundEffect;
+            soundEffectsSource.volume = 0.6f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayPassenger4CompleteSoundEffect()
+    {
+        if (soundEffectsSource != null && passenger4CompleteSoundEffect != null)
+        {
+            soundEffectsSource.clip = passenger4CompleteSoundEffect;
+            soundEffectsSource.volume = 0.6f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayPassenger5StartSoundEffect()
+    {
+        if (soundEffectsSource != null && passenger5StartSoundEffect != null)
+        {
+            soundEffectsSource.clip = passenger5StartSoundEffect;
+            soundEffectsSource.volume = 0.6f;
+            soundEffectsSource.Play();
+        }
+    }
+
+    public void PlayPassenger5CompleteSoundEffect()
+    {
+        if (soundEffectsSource != null && passenger5CompleteSoundEffect != null)
+        {
+            soundEffectsSource.clip = passenger5CompleteSoundEffect;
+            soundEffectsSource.volume = 0.6f;
             soundEffectsSource.Play();
         }
     }
