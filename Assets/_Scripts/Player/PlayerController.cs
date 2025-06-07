@@ -191,7 +191,8 @@ public class PlayerController : MonoBehaviour
         if (jetParticles.isStopped)
             return;
 
-            jetParticles.Stop();
+        AudioManager.Instance.PlayFootstepsSoundEffect();
+        jetParticles.Stop();
     }
 
     public void TurnOnParticles()
@@ -199,6 +200,7 @@ public class PlayerController : MonoBehaviour
         if (jetParticles.isPlaying)
             return;
 
+        AudioManager.Instance.PlayJetpackOnSoundEffect();
         jetParticles.Play();
     }
 }

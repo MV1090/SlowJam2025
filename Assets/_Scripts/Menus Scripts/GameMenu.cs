@@ -39,13 +39,15 @@ public class GameMenu : BaseMenu
     {
         if (value > 1) 
         {
-            upgrades.gameObject.SetActive(true);            
+            upgrades.gameObject.SetActive(true);     
+            AudioManager.Instance.StopAllSFX();
             Time.timeScale = 0.0f;
         }
     }
     public void HideUpgrades()
     {
-        upgrades.gameObject.SetActive(false);        
+        upgrades.gameObject.SetActive(false);
+        AudioManager.Instance.PlayMovementSound();
         Time.timeScale = 1.0f;
     }
     void UpdateHealthBar(float health)
