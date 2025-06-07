@@ -76,4 +76,9 @@ public class TaxiDriver : BaseJob
         hasCustomer = false;
     }
 
+    public bool GetHasCustomer()
+    {
+        return hasCustomer;
+    }
+
 }

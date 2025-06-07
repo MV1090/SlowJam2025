@@ -204,6 +204,11 @@ public class LevelManager : MonoBehaviour
             if (encountersCompleted >= encountersInLevel)
                 yield break;
 
+            // Do NOT continue if the player is out of food
+            Delivery deliveryJob = (Delivery)jobManager.currentJob;
+            if (deliveryJob.GetNumberOfDeliveries() < 1)
+                yield break;
+
             // Spawn a new customer on the edges of the level boundary to receive food
             Customer newCustomer = Instantiate(customerPrefab);
             if (currentLevel.levelCustomers)
@@ -219,7 +224,10 @@ public class LevelManager : MonoBehaviour
  
         }
         else if(jobManager.currentJob.jobState == JobManager.JobState.TaxiDriver)
-        {         
+        {
+            //TaxiDriver taxiJob = (TaxiDriver)jobManager.currentJob;
+            //isSpawningStop = taxiJob.GetHasCustomer();
+
             if (isSpawningStop)
             {
                 // Spawn a taxi stop for the fare
@@ -227,6 +235,7 @@ public class LevelManager : MonoBehaviour
 
                 float randX = Random.Range(-1.0f, 1.0f);
                 SetupTransformForSpecialObject(newStop.transform, randX);
+                isSpawningStop = false;
             }
             else
             {
@@ -242,13 +251,9 @@ public class LevelManager : MonoBehaviour
                 }
 
                 float randX = Random.Range(-1.0f, 1.0f);
-                SetupTransformForSpecialObject(newCustomer.transform, randX);               
-            }
-
-            // toggle between spawning customers and stops
-            // TODO: Should only spawn stops if a fare is picked up; fares otherwise
-            isSpawningStop = !isSpawningStop; 
-
+                SetupTransformForSpecialObject(newCustomer.transform, randX);
+                isSpawningStop = true;
+            }            
         }
         else if (jobManager.currentJob.jobState == JobManager.JobState.Sweeper)
         {
@@ -290,12 +295,10 @@ public class LevelManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        DestroyAllUnPooledObjects();
-        ObjectPool.SharedInstance.DisableAllPooledObjects();
+        ClearAllObstacles();
         GameManager.Instance.Level = 0;
-
         SetUpNewLevel();
-        print("Started a new Level; Objects/Data wiped from LevelManager/ObjectPool");
+
     }
 
     public void SetUpNewLevel()
@@ -320,12 +323,20 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(SpawnRandomObstacle());
         StartCoroutine(ChooseNewEncounter());
         StartCoroutine(BeginJob());
+
     }
 
     public void SelectLevel()
     {
         int randI = Random.Range(0, gameLevels.Count);
         currentLevel = gameLevels[randI];
+    }
+
+    public void ClearAllObstacles()
+    {
+        DestroyAllUnPooledObjects();
+        ObjectPool.SharedInstance.DisableAllPooledObjects();
+        print("Obstacles cleared by Level Manager.");
     }
 
     private void CreateWorldObstacle(ObstacleScriptableObject obstacleData)
