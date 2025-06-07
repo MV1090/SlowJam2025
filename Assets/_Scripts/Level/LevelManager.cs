@@ -33,6 +33,9 @@ public class LevelManager : MonoBehaviour
     public float encounterRate = 5.0f;
     private float baseEncounterRate;
 
+    public float levelEnemyFireRate = 1.0f;
+    private float baseEnemyFireRate;
+
     [Header("Level Encounters")]
     [Tooltip("Stores every possible level this Manager can pick from.")]
     public List<LevelDetailsScriptableObject> gameLevels; // all game levels available
@@ -274,6 +277,7 @@ public class LevelManager : MonoBehaviour
         baseEncounterRate = encounterRate;
         baseEncounters = encountersInLevel;
         baseWorldSpeed = worldMoveSpeed;
+        baseEnemyFireRate = levelEnemyFireRate;
 
     }
 
@@ -309,6 +313,7 @@ public class LevelManager : MonoBehaviour
         worldMoveSpeed = Mathf.Min(baseWorldSpeed + (currentStage/2), baseWorldSpeed * 2);
         encounterRate = Mathf.Max(baseEncounterRate - (currentStage * 0.1f), baseEncounterRate/2);
         encountersInLevel = Mathf.RoundToInt(baseEncounters + (currentStage/2));
+        levelEnemyFireRate = Mathf.Max(baseEnemyFireRate - (currentStage * 0.05f), baseEnemyFireRate / 2);
 
         SelectLevel();
        
@@ -355,6 +360,8 @@ public class LevelManager : MonoBehaviour
 
         enemy.SetMoveSpeed(worldMoveSpeed);
         enemy.SetDeactivatePoint(minBoundary);
+        enemy.projectileSpeed = Mathf.Round(worldMoveSpeed/2);
+        enemy.fireRate = levelEnemyFireRate;
         enemy.SetupObstacle(enemyData);
 
         enemy.gameObject.SetActive(true);
