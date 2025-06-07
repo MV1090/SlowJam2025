@@ -25,7 +25,7 @@ public class EnemyObstacle : WorldObstacle
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(FireProjectile());
+
     }
 
     // Update is called once per frame
@@ -44,7 +44,7 @@ public class EnemyObstacle : WorldObstacle
 
     public void SetupEnemyObstacle(EnemyScriptableObject enemyData)
     {
-        // To be completed.
+        StartCoroutine(FireProjectile());
     }
 
 }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickRandomly: 1
   levelEncounters:
+  - {fileID: 11400000, guid: 92d6baa32579eeb4f89173a75d804747, type: 2}
   - {fileID: 11400000, guid: 23b80c65e8d23ee409ef19890b77e7c6, type: 2}
   - {fileID: 11400000, guid: 7b2bdd1c9192c384e8dbeea4b0389bd9, type: 2}
   - {fileID: 11400000, guid: 77024376c8c56194996aaad027d5bd86, type: 2}
