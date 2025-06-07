@@ -11,7 +11,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip pizzaThrowSoundEffect; // Reference to the Pizza Throw sound effect
     [SerializeField] private AudioSource soundEffectsSource; // Separate AudioSource for sound effects
     [SerializeField] private AudioClip jetpackOnSoundEffect; // Reference to the Jetpack On sound effect
-    [SerializeField] private AudioClip jobSuccessSoundEffect; // Reference to the Job Success sound effect
     [SerializeField] private AudioClip footstepsSoundEffect; // Reference to the Footsteps sound effect
     [SerializeField] private AudioClip explosionSoundEffect; // Reference to the Explosion sound effect
     [SerializeField] private AudioSource movementSoundSource; // Separate AudioSource for movement sounds
@@ -132,17 +131,6 @@ public class AudioManager : MonoBehaviour
             movementSoundSource.Play();
         }
     }
-
-    public void PlayJobSuccessSoundEffect()
-    {
-        if (soundEffectsSource != null && jobSuccessSoundEffect != null)
-        {
-            soundEffectsSource.clip = jobSuccessSoundEffect;
-            soundEffectsSource.volume = 0.5f;
-            soundEffectsSource.Play();
-        }
-    }
-
 
 
     public void PlayFootstepsSoundEffect()
