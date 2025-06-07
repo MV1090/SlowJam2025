@@ -22,12 +22,6 @@ public class EnemyObstacle : WorldObstacle
         StartCoroutine(FireProjectile());
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -42,9 +36,24 @@ public class EnemyObstacle : WorldObstacle
         transform.Translate(-(Vector3.forward * moveSpeed) * Time.deltaTime);
     }
 
-    public void SetupEnemyObstacle(EnemyScriptableObject enemyData)
+    public void SetupEnemyObstacle(EnemyScriptableObject obstacleData)
     {
-        StartCoroutine(FireProjectile());
+        obstacleType = obstacleData.obstacleType;
+        destructible = obstacleData.isDestructible;
+        gameObject.transform.localScale = obstacleData.obstacleScale;
+        gameObject.GetComponent<BoxCollider>().enabled = true;
+        gameObject.GetComponent<Animator>().runtimeAnimatorController = obstacleData.enemyAnim;
+        hitPoints = obstacleData.health;
+        moveSpeed += obstacleData.relativeSpeed;
+
+        Sprite chosenSprite;
+        chosenSprite = obstacleData.obstacleSprites[Random.Range(0, obstacleData.obstacleSprites.Count)];
+        sprRef.sprite = chosenSprite;
+        // Resize collider based on the sprite size
+        obstacleCollider.size = new Vector3(chosenSprite.bounds.size.x * obstacleData.obstacleScale.x,
+            chosenSprite.bounds.size.y * obstacleData.obstacleScale.y, chosenSprite.bounds.size.z);
+        obstacleCollider.center = chosenSprite.bounds.center + spriteOffset;
+
     }
 
 }
