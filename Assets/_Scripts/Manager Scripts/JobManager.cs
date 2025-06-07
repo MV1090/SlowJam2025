@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class JobManager : Singleton<JobManager>
 
     public Dictionary<JobState, BaseJob> jobDictionary = new Dictionary<JobState, BaseJob>();
 
+    public int JobIndex;
+    public Action jobChanged;
     public enum JobState
     {
         Unemployed, Delivery, TaxiDriver, Sweeper  
@@ -50,14 +53,17 @@ public class JobManager : Singleton<JobManager>
         }
 
         currentJob = jobDictionary[state];
+        JobIndex = Array.IndexOf(Enum.GetValues(typeof(JobState)), state);
         //currentJob.gameObject.SetActive(true);
         //currentJob.EnterState();
+        jobChanged?.Invoke();
+
     }
 
     // Randomly choose a new Job from the Job list
     public void ChooseRandomJob()
     {
-        int randI = Random.Range(0, allJobs.Length);
+        int randI = UnityEngine.Random.Range(0, allJobs.Length);
         currentJob = allJobs[randI];        
     }
 }

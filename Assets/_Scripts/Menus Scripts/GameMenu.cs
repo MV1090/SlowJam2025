@@ -6,6 +6,8 @@ public class GameMenu : BaseMenu
     [SerializeField] GameObject upgrades;
     [SerializeField] Health playerHealth;
     [SerializeField] Slider healthBar;
+    [SerializeField] Image jobIcon;
+    [SerializeField] Sprite[] jobIcons;
     public override void InitState(MenuManager ctx)
     {
         base.InitState(ctx);
@@ -14,6 +16,15 @@ public class GameMenu : BaseMenu
         upgrades.SetActive(false);
 
         playerHealth.OnHealthChanged.AddListener(UpdateHealthBar);
+
+        JobManager.Instance.jobChanged += UpdateImage; 
+    }
+
+    private void UpdateImage()
+    {
+        int jobIndex  = JobManager.Instance.JobIndex;
+
+        jobIcon.sprite = jobIcons[jobIndex];
     }
 
     public override void EnterState()
