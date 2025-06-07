@@ -52,8 +52,10 @@ MonoBehaviour:
   destructible: 0
   setInactiveOnDespawn: 0
   sprRef: {fileID: 5429710226347273997}
+  explosionObj: {fileID: 0}
   obstacleType: 3
   floatingScorePrefab: {fileID: 8975863942774107405, guid: 4b28c70d0b746d3418aaad0174dd7f76, type: 3}
+  spriteOffset: {x: 0, y: 0, z: 0}
 --- !u!54 &3191697604784675509
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -216,7 +218,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6484582085410251890}
@@ -265,7 +267,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -303689077, guid: 28469b72f1644b44b82e092fa8153f3f, type: 3}
+  m_Sprite: {fileID: 6840857970483876212, guid: c53968db7c3637c4c839ca22ebba578e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
