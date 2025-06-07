@@ -64,14 +64,18 @@ public class WorldObstacle : MonoBehaviour
 
     protected void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Player")) // Player handles the collision logic here
+            return;
+
         if (obstacleType == ObstacleType.Customer)
-        {   
-            // Delivery: Have customer react to receiving their food
-            print("Projectile hits a customer.");                    
-            //onDelivered?.Invoke();            
-            //Customer customer = collision.gameObject.GetComponent<Customer>();
-            GetComponent<Customer>().receivedFood?.Invoke();
-            gameObject.SetActive(false);
+        {
+            if (JobManager.Instance.currentJob.jobState == JobManager.JobState.Delivery)
+            {
+                // Delivery: Have customer react to receiving their food
+                print("Projectile hits a customer.");
+                GetComponent<Customer>().receivedFood?.Invoke();
+                gameObject.SetActive(false);
+            }
         }         
         else if (other.gameObject.CompareTag("Projectile"))
         {
