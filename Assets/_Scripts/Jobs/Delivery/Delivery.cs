@@ -79,4 +79,8 @@ public class Delivery : BaseJob
         AudioManager.Instance.PlayPizzaThrowSoundEffect();
     } 
        
+    public int GetNumberOfDeliveries()
+    {
+        return numOfDeliveries;
+    }
 }

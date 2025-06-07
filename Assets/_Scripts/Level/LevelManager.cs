@@ -204,6 +204,11 @@ public class LevelManager : MonoBehaviour
             if (encountersCompleted >= encountersInLevel)
                 yield break;
 
+            // Do NOT continue if the player is out of food
+            Delivery deliveryJob = (Delivery)jobManager.currentJob;
+            if (deliveryJob.GetNumberOfDeliveries() < 1)
+                yield break;
+
             // Spawn a new customer on the edges of the level boundary to receive food
             Customer newCustomer = Instantiate(customerPrefab);
             if (currentLevel.levelCustomers)
@@ -219,7 +224,10 @@ public class LevelManager : MonoBehaviour
  
         }
         else if(jobManager.currentJob.jobState == JobManager.JobState.TaxiDriver)
-        {         
+        {
+            //TaxiDriver taxiJob = (TaxiDriver)jobManager.currentJob;
+            //isSpawningStop = taxiJob.GetHasCustomer();
+
             if (isSpawningStop)
             {
                 // Spawn a taxi stop for the fare
@@ -227,6 +235,7 @@ public class LevelManager : MonoBehaviour
 
                 float randX = Random.Range(-1.0f, 1.0f);
                 SetupTransformForSpecialObject(newStop.transform, randX);
+                isSpawningStop = false;
             }
             else
             {
@@ -242,13 +251,9 @@ public class LevelManager : MonoBehaviour
                 }
 
                 float randX = Random.Range(-1.0f, 1.0f);
-                SetupTransformForSpecialObject(newCustomer.transform, randX);               
-            }
-
-            // toggle between spawning customers and stops
-            // TODO: Should only spawn stops if a fare is picked up; fares otherwise
-            isSpawningStop = !isSpawningStop; 
-
+                SetupTransformForSpecialObject(newCustomer.transform, randX);
+                isSpawningStop = true;
+            }            
         }
         else if (jobManager.currentJob.jobState == JobManager.JobState.Sweeper)
         {
