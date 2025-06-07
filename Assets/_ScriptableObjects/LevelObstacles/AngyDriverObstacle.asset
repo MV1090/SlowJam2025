@@ -19,5 +19,5 @@ MonoBehaviour:
   isFloating: 0
   obstacleScale: {x: 2, y: 2}
   enemyAnim: {fileID: 9100000, guid: 5e845e9d773b93c4ca707bf3bcce68a6, type: 2}
-  health: 3
+  health: 1
   relativeSpeed: 3
