@@ -19,7 +19,10 @@ public class GameMenu : BaseMenu
     public override void EnterState()
     {
         base.EnterState();
-        Time.timeScale = 1.0f;        
+        Time.timeScale = 1.0f;      
+        
+        if(!GameManager.Instance.hasPlayed)
+            GameManager.Instance.hasPlayed = true;
     }
 
     public override void ExitState()

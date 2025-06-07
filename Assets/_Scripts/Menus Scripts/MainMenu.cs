@@ -27,9 +27,16 @@ public class MainMenu : BaseMenu
 
     public void JumpToGameMenu()
     {
-        context.SetActiveMenu(MenuManager.MenuStates.GameMenu);
-        LevelManager.LevelInstance.StartNewGame();
-        AudioManager.Instance.PlayBackgroundTrack();
+        if (!GameManager.Instance.hasPlayed)
+        {
+            context.SetActiveMenu(MenuManager.MenuStates.HowToPlay);
+        }
+        else
+        {
+            context.SetActiveMenu(MenuManager.MenuStates.GameMenu);
+            LevelManager.LevelInstance.StartNewGame();
+            AudioManager.Instance.PlayBackgroundTrack();
+        }
     }
 
     public void QuitGame()

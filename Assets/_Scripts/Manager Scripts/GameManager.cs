@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class GameManager : Singleton<GameManager>
 {
+    public bool hasPlayed = false;
 
     public Action OnDeath;
 

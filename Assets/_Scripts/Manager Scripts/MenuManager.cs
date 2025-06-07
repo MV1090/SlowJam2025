@@ -7,10 +7,10 @@ public class MenuManager : Singleton<MenuManager>
     public BaseMenu currentMenu;
     public Dictionary<MenuStates, BaseMenu> menuDictionary = new Dictionary<MenuStates, BaseMenu>();
     private Stack<MenuStates> menuStack = new Stack<MenuStates>();
-
+       
     public enum MenuStates
     { 
-      MainMenu, SettingsMenu, EndGameMenu, GameMenu
+      MainMenu, SettingsMenu, EndGameMenu, GameMenu, HowToPlay
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
