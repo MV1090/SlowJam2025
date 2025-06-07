@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b3ae2e6cf34ac4d80da8db47adf86f, type: 3}
+  m_Name: NatureWalk
+  m_EditorClassIdentifier: 
+  pickRandomly: 1
+  levelEncounters:
+  - {fileID: 11400000, guid: 23b80c65e8d23ee409ef19890b77e7c6, type: 2}
+  - {fileID: 11400000, guid: 7b2bdd1c9192c384e8dbeea4b0389bd9, type: 2}
+  - {fileID: 11400000, guid: 77024376c8c56194996aaad027d5bd86, type: 2}
+  levelRandomObstacles:
+  - {fileID: 11400000, guid: 066b8c3fe4088354fb3c4a0b07534f88, type: 2}
+  - {fileID: 11400000, guid: e0ebe6c13ebd53443aff82b3a4a3cf94, type: 2}
+  levelCustomers: {fileID: 11400000, guid: 322fd6d555e8fc446bea9897c94cbc7e, type: 2}
