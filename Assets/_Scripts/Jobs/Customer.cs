@@ -19,6 +19,9 @@ public class Customer : MonoBehaviour
 
     public static Sprite GlobalChosenSprite; // Global variable to store the chosen Sprite
 
+    [SerializeField] private GameObject deliveryGameObject;
+    [SerializeField] private GameObject taxifareGameObject;
+
     void Start()
     {
         playerPosOffset = new Vector3(0, 0, 0.1f);
@@ -42,6 +45,7 @@ public class Customer : MonoBehaviour
             Debug.Log("Chosen Sprite: " + (GlobalChosenSprite != null ? GlobalChosenSprite.name : "None"));
         }
         PlayCustomerStartAudioEffect();
+        SetObjectAnimation();
     }
     
     void Update()
@@ -61,6 +65,7 @@ public class Customer : MonoBehaviour
     {           
         isPassenger = true;
         gameObject.layer = LayerMask.NameToLayer("Player");
+        taxifareGameObject.SetActive(false);
     }
     private void OnDropOff()
     {
@@ -93,6 +98,19 @@ public class Customer : MonoBehaviour
         //customer looses health and gets less money.
         moneyLost = damage / 2;
         remainingWallet -= moneyLost;
+    }
+
+    public void SetObjectAnimation()
+    {
+        if (JobManager.Instance.currentJob.jobState == JobManager.JobState.Delivery)
+        {
+            deliveryGameObject.SetActive(true);
+        }
+        else if (JobManager.Instance.currentJob.jobState == JobManager.JobState.TaxiDriver)
+        {
+            taxifareGameObject.SetActive(true);
+        }
+
     }
 
     public void PlayCustomerStartAudioEffect()
