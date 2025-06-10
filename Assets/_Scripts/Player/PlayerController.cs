@@ -82,8 +82,11 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnFire(InputAction.CallbackContext context)
-    {  
-        if (!gameObject.activeInHierarchy)
+    {
+        //if (!gameObject.activeInHierarchy)
+        //    return;
+
+        if (Time.timeScale == 0.0f) // game is paused, don't shoot
             return;
 
         int playerLayer = LayerMask.NameToLayer("Player");

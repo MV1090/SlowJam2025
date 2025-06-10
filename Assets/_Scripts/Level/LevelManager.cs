@@ -322,7 +322,9 @@ public class LevelManager : MonoBehaviour
        
         StartCoroutine(SpawnRandomObstacle());
         StartCoroutine(ChooseNewEncounter());
-        StartCoroutine(BeginJob());
+
+        if(currentStage > 1) // Begin spawning jobs after Stage 1
+            StartCoroutine(BeginJob());
 
     }
 

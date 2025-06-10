@@ -7,7 +7,7 @@ public class EnemyObstacle : WorldObstacle
     public float projectileSpeed = 5.0f;
 
     private IEnumerator FireProjectile()
-    {
+    {        
         yield return new WaitForSeconds(fireRate);
         float distance = Vector3.Distance(LevelManager.LevelInstance.playerRef.transform.position, gameObject.transform.position);
         if (distance > 5.0f && gameObject.transform.position.z > 0.0f)

@@ -117,13 +117,14 @@ public class WorldObstacle : MonoBehaviour
 
         if (hitPoints < 1) // Deactivate this object
         {
+            StopAllCoroutines(); // mainly to stop enemies from shooting, move if needed
             gameObject.GetComponent<BoxCollider>().enabled = false;
             explosionObj.SetActive(true);
             explosionObj.GetComponent<Animator>().Play("Explosion");
             sprRef.enabled = false;
             ShowScore(transform.position, 10);
             //gameObject.SetActive(false);
-            AudioManager.Instance.PlayExplosionSoundEffect();
+            AudioManager.Instance.PlayExplosionSoundEffect();            
         }
     }
 
@@ -149,5 +150,6 @@ public class WorldObstacle : MonoBehaviour
 
         if(sprRef)
             sprRef.enabled = true;
+
     }
 }
