@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour
 
     // Animation
     public Animator animator;
-    
+
     // Movement Settings
-    //public float moveSpeed = 5f;
+    //public float moveSpeed = 5f;    
     [SerializeField] float xClampPercentage = 80;
     [SerializeField] float yClampPercentage = 80;
     [SerializeField] float xMinOffset;
@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
         healthComponent = GetComponent<Health>();
 
         GameManager.Instance.OnDeath += Respawn;
+
+        //print("Screen Height: " + _camera.orthographicSize + ", Screen Width: " + _camera.orthographicSize * _camera.aspect);
     }
 
     void Respawn()
@@ -170,8 +172,10 @@ public class PlayerController : MonoBehaviour
 
     void ClampPosition()
     {
-        float camHeight = _camera.orthographicSize;
-        float camWidth = camHeight * _camera.aspect;
+        // NOTE: These are hard-coded values of a 1920x1080 resolution
+        // TODO: Figure out how to set hard-numbered boundaries.
+        float camHeight = 5.4f; // _camera.orthographicSize;
+        float camWidth  = 9.6f; //camHeight * _camera.aspect;
         
         float xMin = -camWidth * xClampPercentage * xMinOffset;
         float xMax = camWidth * xClampPercentage * xMaxOffSet;
