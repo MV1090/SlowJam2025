@@ -14,6 +14,7 @@ public class Sweeper : BaseJob
     public override void DoYerJob(PlayerController player)
     {        
         PickUpTrash(player.transform);
+        player.animator.SetTrigger("Sweeping");
     }
     public override void StartJob()
     {

@@ -57,7 +57,7 @@ public class WorldObstacle : MonoBehaviour
         sprRef.sprite = chosenSprite;
         // Resize collider based on the sprite size
         obstacleCollider.size = new Vector3(chosenSprite.bounds.size.x * obstacleData.obstacleScale.x,
-            chosenSprite.bounds.size.y * obstacleData.obstacleScale.y, chosenSprite.bounds.size.z);
+            chosenSprite.bounds.size.y * obstacleData.obstacleScale.y, 0.5f);
         obstacleCollider.center = chosenSprite.bounds.center + spriteOffset;
 
     }

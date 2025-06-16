@@ -153,6 +153,7 @@ public class PlayerController : MonoBehaviour
         {
             print("Ouch! The player took some damage from a Projectile!");
             other.gameObject.SetActive(false);
+            animator.SetTrigger("IsHurt");
             healthComponent.TakeDamage(10.0f);
         }
         else if (other.gameObject.CompareTag("Obstacle"))
@@ -168,6 +169,7 @@ public class PlayerController : MonoBehaviour
             {
                 print("Ouch! The player took some damage hitting an Obstacle!");
                 other.gameObject.SetActive(false);
+                animator.SetTrigger("IsHurt");
                 healthComponent.TakeDamage(15.0f);
             }
         }       
