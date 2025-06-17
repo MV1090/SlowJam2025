@@ -5,6 +5,9 @@ using UnityEngine.Events;
 public class GameManager : Singleton<GameManager>
 {
     public bool hasPlayed = false;
+    public bool seenDeliveryTutorial = false;
+    public bool seenTaxiTutorial = false;
+    public bool seenSweeperTutorial = false;
 
     public Action OnDeath;
 
@@ -106,5 +109,37 @@ public class GameManager : Singleton<GameManager>
         Level = 0;
         Score = 0;
         money = 0;
+    }
+
+    public void ActivateJobTutorial(JobManager.JobState newState)
+    {
+        switch (newState)
+        {
+            case JobManager.JobState.Delivery:
+                if (!seenDeliveryTutorial)
+                {
+                    MenuManager.Instance.SetActiveMenu(MenuManager.MenuStates.JobTutorial);
+                    seenDeliveryTutorial = true;
+                }
+                break;
+            case JobManager.JobState.TaxiDriver:
+                if(!seenTaxiTutorial)
+                {
+                    MenuManager.Instance.SetActiveMenu(MenuManager.MenuStates.JobTutorial);
+                    seenTaxiTutorial = true;
+
+                }
+                break;
+            case JobManager.JobState.Sweeper:
+                if (!seenSweeperTutorial)
+                {
+                    MenuManager.Instance.SetActiveMenu(MenuManager.MenuStates.JobTutorial);
+                    seenSweeperTutorial = true;
+
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

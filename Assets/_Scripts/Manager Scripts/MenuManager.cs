@@ -10,7 +10,7 @@ public class MenuManager : Singleton<MenuManager>
        
     public enum MenuStates
     { 
-      MainMenu, SettingsMenu, EndGameMenu, GameMenu, HowToPlay
+      MainMenu, SettingsMenu, EndGameMenu, GameMenu, HowToPlay, JobTutorial
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
