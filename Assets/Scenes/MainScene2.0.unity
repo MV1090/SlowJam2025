@@ -2553,8 +2553,8 @@ MonoBehaviour:
     Driver\n\nPick up customers and drop them off at fare points!\n<align=left> \n[RMB]
     Pick up/Drop Customers\n\n<color=grey><size=50%>\nThe Taxi Service Company Limited
     is searching for people to help get customers to their destinations by any means
-    possible. Inquire for a position today! (Earnings will be deducted based on customer
-    condition upon arrival)\n"
+    possible. Inquire for a position today! (Company is not responsible for any damages
+    caused during the trip)\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91ca5fdf73cc77c49a9a902f55056b1c, type: 2}
   m_sharedMaterial: {fileID: 2517801999776639364, guid: 91ca5fdf73cc77c49a9a902f55056b1c, type: 2}
@@ -5483,8 +5483,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8644,7 +8644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1735591701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8667,9 +8667,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: "<b><color=red><align=center>!! NEW JOB ALERT !!</b>\n<color=#008FFF>Trash
     Sweeping\n\nSweep trash off the road for some quick Cash!\n<align=left> \n[RMB]
-    Start Sweeping\n\n<color=grey><size=50%>\nDo your part to clear trash off the
-    road, citizen! The city will pay a small bounty for each bag of trash removed.
-    Thank you for doing your part towards a cleaner city!\n"
+    to start sweeping. Clear trash by sweeping near it.\n\n<color=grey><size=50%>\nDo
+    your part to clear trash off the road, citizen! The city will pay a small bounty
+    for each bag of trash removed. Thank you for doing your part towards a cleaner
+    city!\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 91ca5fdf73cc77c49a9a902f55056b1c, type: 2}
   m_sharedMaterial: {fileID: 2517801999776639364, guid: 91ca5fdf73cc77c49a9a902f55056b1c, type: 2}
@@ -9257,7 +9258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 1
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
