@@ -5,9 +5,13 @@ using UnityEngine.Events;
 public class GameManager : Singleton<GameManager>
 {
     public bool hasPlayed = false;
+
+    // TODO: These could be set as an array if there's enough tutorials
     public bool seenDeliveryTutorial = false;
     public bool seenTaxiTutorial = false;
     public bool seenSweeperTutorial = false;
+
+    public bool hasTurboMode = true;
 
     public Action OnDeath;
 
@@ -111,6 +115,10 @@ public class GameManager : Singleton<GameManager>
         money = 0;
     }
 
+    /**
+     * Makes the tutorial screen for a respective job appear, if it hasn't appeared already.
+     * Mainly called by the Level Manager when a job is selected.
+     */
     public void ActivateJobTutorial(JobManager.JobState newState)
     {
         switch (newState)
@@ -141,5 +149,15 @@ public class GameManager : Singleton<GameManager>
             default:
                 break;
         }
+    }
+
+    /**
+     * Toggles if Turbo mode is enabled or disabled.
+     * Mainly called by the Toggle UI in the Main Menu through a Unity Event.
+     */
+    public void ToggleTurboMode()
+    {
+        hasTurboMode = !hasTurboMode;
+        print("Turbo Mode: " + hasTurboMode);
     }
 }

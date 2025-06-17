@@ -312,13 +312,31 @@ public class LevelManager : MonoBehaviour
         isSpawningStop = false;
         GameManager.Instance.ChangeJobDescription("---");
 
-        // Update scaling
+        
         GameManager.Instance.Level++;
         int currentStage = GameManager.Instance.Level;
-        worldMoveSpeed = Mathf.Min(baseWorldSpeed + (currentStage/2), baseWorldSpeed * 2);
-        encounterRate = Mathf.Max(baseEncounterRate - (currentStage * 0.1f), baseEncounterRate/2);
-        encountersInLevel = Mathf.RoundToInt(baseEncounters + (currentStage/2));
-        levelEnemyFireRate = Mathf.Max(baseEnemyFireRate - (currentStage * 0.05f), baseEnemyFireRate / 2);
+
+        // Update scaling
+        if (GameManager.Instance.hasTurboMode) 
+        {
+            // use Turbo mode scaling
+            // Turbo Mode starts from Stage 10 scaling, and has no limit
+            //print("DEBUG: Turbo Mode enabled");
+            int baseStage = 10;
+            worldMoveSpeed = baseWorldSpeed + ((baseStage + currentStage) / 2);
+            encounterRate = Mathf.Max(baseEncounterRate - ((baseStage + currentStage) * 0.1f), 0.5f);
+            encountersInLevel = Mathf.RoundToInt(baseEncounters + currentStage);
+            levelEnemyFireRate = Mathf.Max(baseEnemyFireRate - ((baseStage + currentStage) * 0.05f), baseEnemyFireRate / 2);
+        }
+        else 
+        {
+            // use Normal mode scaling
+            // scaling slowly builds up to around Stage 10, and caps out
+            worldMoveSpeed = Mathf.Min(baseWorldSpeed + (currentStage / 2), baseWorldSpeed * 2);
+            encounterRate = Mathf.Max(baseEncounterRate - (currentStage * 0.1f), baseEncounterRate / 2);
+            encountersInLevel = Mathf.RoundToInt(baseEncounters + (currentStage / 2));
+            levelEnemyFireRate = Mathf.Max(baseEnemyFireRate - (currentStage * 0.05f), baseEnemyFireRate / 2);
+        }
 
         SelectLevel();
        
