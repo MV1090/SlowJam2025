@@ -35,11 +35,19 @@ public class LevelManager : MonoBehaviour
 
     public float levelEnemyFireRate = 1.0f;
     private float baseEnemyFireRate;
+    public float levelEnemyProjectileSpeed = 5.0f;
+    private float baseEnemyProjectileSpeed;
+
+    [Header("Level Scaling")]
+    [Tooltip("(Turbo Mode) Sets the initial Stage for scaling")]
+    public int turboInitialStage = 15; // TODO: Should be stored in the Scriptable Object instead
 
     [Header("Level Encounters")]
     [Tooltip("Stores every possible level this Manager can pick from.")]
     public List<LevelDetailsScriptableObject> gameLevels; // all game levels available
     private LevelDetailsScriptableObject currentLevel; // current level to use encounters/obstacles from
+
+    
 
     //[Tooltip("Lists what kind of Encounters can appear in this level randomly.")]
     //private List<LevelEncounterScriptableObject> encounterList;
@@ -285,6 +293,7 @@ public class LevelManager : MonoBehaviour
         baseEncounters = encountersInLevel;
         baseWorldSpeed = worldMoveSpeed;
         baseEnemyFireRate = levelEnemyFireRate;
+        baseEnemyProjectileSpeed = levelEnemyProjectileSpeed;
 
     }
 
@@ -322,11 +331,10 @@ public class LevelManager : MonoBehaviour
             // use Turbo mode scaling
             // Turbo Mode starts from Stage 10 scaling, and has no limit
             //print("DEBUG: Turbo Mode enabled");
-            int baseStage = 10;
-            worldMoveSpeed = baseWorldSpeed + ((baseStage + currentStage) / 2);
-            encounterRate = Mathf.Max(baseEncounterRate - ((baseStage + currentStage) * 0.1f), 0.5f);
+            worldMoveSpeed = baseWorldSpeed + ((turboInitialStage + currentStage) / 2);
+            encounterRate = Mathf.Max(baseEncounterRate - ((turboInitialStage + currentStage) * 0.1f), 0.5f);
             encountersInLevel = Mathf.RoundToInt(baseEncounters + currentStage);
-            levelEnemyFireRate = Mathf.Max(baseEnemyFireRate - ((baseStage + currentStage) * 0.05f), baseEnemyFireRate / 2);
+            levelEnemyFireRate = Mathf.Max(baseEnemyFireRate - ((turboInitialStage + currentStage) * 0.05f), baseEnemyFireRate / 2);
         }
         else 
         {
@@ -337,6 +345,7 @@ public class LevelManager : MonoBehaviour
             encountersInLevel = Mathf.RoundToInt(baseEncounters + (currentStage / 2));
             levelEnemyFireRate = Mathf.Max(baseEnemyFireRate - (currentStage * 0.05f), baseEnemyFireRate / 2);
         }
+        levelEnemyProjectileSpeed = Mathf.Min(Mathf.Round(worldMoveSpeed / 2), 20);
 
         SelectLevel();
        
@@ -392,7 +401,7 @@ public class LevelManager : MonoBehaviour
 
         enemy.SetMoveSpeed(worldMoveSpeed);
         enemy.SetDeactivatePoint(minBoundary);
-        enemy.projectileSpeed = Mathf.Round(worldMoveSpeed/2);
+        enemy.projectileSpeed = levelEnemyProjectileSpeed;
         enemy.fireRate = levelEnemyFireRate;
         enemy.SetupEnemyObstacle(enemyData);
 

@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager>
         {
             _money = value;
             OnMoneyChanged?.Invoke(_money);
-            Debug.Log("Money: " + _money);
+            //Debug.Log("Money: " + _money);
         }
     }
 
@@ -39,7 +39,7 @@ public class GameManager : Singleton<GameManager>
         {
             _score = value;
             OnScoreChanged?.Invoke(_score);
-            Debug.Log("Score: " + _score);
+            //Debug.Log("Score: " + _score);
         }
     }
 
