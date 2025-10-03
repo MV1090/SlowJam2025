@@ -5483,8 +5483,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9240,11 +9240,11 @@ RectTransform:
   - {fileID: 1216654452}
   m_Father: {fileID: 667803602}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 32, y: 32}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 16, y: 32}
   m_SizeDelta: {x: 160, y: 20}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1898008824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22602,6 +22602,8 @@ MonoBehaviour:
   encountersInLevel: 5
   encounterRate: 3
   levelEnemyFireRate: 1
+  levelEnemyProjectileSpeed: 5
+  turboInitialStage: 15
   gameLevels:
   - {fileID: 11400000, guid: e1ebb826fb15f134485c6425715d6584, type: 2}
   - {fileID: 11400000, guid: f2e8c39a0effb7a4788cf443aea438a5, type: 2}
